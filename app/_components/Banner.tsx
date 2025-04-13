@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
 import React from 'react';
+import Laptop from './Laptop';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -36,6 +37,9 @@ const Banner = () => {
     return (
         <section className="relative overflow-hidden" id="banner">
             <ArrowAnimation />
+            <div className="absolute right-0 top-0 w-1/2 h-full">
+                <Laptop />
+            </div>
             <div
                 className="container h-[100svh] min-h-[530px] max-md:pb-10 flex justify-between items-center max-md:flex-col"
                 ref={containerRef}

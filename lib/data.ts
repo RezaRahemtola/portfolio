@@ -221,18 +221,18 @@ export const MY_EXPERIENCE = [
         duration: 'June 2024 - Present',
     },
     {
-        title: 'Frontend Developer',
-        company: 'Epikcoders',
-        duration: 'Oct 2023 - Nov 2024',
+        title: 'Freelance Developer',
+        company: 'Self employed',
+        duration: 'Jul 2023 - Present',
     },
     {
-        title: 'FRONTEND ENGINEER',
-        company: 'Anchorblock Technology',
-        duration: 'Oct 2022 - Sep 2023',
+        title: 'Back End Engineer (Internship)',
+        company: 'Cryptio',
+        duration: 'Feb 2024 - June 2024',
     },
     {
-        title: 'Frontend Developer (Part-time)',
-        company: 'Branex IT',
-        duration: 'Jan 2022 - Oct 2022',
+        title: 'Full Stack Engineer (Internship)',
+        company: 'Qobra',
+        duration: 'Jul 2022 - Dec 2022',
     },
 ];
