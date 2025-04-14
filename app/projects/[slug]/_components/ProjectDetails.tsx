@@ -125,20 +125,16 @@ const ProjectDetails = ({ project }: Props) => {
 							<div className="fade-in-later">
 								<p className="text-muted-foreground font-anton mb-3">Description</p>
 
-								<div className="text-lg">
-									<Markdown className="markdown-text" remarkPlugins={[remarkGfm]}>
-										{project.description}
-									</Markdown>
+								<div className="text-lg markdown-text">
+									<Markdown remarkPlugins={[remarkGfm]}>{project.description}</Markdown>
 								</div>
 							</div>
 							{project.role && (
 								<div className="fade-in-later">
 									<p className="text-muted-foreground font-anton mb-3">My Role</p>
 
-									<div className="text-lg">
-										<Markdown className="markdown-text" remarkPlugins={[remarkGfm]}>
-											{project.role}
-										</Markdown>
+									<div className="text-lg markdown-text">
+										<Markdown remarkPlugins={[remarkGfm]}>{project.role}</Markdown>
 									</div>
 								</div>
 							)}

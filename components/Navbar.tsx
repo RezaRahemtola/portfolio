@@ -23,7 +23,11 @@ const MENU_LINKS = [
 	},
 	{
 		name: "Experience",
-		url: "/#my-experience",
+		url: "/#experience",
+	},
+	{
+		name: "Passions",
+		url: "/#passions",
 	},
 	{
 		name: "Projects",

@@ -15,10 +15,6 @@ export const SOCIAL_LINKS = [
 export const MY_STACK = {
 	frontend: [
 		{
-			name: "Javascript",
-			icon: "/logo/js.png",
-		},
-		{
 			name: "Typescript",
 			icon: "/logo/ts.png",
 		},
@@ -31,8 +27,8 @@ export const MY_STACK = {
 			icon: "/logo/next.png",
 		},
 		{
-			name: "Redux",
-			icon: "/logo/redux.png",
+			name: "Vue",
+			icon: "/logo/react.png",
 		},
 		{
 			name: "Tailwind CSS",
@@ -41,18 +37,6 @@ export const MY_STACK = {
 		{
 			name: "GSAP",
 			icon: "/logo/gsap.png",
-		},
-		{
-			name: "Frammer Motion",
-			icon: "/logo/framer-motion.png",
-		},
-		{
-			name: "SASS",
-			icon: "/logo/sass.png",
-		},
-		{
-			name: "Bootstrap",
-			icon: "/logo/bootstrap.svg",
 		},
 	],
 	backend: [
@@ -65,15 +49,11 @@ export const MY_STACK = {
 			icon: "/logo/nest.svg",
 		},
 		{
-			name: "Express.js",
-			icon: "/logo/express.png",
+			name: "FastAPI",
+			icon: "/logo/nest.svg",
 		},
 	],
 	database: [
-		{
-			name: "MySQL",
-			icon: "/logo/mysql.svg",
-		},
 		{
 			name: "PostgreSQL",
 			icon: "/logo/postgreSQL.png",
@@ -96,18 +76,24 @@ export const MY_STACK = {
 			name: "Docker",
 			icon: "/logo/docker.svg",
 		},
+	],
+	others: [
 		{
-			name: "AWS",
-			icon: "/logo/aws.png",
+			name: "Python",
+			icon: "/logo/git.png",
+		},
+		{
+			name: "Solidity",
+			icon: "/logo/docker.svg",
 		},
 	],
 };
 
 export const PROJECTS: IProject[] = [
 	{
-		title: "Epikcart",
-		slug: "epikcart",
-		techStack: ["React", "Redux", "React i18n", "Tailwind CSS", "Framer Motion", "debouncing", "Api Integration"],
+		title: "Solva",
+		slug: "solva",
+		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
 		thumbnail: "/projects/thumbnail/epikcart.jpg",
 		longThumbnail: "/projects/long/epikcart.jpg",
 		images: [
@@ -117,8 +103,9 @@ export const PROJECTS: IProject[] = [
 			"/projects/images/epikcart-4.png",
 			"/projects/images/epikcart-5.png",
 		],
+		sourceCode: "https://github.com/RezaRahemtola/ETHGlobal-Taipei2025",
 		liveUrl: "https://demo.epikcart.siphertech.com/",
-		year: 2023,
+		year: 2025,
 		description: `Epikcart is a feature-rich, scalable e-commerce platform tailored for large businesses. It features dynamic product filtering, multi-language support with RTL, advanced inventory management, order tracking, and refund systems, offering a comprehensive solution for multi-vendor operations.`,
 		role: `As the frontend developer in a team of five, I:\n- Built the frontend from scratch using React, Redux, RTK Query, and Tailwind CSS.\n- Developed dynamic filtering logic for the product search page with admin-configurable parameters.\n- Integrated multi-language support with React i18n, including RTL handling.\n- Delivered a responsive, user-friendly interface in collaboration with the UI/UX designer.\n`,
 	},
