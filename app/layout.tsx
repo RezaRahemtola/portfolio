@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import "lenis/dist/lenis.css";
 import Preloader from "../components/Preloader";
 import StickyEmail from "./_components/StickyEmail";
@@ -39,7 +38,6 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<GoogleAnalytics gaId="G-MHLY1LNGY5" />
 			<body className={`${antonFont.variable} ${robotoFlex.variable} antialiased`}>
 				<ReactLenis
 					root

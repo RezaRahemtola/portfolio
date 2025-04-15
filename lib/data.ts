@@ -2,9 +2,6 @@ import { IProject } from "@/types";
 
 export const GENERAL_INFO = {
 	email: "contact@rezar.fr",
-
-	emailSubject: "Let's collaborate on a project",
-	emailBody: "Hi Reza, I am reaching out to you because...",
 };
 
 export const SOCIAL_LINKS = [
@@ -28,7 +25,7 @@ export const MY_STACK = {
 		},
 		{
 			name: "Vue",
-			icon: "/logo/react.png",
+			icon: "/logo/vue.png",
 		},
 		{
 			name: "Tailwind CSS",
@@ -50,7 +47,7 @@ export const MY_STACK = {
 		},
 		{
 			name: "FastAPI",
-			icon: "/logo/nest.svg",
+			icon: "/logo/fastapi.svg",
 		},
 	],
 	database: [
@@ -76,15 +73,19 @@ export const MY_STACK = {
 			name: "Docker",
 			icon: "/logo/docker.svg",
 		},
+		{
+			name: "GitHub Actions",
+			icon: "/logo/github.png",
+		},
 	],
 	others: [
 		{
 			name: "Python",
-			icon: "/logo/git.png",
+			icon: "/logo/python.png",
 		},
 		{
 			name: "Solidity",
-			icon: "/logo/docker.svg",
+			icon: "/logo/solidity.webp",
 		},
 	],
 };

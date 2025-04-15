@@ -7,12 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier '**/**/*.{ts,tsx}' --write",
-    "svgr:icons": "svgr --title-prop --no-dimensions --typescript -d components/icons -- components/icons/svgs"
+    "format": "prettier '**/**/*.{ts,tsx}' --write"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@next/third-parties": "^15.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.12.7",
@@ -31,9 +29,8 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.24.0",
     "@next/eslint-plugin-next": "^15.3.0",
-    "@svgr/cli": "^8.1.0",
     "@types/node": "^22.14.1",
-    "@types/react": "^19.1.1",
+    "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/three": "^0.175.0",
     "eslint": "^9.24.0",
