@@ -95,7 +95,7 @@ const Passions = () => {
 							<p className="text-xl text-muted-foreground">Hackathons</p>
 						</div>
 						<div className="flex flex-wrap items-baseline gap-x-4 mt-3.5 mb-2.5 group">
-							<p className="text-5xl font-anton leading-none transition-all duration-700 bg-gradient-to-r from-primary to-foreground from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+							<p className="text-5xl font-anton leading-none transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 								$<span ref={hackathonRef}>23800</span>+
 							</p>
 							<p className="text-xl text-muted-foreground">cash prizes won</p>
@@ -113,7 +113,7 @@ const Passions = () => {
 							<p className="text-xl text-muted-foreground">Swimming</p>
 						</div>
 						<div className="flex flex-wrap items-baseline gap-x-4 mt-3.5 mb-2.5 group">
-							<p className="text-5xl font-anton leading-none transition-all duration-700 bg-gradient-to-r from-primary to-foreground from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+							<p className="text-5xl font-anton leading-none transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 								<span ref={swimmingRef}>105</span>km
 							</p>
 							<p className="text-xl text-muted-foreground">swam in the last year</p>

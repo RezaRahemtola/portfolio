@@ -41,9 +41,9 @@ const Navbar = () => {
 
 	return (
 		<>
-			<div className="sticky top-0 z-[4]">
+			<div className="sticky top-0 z-4">
 				<button
-					className={cn("group size-12 absolute top-5 right-5 md:right-10 z-[2]")}
+					className={cn("group size-12 absolute top-5 right-5 md:right-10 z-2")}
 					onClick={() => setIsMenuOpen(!isMenuOpen)}
 				>
 					<span
@@ -68,7 +68,7 @@ const Navbar = () => {
 			</div>
 
 			<div
-				className={cn("overlay fixed inset-0 z-[2] bg-black/70 transition-all duration-150", {
+				className={cn("overlay fixed inset-0 z-2 bg-black/70 transition-all duration-150", {
 					"opacity-0 invisible pointer-events-none": !isMenuOpen,
 				})}
 				onClick={() => setIsMenuOpen(false)}
@@ -76,7 +76,7 @@ const Navbar = () => {
 
 			<div
 				className={cn(
-					"fixed top-0 right-0 h-[100dvh] w-[500px] max-w-[calc(100vw-3rem)] transform translate-x-full transition-transform duration-700 z-[3] overflow-hidden gap-y-14",
+					"fixed top-0 right-0 h-[100dvh] w-[500px] max-w-[calc(100vw-3rem)] transform translate-x-full transition-transform duration-700 z-3 overflow-hidden gap-y-14",
 					"flex flex-col lg:justify-center py-10",
 					{ "translate-x-0": isMenuOpen },
 				)}

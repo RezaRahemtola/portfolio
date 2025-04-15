@@ -81,7 +81,7 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
 	return (
 		<TransitionLink
 			href={`/projects/${project.slug}`}
-			className="project-item group leading-none py-5 md:border-b first:!pt-0 last:pb-0 last:border-none md:group-hover/projects:opacity-30 md:hover:!opacity-100 transition-all"
+			className="project-item group leading-none py-5 md:border-b first:pt-0! last:pb-0 last:border-none md:group-hover/projects:opacity-30 md:hover:opacity-100! transition-all"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
@@ -91,7 +91,7 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
 					alt="Project"
 					width="300"
 					height="200"
-					className="w-full object-cover mb-6 aspect-[3/2] object-top"
+					className="w-full object-cover mb-6 aspect-3/2 object-top"
 					key={project.slug}
 					loading="lazy"
 				/>
@@ -99,7 +99,7 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
 			<div className="flex gap-2 md:gap-5">
 				<div className="font-anton text-muted-foreground">_{(index + 1).toString().padStart(2, "0")}.</div>
 				<div className="">
-					<h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-gradient-to-r from-primary to-foreground from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+					<h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 						{project.title}
 						<span className="text-foreground opacity-0 group-hover:opacity-100 transition-all">
 							<svg

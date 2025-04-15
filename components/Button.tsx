@@ -48,7 +48,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 	);
 
 	const buttonClasses = cn(
-		`group h-12 px-8 inline-flex justify-center items-center gap-2 text-lg uppercase font-anton tracking-widest outline-none transition-colors relative overflow-hidden`,
+		`group h-12 px-8 inline-flex justify-center items-center gap-2 text-lg uppercase font-anton tracking-widest outline-hidden transition-colors relative overflow-hidden`,
 		variantClasses,
 		{ [iconClasses]: icon },
 		className,
@@ -63,7 +63,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 					{variant !== "link" && (
 						<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 transition-all duration-500 scale-150"></span>
 					)}
-					<span className="z-[1]">{loading ? <Child icon={icon} /> : children}</span>
+					<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
 				</a>
 			);
 		}
@@ -73,7 +73,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 				{variant !== "link" && (
 					<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 transition-all duration-500 scale-150"></span>
 				)}
-				<span className="z-[1]">{loading ? <Child icon={icon} /> : children}</span>
+				<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
 			</Link>
 		);
 	} else if (as === "button") {
@@ -84,7 +84,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 				{variant !== "link" && (
 					<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 transition-all duration-500 scale-150"></span>
 				)}
-				<span className="z-[1]">{loading ? <Child icon={icon} /> : children}</span>
+				<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
 			</button>
 		);
 	}
