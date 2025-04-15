@@ -1,8 +1,3 @@
-export type Next_Page_Url = string;
-// UrlObject;
-// | __next_route_internal_types__.StaticRoutes
-// | __next_route_internal_types__.DynamicRoutes;
-
 export type Variant =
 	| "primary"
 	| "secondary"
@@ -22,7 +17,7 @@ export interface IProject {
 	role: string;
 	techStack: string[];
 	thumbnail: string;
-	longThumbnail: string;
+	thumbnailMobile: string;
 	images: string[];
 	slug: string;
 	liveUrl?: string;

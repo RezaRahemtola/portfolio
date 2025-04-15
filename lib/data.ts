@@ -95,8 +95,8 @@ export const PROJECTS: IProject[] = [
 		title: "Solva",
 		slug: "solva",
 		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
-		thumbnail: "/projects/thumbnail/epikcart.jpg",
-		longThumbnail: "/projects/long/epikcart.jpg",
+		thumbnail: "/projects/thumbnail/solva.png",
+		thumbnailMobile: "/projects/thumbnail/solva-mobile.png",
 		images: [
 			"/projects/images/epikcart-1.png",
 			"/projects/images/epikcart-2.png",
@@ -115,7 +115,7 @@ export const PROJECTS: IProject[] = [
 		slug: "resume-roaster",
 		techStack: ["GPT-4", "Next.js", "Postgressql", "Prisma", "Tailwind CSS"],
 		thumbnail: "/projects/thumbnail/resume-roaster.jpg",
-		longThumbnail: "/projects/long/resume-roaster.jpg",
+		thumbnailMobile: "/projects/thumbnail/resume-roaster.jpg",
 		images: [
 			"/projects/images/resume-roaster-1.png",
 			"/projects/images/resume-roaster-2.png",
@@ -132,7 +132,7 @@ export const PROJECTS: IProject[] = [
 		slug: "property-pro",
 		techStack: ["React.js", "Redux", "Tailwind CSS", "React i18n", "Framer Motion"],
 		thumbnail: "/projects/thumbnail/property-pro.jpg",
-		longThumbnail: "/projects/long/property-pro.jpg",
+		thumbnailMobile: "/projects/thumbnail/property-pro.jpg",
 		images: [
 			"/projects/images/property-pro-1.png",
 			"/projects/images/property-pro-2.png",
@@ -149,7 +149,7 @@ export const PROJECTS: IProject[] = [
 		slug: "crenotive",
 		techStack: ["HTML", "CSS & SCSS", "Javascript", "Bootstrap"],
 		thumbnail: "/projects/thumbnail/consulting-finance.jpg",
-		longThumbnail: "/projects/long/consulting-finance.jpg",
+		thumbnailMobile: "/projects/thumbnail/consulting-finance.jpg",
 		images: [
 			"/projects/images/consulting-finance-1.png",
 			"/projects/images/consulting-finance-2.png",
@@ -167,7 +167,7 @@ export const PROJECTS: IProject[] = [
 		slug: "devLinks",
 		techStack: ["Next.js", "Formik", "Drag & Drop", "Tailwind CSS"],
 		thumbnail: "/projects/thumbnail/devLinks.jpg",
-		longThumbnail: "/projects/long/devLinks.jpg",
+		thumbnailMobile: "/projects/thumbnail/devLinks.jpg",
 		images: ["/projects/images/devLinks-1.png", "/projects/images/devLinks-2.png", "/projects/images/devLinks-3.png"],
 		sourceCode: "https://github.com/Tajmirul/devsLink",
 		liveUrl: "https://devlinks-demo.vercel.app/auth/signin",
