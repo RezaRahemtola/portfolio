@@ -103,7 +103,7 @@ const Passions = () => {
 						<p className="text-lg text-muted-foreground max-w-[650px]">
 							I love the fast-paced environment of hackathons to push my creativity and technical skills to their
 							limits. Whether I compete in solo or with friends, it&apos;s always a fun experience and an opportunity to
-							connect with amazing people & companies (some of which I&apos;ve ended up working for afterwards).
+							connect with amazing people & companies (some of which I&apos;ve ended up working with afterwards).
 						</p>
 					</div>
 

@@ -105,15 +105,15 @@ export const PROJECTS: IProject[] = [
 			"/projects/images/epikcart-5.png",
 		],
 		sourceCode: "https://github.com/RezaRahemtola/ETHGlobal-Taipei2025",
-		liveUrl: "https://demo.epikcart.siphertech.com/",
+		liveUrl: "https://solva.rezar.fr",
 		year: 2025,
 		description: `Epikcart is a feature-rich, scalable e-commerce platform tailored for large businesses. It features dynamic product filtering, multi-language support with RTL, advanced inventory management, order tracking, and refund systems, offering a comprehensive solution for multi-vendor operations.`,
 		role: `As the frontend developer in a team of five, I:\n- Built the frontend from scratch using React, Redux, RTK Query, and Tailwind CSS.\n- Developed dynamic filtering logic for the product search page with admin-configurable parameters.\n- Integrated multi-language support with React i18n, including RTL handling.\n- Delivered a responsive, user-friendly interface in collaboration with the UI/UX designer.\n`,
 	},
 	{
-		title: "Resume Roaster",
-		slug: "resume-roaster",
-		techStack: ["GPT-4", "Next.js", "Postgressql", "Prisma", "Tailwind CSS"],
+		title: "DocTripper",
+		slug: "doctripper",
+		techStack: ["Next.js", "PostgreSQL", "Nest.js", "Chakra UI"],
 		thumbnail: "/projects/thumbnail/resume-roaster.jpg",
 		thumbnailMobile: "/projects/thumbnail/resume-roaster.jpg",
 		images: [
@@ -121,7 +121,7 @@ export const PROJECTS: IProject[] = [
 			"/projects/images/resume-roaster-2.png",
 			"/projects/images/resume-roaster-3.png",
 		],
-		liveUrl: "https://resume-roaster.vercel.app/",
+		liveUrl: "https://doctripper.com",
 		year: 2023,
 		description:
 			"Resume Roaster is a web application designed to provide tailored resume feedback and professional writing services. Built with Next.js, PostgreSQL, Prisma, and Tailwind CSS, it integrates GPT-4 for AI-powered recommendations. The platform also includes peer-to-peer reviews with a points-based system, fostering a collaborative and engaging experience. Targeting freshers, experienced professionals, and programmers, it helps optimize resumes for job-specific success.",
