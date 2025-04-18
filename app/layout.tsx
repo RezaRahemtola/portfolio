@@ -1,7 +1,6 @@
 import { ReactLenis } from "lenis/react";
 import type { Metadata } from "next";
 import { Anton, Roboto_Flex } from "next/font/google";
-
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -11,6 +10,7 @@ import "lenis/dist/lenis.css";
 import Preloader from "../components/Preloader";
 import StickyEmail from "./_components/StickyEmail";
 import "./globals.css";
+import { ReactNode } from "react";
 
 const antonFont = Anton({
 	weight: "400",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
 	return (
 		<html lang="en">
