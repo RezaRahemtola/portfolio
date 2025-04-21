@@ -60,6 +60,10 @@ export const MY_STACK = {
 			icon: "/logo/mongodb.svg",
 		},
 		{
+			name: "Redis",
+			icon: "/logo/redis.png",
+		},
+		{
 			name: "Prisma",
 			icon: "/logo/prisma.png",
 		},
@@ -107,8 +111,8 @@ export const PROJECTS: IProject[] = [
 		sourceCode: "https://github.com/RezaRahemtola/ETHGlobal-Taipei2025",
 		liveUrl: "https://solva.rezar.fr",
 		year: 2025,
-		description: `Epikcart is a feature-rich, scalable e-commerce platform tailored for large businesses. It features dynamic product filtering, multi-language support with RTL, advanced inventory management, order tracking, and refund systems, offering a comprehensive solution for multi-vendor operations.`,
-		role: `As the frontend developer in a team of five, I:\n- Built the frontend from scratch using React, Redux, RTK Query, and Tailwind CSS.\n- Developed dynamic filtering logic for the product search page with admin-configurable parameters.\n- Integrated multi-language support with React i18n, including RTL handling.\n- Delivered a responsive, user-friendly interface in collaboration with the UI/UX designer.\n`,
+		description: `Solva is a Venmo-like payment app powered by Web3 technologies, empowering anyone to receive and transfer funds, instantly & without fees, without knowing anything about crypto.\n\n Built in 36 hours during the [ETHGlobal Taipei 2025 hackathon](https://ethglobal.com/showcase/solva-map8t), it received 3 prizes, totalling $5500 and was selected among the 8 finalist projects out of 226 by a jury of industry experts.`,
+		role: `As the solo developer, I designed & developed the entire application, including:\n- The responsive frontend using React, Tailwind CSS and shadcn/ui.\n- The backend using FastAPI, PostgreSQL and Alembic.\n- The smart contracts & blockchain interactions using Solidity.\n- The deployment using Docker and GitHub Actions.\n\nI also had the opportunity to [demo the project live on stage](https://www.youtube.com/live/if_XZf0IIr8?t=5864s) in front of the 500+ other hackers at the end of the event.`,
 	},
 	{
 		title: "DocTripper",

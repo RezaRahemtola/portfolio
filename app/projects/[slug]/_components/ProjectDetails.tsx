@@ -7,8 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import React, { useRef } from "react";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 interface Props {
 	project: IProject;
@@ -126,7 +125,7 @@ const ProjectDetails = ({ project }: Props) => {
 								<p className="text-muted-foreground font-anton mb-3">Description</p>
 
 								<div className="text-lg markdown-text">
-									<Markdown remarkPlugins={[remarkGfm]}>{project.description}</Markdown>
+									<MarkdownRenderer content={project.description} />
 								</div>
 							</div>
 							{project.role && (
@@ -134,7 +133,7 @@ const ProjectDetails = ({ project }: Props) => {
 									<p className="text-muted-foreground font-anton mb-3">My Role</p>
 
 									<div className="text-lg markdown-text">
-										<Markdown remarkPlugins={[remarkGfm]}>{project.role}</Markdown>
+										<MarkdownRenderer content={project.role} />
 									</div>
 								</div>
 							)}

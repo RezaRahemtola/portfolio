@@ -46,8 +46,8 @@ const Banner = () => {
 						<br /> <span className="ml-4">DEVELOPER</span>
 					</h1>
 					<p className="banner-description slide-up-and-fade mt-6 text-lg text-muted-foreground">
-						Hi! I&apos;m <span className="font-medium text-foreground">Reza</span>. A creative Frontend Developer with
-						3+ years of experience in building high-performance, scalable, and responsive web solutions.
+						Hi! I&apos;m <span className="font-medium text-foreground">Reza</span>, a passionate Full Stack Developer
+						with 3+ years of experience turning ideas to realities - from sleek frontends to robust backends.
 					</p>
 					<Button
 						as="link"
@@ -67,12 +67,12 @@ const Banner = () => {
 						<p className="text-muted-foreground">Years of Experience</p>
 					</div>
 					<div className="slide-up-and-fade">
-						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7+</h5>
+						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12+</h5>
 						<p className="text-muted-foreground">Completed Projects</p>
 					</div>
 					<div className="slide-up-and-fade">
-						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">10K+</h5>
-						<p className="text-muted-foreground">Hours Worked</p>
+						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7k+</h5>
+						<p className="text-muted-foreground">GitHub Commits</p>
 					</div>
 				</div>
 			</div>
