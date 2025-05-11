@@ -117,7 +117,7 @@ const ProjectDetails = ({ project }: Props) => {
 								<div className="text-lg">{project.year}</div>
 							</div>
 							<div className="fade-in-later">
-								<p className="text-muted-foreground font-anton mb-3">Tech & Technique</p>
+								<p className="text-muted-foreground font-anton mb-3">Technologies</p>
 
 								<div className="text-lg">{project.techStack.join(", ")}</div>
 							</div>

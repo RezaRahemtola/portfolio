@@ -96,6 +96,23 @@ export const MY_STACK = {
 
 export const PROJECTS: IProject[] = [
 	{
+		title: "DocTripper",
+		slug: "doctripper",
+		techStack: ["Next.js", "PostgreSQL", "Nest.js", "Chakra UI", "Prisma", "S3", "GitHub Actions"],
+		thumbnail: "/projects/thumbnail/doctripper.png",
+		thumbnailMobile: "/projects/thumbnail/doctripper-mobile.png",
+		images: [
+			"/projects/images/resume-roaster-1.png",
+			"/projects/images/resume-roaster-2.png",
+			"/projects/images/resume-roaster-3.png",
+		],
+		liveUrl: "https://doctripper.com",
+		year: 2024,
+		description:
+			"DocTripper is a French startup founded by a dental surgeon to connect medical students with professionals installed in areas lacking healthcare personnel, allowing them to gain experience while also benefiting from advantages offered by the cities, departments and regions to discover the area & potentially settle there later.\n\n With more than 1000 users & 300 offers in 130 cities across France 🇫🇷, DocTripper is supported by several healthcare institutions, was featured on television reports on [TF1](https://www.tf1info.fr/sante/video-je-ne-trouve-pas-ca-choquant-l-installation-des-dentistes-regulee-pour-les-pousser-a-aller-dans-des-deserts-medicaux-2342642.html) & [France 3](https://france3-regions.francetvinfo.fr/nouvelle-aquitaine/correze/brive/un-site-internet-pour-trouver-des-medecins-remplacants-et-pourquoi-pas-attirer-les-jeunes-professionnels-en-zones-rurales-3103921.html) and is now accelerating its growth to combat medical deserts.",
+		role: `As the freelance lead developer & project manager, I:\n- Scaled the project from an internal PoC to a reliable platform used by hundreds of students, healthcare professionals & partner cities across France.\n- Translated the founder's vision into actual features, helping him prioritize the roadmap to scale quickly while mitigating the technical debt from the PoC.\n- Managed several developers to work with me on the platform development.\n- Implemented CI/CD pipelines using GitHub Actions for automated testing and deployment.`,
+	},
+	{
 		title: "Solva",
 		slug: "solva",
 		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
@@ -113,23 +130,6 @@ export const PROJECTS: IProject[] = [
 		year: 2025,
 		description: `Solva is a Venmo-like payment app powered by Web3 technologies, empowering anyone to receive and transfer funds, instantly & without fees, without knowing anything about crypto.\n\n Built in 36 hours during the [ETHGlobal Taipei 2025 hackathon](https://ethglobal.com/showcase/solva-map8t), it received 3 prizes, totalling $5500 and was selected among the 8 finalist projects out of 226 by a jury of industry experts.`,
 		role: `As the solo developer, I designed & developed the entire application, including:\n- The responsive frontend using React, Tailwind CSS and shadcn/ui.\n- The backend using FastAPI, PostgreSQL and Alembic.\n- The smart contracts & blockchain interactions using Solidity.\n- The deployment using Docker and GitHub Actions.\n\nI also had the opportunity to [demo the project live on stage](https://www.youtube.com/live/if_XZf0IIr8?t=5864s) in front of the 500+ other hackers at the end of the event.`,
-	},
-	{
-		title: "DocTripper",
-		slug: "doctripper",
-		techStack: ["Next.js", "PostgreSQL", "Nest.js", "Chakra UI"],
-		thumbnail: "/projects/thumbnail/resume-roaster.jpg",
-		thumbnailMobile: "/projects/thumbnail/resume-roaster.jpg",
-		images: [
-			"/projects/images/resume-roaster-1.png",
-			"/projects/images/resume-roaster-2.png",
-			"/projects/images/resume-roaster-3.png",
-		],
-		liveUrl: "https://doctripper.com",
-		year: 2024,
-		description:
-			"Resume Roaster is a web application designed to provide tailored resume feedback and professional writing services. Built with Next.js, PostgreSQL, Prisma, and Tailwind CSS, it integrates GPT-4 for AI-powered recommendations. The platform also includes peer-to-peer reviews with a points-based system, fostering a collaborative and engaging experience. Targeting freshers, experienced professionals, and programmers, it helps optimize resumes for job-specific success.",
-		role: `As the sole developer and business owner, I:\n- Designed and developed the platform end-to-end using Next.js, PostgreSQL, Prisma, and Tailwind CSS.\n- Integrated GPT-4 for AI-driven feedback and insights.\n- Implemented complex SQL queries, including one to identify the top two resumes based on user points.`,
 	},
 	{
 		title: "CreAItors",
