@@ -6,7 +6,7 @@ export const GENERAL_INFO = {
 
 export const SOCIAL_LINKS = [
 	{ name: "github", url: "https://github.com/RezaRahemtola" },
-	{ name: "linkedin", url: "https://www.linkedin.com/in/reza-rahemtola" },
+	{ name: "linkedin", url: "https://linkedin.com/in/reza-rahemtola" },
 ];
 
 export const MY_STACK = {
@@ -102,9 +102,9 @@ export const PROJECTS: IProject[] = [
 		thumbnail: "/projects/thumbnail/doctripper.png",
 		thumbnailMobile: "/projects/thumbnail/doctripper-mobile.png",
 		images: [
-			"/projects/images/resume-roaster-1.png",
-			"/projects/images/resume-roaster-2.png",
-			"/projects/images/resume-roaster-3.png",
+			"/projects/images/doctripper-1.png",
+			"/projects/images/doctripper-2.png",
+			"/projects/images/doctripper-3.png",
 		],
 		liveUrl: "https://doctripper.com",
 		year: 2024,
