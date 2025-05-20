@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import { withPlausibleProxy } from "next-plausible";
 
-const nextConfig: NextConfig = {
+const nextConfig = withPlausibleProxy({
+	customDomain: "https://analytics.reza.dev",
+})({
 	/* config options here */
-};
+});
 
 export default nextConfig;

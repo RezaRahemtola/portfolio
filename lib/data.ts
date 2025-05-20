@@ -1,7 +1,7 @@
 import { IProject } from "@/types";
 
 export const GENERAL_INFO = {
-	email: "contact@rezar.fr",
+	email: "contact@reza.dev",
 };
 
 export const SOCIAL_LINKS = [
