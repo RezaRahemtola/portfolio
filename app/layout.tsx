@@ -40,7 +40,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<PlausibleProvider domain="reza.dev" customDomain="https://analytics.reza.dev" />
+				<PlausibleProvider domain="reza.dev" customDomain="https://analytics.reza.dev" trackOutboundLinks />
 			</head>
 			<body className={`${antonFont.variable} ${robotoFlex.variable} antialiased`}>
 				<ReactLenis
