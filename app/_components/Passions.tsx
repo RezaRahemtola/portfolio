@@ -12,7 +12,7 @@ const passionsData = [
 	{
 		icon: Award,
 		title: "Hackathons",
-		value: 23800,
+		value: 25800,
 		prefix: "$",
 		suffix: "+",
 		unit: "cash prizes won",
@@ -36,7 +36,7 @@ const passionsData = [
 			</svg>
 		),
 		title: "Chess",
-		value: 519,
+		value: 584,
 		prefix: "",
 		suffix: "",
 		unit: "highest rapid elo on chess.com",
