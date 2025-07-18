@@ -12,7 +12,7 @@ const passionsData = [
 	{
 		icon: Award,
 		title: "Hackathons",
-		value: 25800,
+		value: 26300,
 		prefix: "$",
 		suffix: "+",
 		unit: "cash prizes won",
@@ -36,10 +36,10 @@ const passionsData = [
 			</svg>
 		),
 		title: "Chess",
-		value: 584,
+		value: 715,
 		prefix: "",
 		suffix: "",
-		unit: "highest rapid elo on chess.com",
+		unit: "highest elo on chess.com",
 		description:
 			"I started playing chess recently (May 2025) and have been enjoying it casually to slowly grind. I mainly play rapid and blitz games on chess.com, and spend time doing puzzles to improve my tactical skills. It's a great mental exercise that complements my other activities.",
 	},
