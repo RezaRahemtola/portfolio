@@ -36,7 +36,7 @@ const passionsData = [
 			</svg>
 		),
 		title: "Chess",
-		value: 715,
+		value: 747,
 		prefix: "",
 		suffix: "",
 		unit: "highest elo on chess.com",
