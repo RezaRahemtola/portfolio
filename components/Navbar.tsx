@@ -31,7 +31,7 @@ const MENU_LINKS = [
 	},
 	{
 		name: "Projects",
-		url: "/#selected-projects",
+		url: "/#projects-showcase",
 	},
 ];
 

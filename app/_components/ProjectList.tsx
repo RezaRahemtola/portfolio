@@ -100,9 +100,9 @@ const ProjectList = () => {
 	};
 
 	return (
-		<section className="pb-section" id="selected-projects">
+		<section className="pb-section" id="projects-showcase">
 			<div className="container">
-				<SectionTitle title="SELECTED PROJECTS" />
+				<SectionTitle title="PROJECTS SHOWCASE" />
 
 				<div className="group/projects relative" ref={containerRef}>
 					{selectedProject !== null && (
@@ -115,8 +115,8 @@ const ProjectList = () => {
 									src={project.thumbnail}
 									alt="Project"
 									width="400"
-									height="500"
-									className={cn("absolute inset-0 transition-all duration-500 w-full h-full object-cover", {
+									height="1000"
+									className={cn("absolute inset-0 transition-all duration-500", {
 										"opacity-0": project.slug !== selectedProject,
 									})}
 									ref={imageRef}

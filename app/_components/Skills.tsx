@@ -74,7 +74,7 @@ const Skills = () => {
 										<div className="w-10 h-10 relative">
 											<Image src={item.icon} alt={item.name} sizes="40,40" fill className="object-contain" />
 										</div>
-										<span className="text-2xl capitalize">{item.name}</span>
+										<span className="text-2xl">{item.name}</span>
 									</div>
 								))}
 							</div>

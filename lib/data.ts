@@ -38,11 +38,11 @@ export const MY_STACK = {
 	],
 	backend: [
 		{
-			name: "Node.js",
+			name: "NodeJS",
 			icon: "/logo/node.png",
 		},
 		{
-			name: "Nest.js",
+			name: "NestJS",
 			icon: "/logo/nest.svg",
 		},
 		{
@@ -54,10 +54,6 @@ export const MY_STACK = {
 		{
 			name: "PostgreSQL",
 			icon: "/logo/postgreSQL.png",
-		},
-		{
-			name: "MongoDB",
-			icon: "/logo/mongodb.svg",
 		},
 		{
 			name: "Redis",
@@ -98,7 +94,7 @@ export const PROJECTS: IProject[] = [
 	{
 		title: "DocTripper",
 		slug: "doctripper",
-		techStack: ["Next.js", "PostgreSQL", "Nest.js", "Chakra UI", "Prisma", "S3", "GitHub Actions"],
+		techStack: ["Next.js", "PostgreSQL", "NestJS", "Chakra UI", "Prisma", "S3", "GitHub Actions"],
 		thumbnail: "/projects/thumbnail/doctripper.png",
 		thumbnailMobile: "/projects/thumbnail/doctripper-mobile.png",
 		images: [
@@ -111,6 +107,25 @@ export const PROJECTS: IProject[] = [
 		description:
 			"DocTripper is a French startup founded by a dental surgeon to connect medical students with professionals installed in areas lacking healthcare personnel, allowing them to gain experience while also benefiting from advantages offered by the cities, departments and regions to discover the area & potentially settle there later.\n\n With more than 1000 users & 300 offers in 130 cities across France 🇫🇷, DocTripper is supported by several healthcare institutions, was featured on television reports on [TF1](https://www.tf1info.fr/sante/video-je-ne-trouve-pas-ca-choquant-l-installation-des-dentistes-regulee-pour-les-pousser-a-aller-dans-des-deserts-medicaux-2342642.html) & [France 3](https://france3-regions.francetvinfo.fr/nouvelle-aquitaine/correze/brive/un-site-internet-pour-trouver-des-medecins-remplacants-et-pourquoi-pas-attirer-les-jeunes-professionnels-en-zones-rurales-3103921.html) and is now accelerating its growth to combat medical deserts.",
 		role: `As the freelance lead developer & project manager, I:\n- Scaled the project from an internal PoC to a reliable platform used by hundreds of students, healthcare professionals & partner cities across France.\n- Translated the founder's vision into actual features, helping him prioritize the roadmap to scale quickly while mitigating the technical debt from the PoC.\n- Managed several developers to work with me on the platform development.\n- Implemented CI/CD pipelines using GitHub Actions for automated testing and deployment.`,
+	},
+	{
+		title: "LibertAI landing",
+		slug: "libertai-landing",
+		techStack: ["GSAP", "Tailwind CSS", "React"],
+		thumbnail: "/projects/thumbnail/libertai.png",
+		thumbnailMobile: "/projects/thumbnail/libertai-mobile.png",
+		images: [
+			"/projects/images/libertai-1.png",
+			"/projects/images/libertai-2.png",
+			"/projects/images/libertai-3.png",
+			"/projects/images/libertai-4.png",
+		],
+		sourceCode: "https://github.com/LibertAI/libertai-website",
+		liveUrl: "https://libertai.io",
+		year: 2025,
+		description:
+			"LibertAI is a confidential AI platform providing various AI services (chat UI, inference APIs, AI Agents deployment...) in a confidential way, leveraging TEEs (Trusted Execution Environments) and decentralized technologies.",
+		role: `As the lead developer, apart from building these AI features, I also worked on the entire redesign of the LibertAI website to showcase the offering and capabilities of the platform with a smooth animated landing page.`,
 	},
 	{
 		title: "Solva",
