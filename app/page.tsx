@@ -4,15 +4,18 @@ import Experiences from "./_components/Experiences";
 import Passions from "./_components/Passions";
 import Skills from "./_components/Skills";
 import ProjectList from "./_components/ProjectList";
+import { getChessStats } from "@/lib/getChessStats";
 
-export default function Home() {
+export default async function Home() {
+	const chessElo = await getChessStats();
+
 	return (
 		<div className="page-">
 			<Banner />
 			<AboutMe />
 			<Skills />
 			<Experiences />
-			<Passions />
+			<Passions chessElo={chessElo} />
 			<ProjectList />
 		</div>
 	);
