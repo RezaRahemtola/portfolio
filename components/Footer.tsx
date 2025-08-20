@@ -27,15 +27,15 @@ const Footer = async () => {
 					))}
 				</div>
 
-				<div>
-					<a
-						href="https://www.me.toinfinite.dev/"
-						target="_blank"
-						className="leading-none text-muted-foreground hover:underline hover:text-white"
-					>
-						Original design by Tajmirul Islam
-					</a>
-				</div>
+				{/*<div>*/}
+				{/*	<a*/}
+				{/*		href="https://www.me.toinfinite.dev/"*/}
+				{/*		target="_blank"*/}
+				{/*		className="leading-none text-muted-foreground hover:underline hover:text-white"*/}
+				{/*	>*/}
+				{/*		Original design by Tajmirul Islam*/}
+				{/*	</a>*/}
+				{/*</div>*/}
 			</div>
 		</footer>
 	);
