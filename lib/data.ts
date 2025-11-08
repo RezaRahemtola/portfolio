@@ -64,18 +64,26 @@ export const MY_STACK = {
 			icon: "/logo/prisma.png",
 		},
 	],
-	tools: [
-		{
-			name: "Git",
-			icon: "/logo/git.png",
-		},
+	devops: [
 		{
 			name: "Docker",
 			icon: "/logo/docker.svg",
 		},
 		{
+			name: "Traefik",
+			icon: "/logo/traefik.svg",
+		},
+		{
+			name: "Dokploy",
+			icon: "/logo/dokploy.png",
+		},
+		{
 			name: "GitHub Actions",
 			icon: "/logo/github.png",
+		},
+		{
+			name: "Google Cloud",
+			icon: "/logo/gcloud.png",
 		},
 	],
 	others: [
