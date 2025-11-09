@@ -104,7 +104,6 @@ export const PROJECTS: IProject[] = [
 		slug: "doctripper",
 		techStack: ["Next.js", "PostgreSQL", "NestJS", "Chakra UI", "Prisma", "S3", "GitHub Actions"],
 		thumbnail: "/projects/thumbnail/doctripper.png",
-		thumbnailMobile: "/projects/thumbnail/doctripper-mobile.png",
 		images: [
 			"/projects/images/doctripper-1.png",
 			"/projects/images/doctripper-2.png",
@@ -121,7 +120,6 @@ export const PROJECTS: IProject[] = [
 		slug: "libertai-landing",
 		techStack: ["GSAP", "Tailwind CSS", "React"],
 		thumbnail: "/projects/thumbnail/libertai.png",
-		thumbnailMobile: "/projects/thumbnail/libertai-mobile.png",
 		images: [
 			"/projects/images/libertai-1.png",
 			"/projects/images/libertai-2.png",
@@ -140,7 +138,6 @@ export const PROJECTS: IProject[] = [
 		slug: "solva",
 		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
 		thumbnail: "/projects/thumbnail/solva.png",
-		thumbnailMobile: "/projects/thumbnail/solva-mobile.png",
 		images: [
 			"/projects/images/solva-1.jpg",
 			"/projects/images/solva-2.jpg",
@@ -158,7 +155,6 @@ export const PROJECTS: IProject[] = [
 		slug: "creaitors",
 		techStack: ["AI Agents", "Python", "Blockchain", "Next.js", "Shadcn"],
 		thumbnail: "/projects/thumbnail/creaitors.png",
-		thumbnailMobile: "/projects/thumbnail/creaitors.png",
 		images: [
 			"/projects/images/creaitors-1.jpeg",
 			"/projects/images/creaitors-2.jpeg",

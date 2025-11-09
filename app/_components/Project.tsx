@@ -8,13 +8,11 @@ import { useRef } from "react";
 interface Props {
 	index: number;
 	project: IProject;
-	selectedProject: string | null;
-	onMouseEnter: (_slug: string) => void;
 }
 
 gsap.registerPlugin(useGSAP);
 
-const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
+const Project = ({ index, project }: Props) => {
 	const externalLinkSVGRef = useRef<SVGSVGElement>(null);
 
 	const { context, contextSafe } = useGSAP(() => {}, {
@@ -23,8 +21,6 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
 	});
 
 	const handleMouseEnter = contextSafe?.(() => {
-		onMouseEnter(project.slug);
-
 		const arrowLine = externalLinkSVGRef.current?.querySelector("#arrow-line") as SVGPathElement;
 		const arrowCurb = externalLinkSVGRef.current?.querySelector("#arrow-curb") as SVGPathElement;
 		const box = externalLinkSVGRef.current?.querySelector("#box") as SVGPathElement;
@@ -81,54 +77,59 @@ const Project = ({ index, project, selectedProject, onMouseEnter }: Props) => {
 	return (
 		<TransitionLink
 			href={`/projects/${project.slug}`}
-			className="project-item group leading-none py-5 md:border-b first:pt-0! last:pb-0 last:border-none md:group-hover/projects:opacity-30 md:hover:opacity-100! transition-all"
+			className="project-item group leading-none py-5 md:py-8 md:border-b first:pt-0! last:pb-0 last:border-none transition-all"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			{selectedProject === null && (
-				<Image
-					src={project.thumbnailMobile}
-					alt="Project"
-					width="300"
-					height="200"
-					className="w-full object-cover mb-6 aspect-3/2 object-top"
-					key={project.slug}
-					loading="lazy"
-				/>
-			)}
-			<div className="flex gap-2 md:gap-5">
-				<div className="font-anton text-muted-foreground">_{(index + 1).toString().padStart(2, "0")}.</div>
-				<div className="">
-					<h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
-						{project.title}
-						<span className="text-foreground opacity-0 group-hover:opacity-100 transition-all">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="36"
-								height="36"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								ref={externalLinkSVGRef}
-							>
-								<path id="box" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-								<path id="arrow-line" d="M10 14 21 3"></path>
-								<path id="arrow-curb" d="M15 3h6v6"></path>
-							</svg>
-						</span>
-					</h4>
-					<div className="mt-2 flex flex-wrap gap-3 text-muted-foreground text-xs">
-						{project.techStack.slice(0, 3).map((tech, idx, stackArr) => (
-							<div className="gap-3 flex items-center" key={tech}>
-								<span className="">{tech}</span>
-								{idx !== stackArr.length - 1 && (
-									<span className="inline-block size-2 rounded-full bg-background-light"></span>
-								)}
-							</div>
-						))}
+			<div className="flex flex-col md:flex-row md:gap-8 md:items-center">
+				{/* Image - always visible */}
+				<div className="mb-6 md:mb-0 md:w-[300px] lg:w-[400px] md:flex-shrink-0 overflow-hidden rounded-lg">
+					<Image
+						src={project.thumbnail}
+						alt={project.title}
+						width="400"
+						height="300"
+						className="w-full object-cover aspect-3/2 object-top transition-transform duration-700"
+						key={project.slug}
+						loading="lazy"
+					/>
+				</div>
+
+				{/* Content */}
+				<div className="flex gap-2 md:gap-5 flex-1">
+					<div className="font-anton text-muted-foreground">_{(index + 1).toString().padStart(2, "0")}.</div>
+					<div className="flex-1">
+						<h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+							{project.title}
+							<span className="text-foreground opacity-0 group-hover:opacity-100 transition-all">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="36"
+									height="36"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									ref={externalLinkSVGRef}
+								>
+									<path id="box" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+									<path id="arrow-line" d="M10 14 21 3"></path>
+									<path id="arrow-curb" d="M15 3h6v6"></path>
+								</svg>
+							</span>
+						</h4>
+						<div className="mt-2 flex flex-wrap gap-3 text-muted-foreground text-xs">
+							{project.techStack.slice(0, 3).map((tech, idx, stackArr) => (
+								<div className="gap-3 flex items-center" key={tech}>
+									<span className="">{tech}</span>
+									{idx !== stackArr.length - 1 && (
+										<span className="inline-block size-2 rounded-full bg-background-light"></span>
+									)}
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
