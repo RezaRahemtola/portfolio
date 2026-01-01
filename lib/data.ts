@@ -1,12 +1,14 @@
 import { IProject } from "@/types";
+import { Github, Linkedin, Trees } from "lucide-react";
 
 export const GENERAL_INFO = {
 	email: "contact@reza.dev",
 };
 
 export const SOCIAL_LINKS = [
-	{ name: "github", url: "https://github.com/RezaRahemtola" },
-	{ name: "linkedin", url: "https://linkedin.com/in/reza-rahemtola" },
+	{ name: "github", url: "https://github.com/RezaRahemtola", icon: Github },
+	{ name: "linkedin", url: "https://linkedin.com/in/reza-rahemtola", icon: Linkedin },
+	{ name: "garden", url: "https://garden.reza.dev", icon: Trees },
 ];
 
 export const MY_STACK = {
@@ -112,7 +114,7 @@ export const PROJECTS: IProject[] = [
 		liveUrl: "https://doctripper.com",
 		year: "2023 - 2025",
 		description:
-			"DocTripper is a French startup founded by a dental surgeon to connect medical students with professionals installed in areas lacking healthcare personnel, allowing them to gain experience while also benefiting from advantages offered by the cities, departments and regions to discover the area & potentially settle there later.\n\n With more than 1500 users & 400 offers in 200 cities across France 🇫🇷, DocTripper is supported by several national healthcare institutions, was featured on television reports on [TF1](https://www.tf1info.fr/sante/video-je-ne-trouve-pas-ca-choquant-l-installation-des-dentistes-regulee-pour-les-pousser-a-aller-dans-des-deserts-medicaux-2342642.html) & [France 3](https://france3-regions.francetvinfo.fr/nouvelle-aquitaine/correze/brive/un-site-internet-pour-trouver-des-medecins-remplacants-et-pourquoi-pas-attirer-les-jeunes-professionnels-en-zones-rurales-3103921.html) and is now accelerating its growth to reduce medical deserts.",
+			"DocTripper is a French startup founded by a dental surgeon to connect medical students with professionals installed in areas lacking healthcare personnel, allowing them to gain experience while also benefiting from advantages offered by the cities, departments and regions to discover the area & potentially settle there later.\n\n With more than 2000 users & 700 offers in 400 cities across France 🇫🇷, DocTripper is supported by several national healthcare institutions, was featured on television reports on [TF1](https://www.tf1info.fr/sante/video-je-ne-trouve-pas-ca-choquant-l-installation-des-dentistes-regulee-pour-les-pousser-a-aller-dans-des-deserts-medicaux-2342642.html) & [France 3](https://france3-regions.francetvinfo.fr/nouvelle-aquitaine/correze/brive/un-site-internet-pour-trouver-des-medecins-remplacants-et-pourquoi-pas-attirer-les-jeunes-professionnels-en-zones-rurales-3103921.html) and is now accelerating its growth to reduce medical deserts.",
 		role: `As the freelance lead developer & project manager, I:\n- Scaled the project from an internal PoC to a reliable platform used by hundreds of students, healthcare professionals & partner cities across France.\n- Translated the founder's vision into actual features, helping him prioritize the roadmap to scale quickly while mitigating the technical debt from the PoC.\n- Managed several developers to work with me on the platform development.\n- Implemented CI/CD pipelines using GitHub Actions for automated testing and deployment.`,
 	},
 	{

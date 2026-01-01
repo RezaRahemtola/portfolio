@@ -1,5 +1,4 @@
 import { GENERAL_INFO, SOCIAL_LINKS } from "@/lib/data";
-import { Github, Linkedin } from "lucide-react";
 
 const Footer = async () => {
 	return (
@@ -22,7 +21,7 @@ const Footer = async () => {
 							className="transition-transform hover:scale-110"
 							aria-label={social.name}
 						>
-							{social.name === "github" ? <Github className="w-6 h-6" /> : <Linkedin className="w-6 h-6" />}
+							<social.icon className="w-6 h-6" />
 						</a>
 					))}
 				</div>
