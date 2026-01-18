@@ -16,6 +16,7 @@ the [PredictFolio](https://predictfolio.com/@0xc0fd74f90C717431FE2fc9AFD25D310D3
 - All-Time PnL: **$ALL_TIME_PNL**
 - All-Time Trading volume: **$ALL_TIME_VOLUME**
 - Last month PnL: **$LAST_MONTH_PNL**
+- Balance: **$BALANCE**
 
 The bot is written in TypeScript with the [Polymarket client](https://github.com/Polymarket/clob-client), and I'm also
 using several Python scripts to collect data and evaluate different scenarios to optimize the performance.

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
 import { IProject } from "@/types";
+import { getPolymarketStats } from "@/lib/getPolymarketStats";
 
 const loadProjectContent = (slug: string, type: "description" | "role"): string => {
 	const filePath = path.join(process.cwd(), "content", "projects", `${slug}-${type}.md`);
@@ -43,59 +44,24 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
 	// Fetch dynamic trading stats for polymarket bot
 	if (slug === "polymarket-trading-bot") {
-		try {
-			const [volumeRes, pnlRes, monthlyPnlRes] = await Promise.all([
-				fetch("https://predictfolio.com/api/current-volume?trader_id=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255", {
-					next: { revalidate: 3600 },
-				}),
-				fetch("https://predictfolio.com/api/current-pnl?trader_id=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255", {
-					next: { revalidate: 3600 },
-				}),
-				fetch(
-					"https://user-pnl-api.polymarket.com/user-pnl?user_address=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255&interval=1m&fidelity=1d",
-					{
-						next: { revalidate: 3600 },
-					},
-				),
-			]);
+		const { balance, volume, pnl, monthlyPnl } = await getPolymarketStats();
 
-			const volumeData = await volumeRes.json();
-			const pnlData = await pnlRes.json();
-			const monthlyPnlData = await monthlyPnlRes.json();
-
-			const volume = volumeData[0]?.amount;
-			const pnl = pnlData[0]?.amount;
-			const monthlyPnl =
-				monthlyPnlData && Array.isArray(monthlyPnlData) && monthlyPnlData.length > 0
-					? monthlyPnlData[monthlyPnlData.length - 1].p
-					: null;
-
-			if (volume) {
-				const formattedVolume = `$${Math.round(volume).toLocaleString()}`;
-				description = description.replace("$ALL_TIME_VOLUME", formattedVolume);
-			} else {
-				description = description.replace("$ALL_TIME_VOLUME", "Error loading volume");
-			}
-
-			if (pnl) {
-				const formattedPnl = `$${Math.round(pnl).toLocaleString()}`;
-				description = description.replace("$ALL_TIME_PNL", formattedPnl);
-			} else {
-				description = description.replace("$ALL_TIME_PNL", "Error loading PnL");
-			}
-
-			if (monthlyPnl === null) {
-				description = description.replace("$LAST_MONTH_PNL", "Error loading monthly PnL");
-			} else {
-				const formattedMonthlyPnl = `$${Math.round(monthlyPnl).toLocaleString()}`;
-				description = description.replace("$LAST_MONTH_PNL", formattedMonthlyPnl);
-			}
-		} catch (error) {
-			console.error("Failed to fetch trading stats:", error);
-			description = description.replace("$ALL_TIME_VOLUME", "Error loading volume");
-			description = description.replace("$ALL_TIME_PNL", "Error loading PnL");
-			description = description.replace("$LAST_MONTH_PNL", "Error loading monthly PnL");
-		}
+		description = description.replace(
+			"$BALANCE",
+			balance !== null ? `$${Math.round(balance).toLocaleString()}` : "Error loading balance",
+		);
+		description = description.replace(
+			"$ALL_TIME_VOLUME",
+			volume !== null ? `$${Math.round(volume).toLocaleString()}` : "Error loading volume",
+		);
+		description = description.replace(
+			"$ALL_TIME_PNL",
+			pnl !== null ? `$${Math.round(pnl).toLocaleString()}` : "Error loading PnL",
+		);
+		description = description.replace(
+			"$LAST_MONTH_PNL",
+			monthlyPnl !== null ? `$${Math.round(monthlyPnl).toLocaleString()}` : "Error loading monthly PnL",
+		);
 	}
 
 	const projectWithContent: IProject = {
