@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 interface Props {
 	index: number;
-	project: IProject;
+	project: Omit<IProject, "description" | "role">;
 }
 
 gsap.registerPlugin(useGSAP);

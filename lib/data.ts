@@ -100,7 +100,7 @@ export const MY_STACK = {
 	],
 };
 
-export const PROJECTS: IProject[] = [
+export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 	{
 		title: "DocTripper",
 		slug: "doctripper",
@@ -113,9 +113,6 @@ export const PROJECTS: IProject[] = [
 		],
 		liveUrl: "https://doctripper.com",
 		year: "2023 - 2025",
-		description:
-			"DocTripper is a French startup founded by a dental surgeon to connect medical students with professionals installed in areas lacking healthcare personnel, allowing them to gain experience while also benefiting from advantages offered by the cities, departments and regions to discover the area & potentially settle there later.\n\n With more than 2000 users & 700 offers in 400 cities across France 🇫🇷, DocTripper is supported by several national healthcare institutions, was featured on television reports on [TF1](https://www.tf1info.fr/sante/video-je-ne-trouve-pas-ca-choquant-l-installation-des-dentistes-regulee-pour-les-pousser-a-aller-dans-des-deserts-medicaux-2342642.html) & [France 3](https://france3-regions.francetvinfo.fr/nouvelle-aquitaine/correze/brive/un-site-internet-pour-trouver-des-medecins-remplacants-et-pourquoi-pas-attirer-les-jeunes-professionnels-en-zones-rurales-3103921.html) and is now accelerating its growth to reduce medical deserts.",
-		role: `As the freelance lead developer & project manager, I:\n- Scaled the project from an internal PoC to a reliable platform used by hundreds of students, healthcare professionals & partner cities across France.\n- Translated the founder's vision into actual features, helping him prioritize the roadmap to scale quickly while mitigating the technical debt from the PoC.\n- Managed several developers to work with me on the platform development.\n- Implemented CI/CD pipelines using GitHub Actions for automated testing and deployment.`,
 	},
 	{
 		title: "LibertAI landing",
@@ -131,9 +128,15 @@ export const PROJECTS: IProject[] = [
 		sourceCode: "https://github.com/LibertAI/libertai-website",
 		liveUrl: "https://libertai.io",
 		year: "2024",
-		description:
-			"LibertAI is a confidential AI platform providing various AI services (chat UI, inference APIs, AI Agents deployment...) in a confidential way, leveraging TEEs (Trusted Execution Environments) and decentralized technologies.",
-		role: `As the lead developer, apart from building these AI features, I also worked on the entire redesign of the LibertAI website to showcase the offering and capabilities of the platform with a smooth animated landing page.`,
+	},
+	{
+		title: "Trading bot",
+		slug: "polymarket-trading-bot",
+		techStack: ["TypeScript", "Blockchain", "Python", "Docker"],
+		thumbnail: "/projects/thumbnail/polymarket-trading-bot.png",
+		images: [],
+		liveUrl: "https://polymarket.com/@0xc0fd74f90C717431FE2fc9AFD25D310D3BAb0255-1768261238207",
+		year: "2026",
 	},
 	{
 		title: "Solva",
@@ -149,8 +152,6 @@ export const PROJECTS: IProject[] = [
 		sourceCode: "https://github.com/RezaRahemtola/ETHGlobal-Taipei2025",
 		liveUrl: "https://ethglobal.com/showcase/solva-map8t",
 		year: "2025",
-		description: `Solva is a Venmo-like payment app powered by Web3 technologies, empowering anyone to receive and transfer funds, instantly & without fees, without knowing anything about crypto.\n\n Built in 36 hours during the [ETHGlobal Taipei 2025 hackathon](https://ethglobal.com/events/taipei), it received 3 prizes, totalling $5500 and was selected among the 8 finalist projects out of 226 by a jury of industry experts.`,
-		role: `As the solo developer, I designed & developed the entire application, including:\n- The responsive frontend using React, Tailwind CSS and shadcn/ui.\n- The backend using FastAPI, PostgreSQL and Alembic.\n- The smart contracts & blockchain interactions using Solidity.\n- The deployment using Docker and GitHub Actions.\n\nI also had the opportunity to [demo the project live on stage](https://www.youtube.com/live/if_XZf0IIr8?t=5864s) in front of the 500+ other hackers at the end of the event.`,
 	},
 	{
 		title: "CreAItors",
@@ -166,9 +167,6 @@ export const PROJECTS: IProject[] = [
 		sourceCode: "https://github.com/ethdenver-creaitors/creaitors",
 		liveUrl: "https://devfolio.co/projects/creaitors-b521",
 		year: "2025",
-		description:
-			"CreAItors is a platform that allows anyone to create and deploy unstoppable & autonomous AI Agents that pay for their own computing on a decentralized cloud. Built during the [ETHDenver 2025 hackathon](https://ethdenver.com/), it received multiple prizes totalling $6000 and was selected among the top 10 infrastructure projects out of 200+ by a jury of industry experts.",
-		role: `My role during this hackathon mainly consisted in:\n- Managing and coordinating our team of 3 developers to develop the project in a week (1 backend developer, 1 frontend developer and myself on the AI part)\n- Developing a custom AI framework on top of Coinbase's AgentKit to provide agents a wallet to control.\n- Creating the tools and reflexion system to allow agents to autonomously pay for their own computing\n- Presenting and demoing the project to the sponsors and jury members`,
 	},
 ];
 

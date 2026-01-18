@@ -11,6 +11,7 @@ export const MarkdownRenderer = ({ content }: { content: string }) => (
 					{props.children}
 				</a>
 			),
+			p: ({ ...props }) => <p {...props} className="mt-4" />,
 		}}
 	>
 		{content}
