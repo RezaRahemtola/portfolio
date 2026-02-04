@@ -139,6 +139,16 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		year: "2026",
 	},
 	{
+		title: "Stocks Hedging",
+		slug: "polymarket-stocks-hedging",
+		techStack: ["Next.js", "TypeScript", "Blockchain"],
+		thumbnail: "/projects/thumbnail/polymarket-stocks-hedging.png",
+		images: ["/projects/images/polymarket-stocks-hedging-1.png", "/projects/images/polymarket-stocks-hedging-2.png"],
+		sourceCode: "https://github.com/RezaRahemtola/polymarket-stocks-hedging",
+		liveUrl: "https://polymarket-stocks-hedging.reza.dev",
+		year: "2026",
+	},
+	{
 		title: "Solva",
 		slug: "solva",
 		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
