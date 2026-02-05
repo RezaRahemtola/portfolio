@@ -8,24 +8,21 @@ interface PolymarketStats {
 export async function getPolymarketStats(): Promise<PolymarketStats> {
 	try {
 		// Fetch USDC balance on Polygon
-		const walletAddress = "0xc0fd74f90c717431fe2fc9afd25d310d3bab0255";
+		const walletAddress = "0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2";
 		const usdcAddress = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"; // USDC.e on Polygon (bridged)
 		const balanceOfSignature = "0x70a08231"; // balanceOf(address)
 		const paddedAddress = walletAddress.slice(2).padStart(64, "0");
 
 		const [volumeRes, pnlRes, monthlyPnlRes, usdcBalanceRes] = await Promise.all([
-			fetch("https://predictfolio.com/api/current-volume?trader_id=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255", {
+			fetch(`https://predictfolio.com/api/current-volume?trader_id=${walletAddress}`, {
 				next: { revalidate: 3600 },
 			}),
-			fetch("https://predictfolio.com/api/current-pnl?trader_id=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255", {
+			fetch(`https://predictfolio.com/api/current-pnl?trader_id=${walletAddress}`, {
 				next: { revalidate: 3600 },
 			}),
-			fetch(
-				"https://user-pnl-api.polymarket.com/user-pnl?user_address=0xc0fd74f90c717431fe2fc9afd25d310d3bab0255&interval=1m&fidelity=1d",
-				{
-					next: { revalidate: 3600 },
-				},
-			),
+			fetch(`https://user-pnl-api.polymarket.com/user-pnl?user_address=${walletAddress}&interval=1m&fidelity=1d`, {
+				next: { revalidate: 3600 },
+			}),
 			fetch("https://polygon-rpc.com", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

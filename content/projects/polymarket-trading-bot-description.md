@@ -25,15 +25,15 @@ planning to implement.
 I won't share the code or the strategy used for obvious reasons, but you can verify that I am the owner of this
 Polymarket account by following these steps:
 
-- Go the [profile page](https://polymarket.com/@0xc0fd74f90C717431FE2fc9AFD25D310D3BAb0255-1768261238207) and click
+- Go the [profile page](https://polymarket.com/profile/0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2) and click
   the "Copy Address" button next to the username, which should give you this address
-  `0xc0fd74f90c717431fe2fc9afd25d310d3bab0255`
+  `0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2`
 - Go on [PolygonScan](https://polygonscan.com/), paste the address, and
-  once [on the page](https://polygonscan.com/address/0xc0fd74f90c717431fe2fc9afd25d310d3bab0255)
-  click ["Internal Transactions"](https://polygonscan.com/address/0xc0fd74f90c717431fe2fc9afd25d310d3bab0255#internaltx)
-  then [on the hash](https://polygonscan.com/tx/0x4eeb74374432c159e0dc46816091f8931ceab649ee9164dfd5b65152368ee56b) of
+  once [on the page](https://polygonscan.com/address/0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2)
+  click ["Internal Transactions"](https://polygonscan.com/address/0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2#internaltx)
+  then [on the hash](https://polygonscan.com/tx/0x2bbc99c97c00684ac4ebf8846925d363f40e049e472e14a5ed39c05f45f18c85) of
   the "Contract Creation" transaction
 - At the top you should see that this Polymarket contract was created by the address [
-  `0xf528c437bd05b77beb86a625a27459a1cb739036`](https://polygonscan.com/address/0xf528c437bd05b77beb86a625a27459a1cb739036),
+  `0x0Cb534C7166DE1F5949ee2507dd457d662D076Ac`](https://polygonscan.com/address/0x0Cb534C7166DE1F5949ee2507dd457d662D076Ac),
   and on the page of this address you can see it was funded by my main
   address [rezarah.eth](https://app.ens.domains/rezarah.eth)
