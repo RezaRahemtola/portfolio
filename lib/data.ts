@@ -135,7 +135,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		techStack: ["TypeScript", "Blockchain", "Python", "Docker"],
 		thumbnail: "/projects/thumbnail/polymarket-trading-bot.png",
 		images: [],
-		liveUrl: "https://polymarket.com/@0xc0fd74f90C717431FE2fc9AFD25D310D3BAb0255-1768261238207",
+		liveUrl: "https://polymarket.com/profile/0xbb64d20a2B4C1FF63bDC03d293549A9D1029C6f2",
 		year: "2026",
 	},
 	{

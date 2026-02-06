@@ -1,15 +1,16 @@
 [Polymarket](https://polymarket.com) is a blockchain-based prediction market where you can bet on future events across
 various topics.
 
-I was already using it as a hedging tool when yields are attractive, but I started studying bots when I came across a
-few posts on X ([like this one](https://x.com/thejayden/status/1996281508550877314)) trying to dissect the logic of the
-most profitable bots.
+I was already using it as a hedging tool when yields are attractive (and actually
+made [a dedicated tool for stocks hedging](https://reza.dev/projects/polymarket-stocks-hedging)), but I started studying
+bots when I came across a few posts on X ([like this one](https://x.com/thejayden/status/1996281508550877314)) trying to
+dissect the logic of the most profitable bots.
 
 After many tests, exploration, data collection & analysis and around $500 lost testing various strategies (as paper
 trading simulation has its limits, like reliably replicate orders filling & available liquidity), I managed to find &
 implement a profitable strategy on short time crypto markets (15min & 1h).
 
-Some statistics as of now (fetched from
+Some statistics since launch on February 5th (fetched in realtime from
 the [PredictFolio](https://predictfolio.com/@0xc0fd74f90C717431FE2fc9AFD25D310D3BAb0255-1768261238207) API):
 
 - All-Time PnL: **$ALL_TIME_PNL**

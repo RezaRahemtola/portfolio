@@ -15,13 +15,13 @@ export async function getPolymarketStats(): Promise<PolymarketStats> {
 
 		const [volumeRes, pnlRes, monthlyPnlRes, usdcBalanceRes] = await Promise.all([
 			fetch(`https://predictfolio.com/api/current-volume?trader_id=${walletAddress}`, {
-				next: { revalidate: 3600 },
+				cache: "no-store",
 			}),
 			fetch(`https://predictfolio.com/api/current-pnl?trader_id=${walletAddress}`, {
-				next: { revalidate: 3600 },
+				cache: "no-store",
 			}),
 			fetch(`https://user-pnl-api.polymarket.com/user-pnl?user_address=${walletAddress}&interval=1m&fidelity=1d`, {
-				next: { revalidate: 3600 },
+				cache: "no-store",
 			}),
 			fetch("https://polygon-rpc.com", {
 				method: "POST",
@@ -38,7 +38,7 @@ export async function getPolymarketStats(): Promise<PolymarketStats> {
 					],
 					id: 1,
 				}),
-				next: { revalidate: 3600 },
+				cache: "no-store",
 			}),
 		]);
 
