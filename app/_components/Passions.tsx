@@ -20,7 +20,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 		{
 			icon: Award,
 			title: "Hackathons",
-			value: 30800,
+			value: 35800,
 			prefix: "$",
 			suffix: "+",
 			unit: "cash prizes won",
