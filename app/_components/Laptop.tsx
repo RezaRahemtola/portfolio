@@ -38,6 +38,7 @@ const LaptopScene = () => {
 		});
 
 		renderer.setSize(containerWidth, containerHeight);
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 		renderer.setClearColor(0x212121, 0); // Set alpha to 0 for transparent background
 		mountRef.current.appendChild(renderer.domElement);
 
@@ -45,8 +46,13 @@ const LaptopScene = () => {
 		const mouse = new Vector2();
 		const raycaster = new Raycaster();
 		let hovering = false;
-		let hoverPoint = new Vector3();
+		const hoverPoint = new Vector3();
 		const effectRadius = 2.5; // Radius of effect around mouse
+
+		// Reusable vectors to avoid per-frame allocations
+		const _direction = new Vector3();
+		const _floatingPos = new Vector3();
+		let mouseDirty = false; // true when mouse moved since last frame
 
 		// Gentle floating animation variables
 		let floatTime = 0;
@@ -334,86 +340,94 @@ const LaptopScene = () => {
 		camera.position.set(6, 5, 7.5);
 		camera.lookAt(0, 0.5, 0);
 
-		// Handle mouse movement
+		// Handle mouse movement — only store coordinates, raycast deferred to animation frame
+		let mouseInBounds = false;
 		const onMouseMove = (event: MouseEvent) => {
 			if (!mountRef.current) return;
 
 			const rect = mountRef.current.getBoundingClientRect();
 
-			// Check if mouse is within the container bounds
 			if (
 				event.clientX >= rect.left &&
 				event.clientX <= rect.right &&
 				event.clientY >= rect.top &&
 				event.clientY <= rect.bottom
 			) {
-				// Calculate mouse position in normalized device coordinates
 				mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
 				mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-				// Update raycaster
-				raycaster.setFromCamera(mouse, camera);
-
-				// Check for intersections with marbles
-				const intersects = raycaster.intersectObjects(marbles);
-
-				if (intersects.length > 0) {
-					hovering = true;
-					hoverPoint = intersects[0].point;
-				} else {
-					hovering = false;
-				}
+				mouseInBounds = true;
+				mouseDirty = true;
 			} else {
+				mouseInBounds = false;
 				hovering = false;
 			}
 		};
 
-		window.addEventListener("mousemove", onMouseMove);
+		window.addEventListener("mousemove", onMouseMove, { passive: true });
 
 		// Animation function
 		const animate = () => {
+			// Raycast once per frame (not per mousemove event)
+			if (mouseDirty && mouseInBounds) {
+				mouseDirty = false;
+				raycaster.setFromCamera(mouse, camera);
+				const intersects = raycaster.intersectObjects(marbles);
+				if (intersects.length > 0) {
+					hovering = true;
+					hoverPoint.copy(intersects[0].point);
+				} else {
+					hovering = false;
+				}
+			}
+
 			// Update floating animation time
 			floatTime += 1;
 			const floatOffset = Math.sin(floatTime * floatSpeed) * floatAmplitude;
 
+			// Pre-compute squared radius to avoid sqrt in distance checks
+			const effectRadiusSq = effectRadius * effectRadius;
+			const explosionThreshold = 0.3;
+			const explosionDistSq = (effectRadius * explosionThreshold) ** 2;
+
 			// Update marbles - apply hover effect and gentle floating
-			marbles.forEach((marble) => {
+			for (let i = 0, len = marbles.length; i < len; i++) {
+				const marble = marbles[i];
+				const pos = marble.position;
+				const ud = marble.userData;
+
 				// Apply hover effect if mouse is hovering
 				if (hovering) {
-					const distance = marble.position.distanceTo(hoverPoint);
+					// Use squared distance to avoid sqrt
+					const dx = pos.x - hoverPoint.x;
+					const dy = pos.y - hoverPoint.y;
+					const dz = pos.z - hoverPoint.z;
+					const distSq = dx * dx + dy * dy + dz * dz;
 
-					if (distance < effectRadius) {
-						// Calculate force based on distance with non-linear falloff for more explosive effect
+					if (distSq < effectRadiusSq) {
+						const distance = Math.sqrt(distSq);
 						const force = Math.pow(1 - distance / effectRadius, 2);
 
-						// Create direction vector away from hover point
-						const direction = new Vector3().subVectors(marble.position, hoverPoint).normalize();
+						// Reuse direction vector
+						_direction.set(dx, dy, dz);
+						if (distance > 0.001) {
+							_direction.multiplyScalar(1 / distance); // normalize without creating new vec
+						}
 
-						// Apply force in that direction - much stronger
-						const explosionThreshold = 0.3;
-
-						if (distance < effectRadius * explosionThreshold) {
-							// Moderate effect for very close marbles
+						if (distSq < explosionDistSq) {
 							const explosionForce = 0.15;
-							marble.position.add(direction.multiplyScalar(explosionForce));
+							pos.x += _direction.x * explosionForce + (Math.random() - 0.5) * 0.05;
+							pos.y += _direction.y * explosionForce + 0.08;
+							pos.z += _direction.z * explosionForce + (Math.random() - 0.5) * 0.05;
 
-							// Subtle random direction component
-							marble.position.x += (Math.random() - 0.5) * 0.05;
-							marble.position.z += (Math.random() - 0.5) * 0.05;
-							marble.position.y += 0.08; // Moderate upward burst
-
-							// Gentle rotation
 							marble.rotation.x += Math.random() * 0.2;
 							marble.rotation.y += Math.random() * 0.2;
 							marble.rotation.z += Math.random() * 0.2;
 						} else {
-							// Reduced force for other marbles
-							marble.position.add(direction.multiplyScalar(0.08 * force));
+							const f = 0.08 * force;
+							pos.x += _direction.x * f;
+							pos.y += _direction.y * f + 0.03 * force;
+							pos.z += _direction.z * f;
 
-							// Subtle vertical movement
-							marble.position.y += 0.03 * force;
-
-							// Gentler rotation
 							marble.rotation.x += 0.05 * force;
 							marble.rotation.y += 0.07 * force;
 							marble.rotation.z += 0.05 * force;
@@ -421,34 +435,35 @@ const LaptopScene = () => {
 					}
 				}
 
-				// Calculate floating position based on original position
-				const floatingOriginalPosition = marble.userData.originalPosition.clone();
-
-				// Add floating offset with slight variation based on marble's random offset
-				floatingOriginalPosition.y +=
-					floatOffset + Math.sin(floatTime * floatSpeed * 1.2 + marble.userData.offset * Math.PI) * 0.03;
+				// Compute floating target position in-place (no clone)
+				const origPos = ud.originalPosition;
+				const floatY = floatOffset + Math.sin(floatTime * floatSpeed * 1.2 + ud.offset * Math.PI) * 0.03;
+				_floatingPos.set(origPos.x, origPos.y + floatY, origPos.z);
 
 				// Apply slight rotation with the floating motion
-				const floatRotation = Math.sin(floatTime * floatSpeed * 0.7 + marble.userData.offset * Math.PI) * 0.02;
+				const floatRotation = Math.sin(floatTime * floatSpeed * 0.7 + ud.offset * Math.PI) * 0.02;
 
-				// Apply gravity to return marbles to floating position with easing
-				if (marble.position.distanceTo(floatingOriginalPosition) > 0.01) {
-					// Faster return if far from target position, slower as it gets closer
-					const distance = marble.position.distanceTo(floatingOriginalPosition);
-					const returnForce = Math.min(0.04, 0.01 + distance * 0.02);
+				// Squared distance check for return-to-origin
+				const rdx = pos.x - _floatingPos.x;
+				const rdy = pos.y - _floatingPos.y;
+				const rdz = pos.z - _floatingPos.z;
+				const returnDistSq = rdx * rdx + rdy * rdy + rdz * rdz;
 
-					marble.position.lerp(floatingOriginalPosition, returnForce);
+				if (returnDistSq > 0.0001) {
+					// 0.01^2
+					const returnDist = Math.sqrt(returnDistSq);
+					const returnForce = Math.min(0.04, 0.01 + returnDist * 0.02);
 
-					// Calculate target rotation with floating effect
-					const targetRotationX = marble.userData.originalRotation.x + floatRotation;
-					const targetRotationZ = marble.userData.originalRotation.z + floatRotation;
+					pos.lerp(_floatingPos, returnForce);
 
-					// Also return rotation with easing
-					marble.rotation.x = MathUtils.lerp(marble.rotation.x, targetRotationX, returnForce);
-					marble.rotation.y = MathUtils.lerp(marble.rotation.y, marble.userData.originalRotation.y, returnForce);
-					marble.rotation.z = MathUtils.lerp(marble.rotation.z, targetRotationZ, returnForce);
+					const targetRotX = ud.originalRotation.x + floatRotation;
+					const targetRotZ = ud.originalRotation.z + floatRotation;
+
+					marble.rotation.x = MathUtils.lerp(marble.rotation.x, targetRotX, returnForce);
+					marble.rotation.y = MathUtils.lerp(marble.rotation.y, ud.originalRotation.y, returnForce);
+					marble.rotation.z = MathUtils.lerp(marble.rotation.z, targetRotZ, returnForce);
 				}
-			});
+			}
 
 			renderer.render(scene, camera);
 		};
