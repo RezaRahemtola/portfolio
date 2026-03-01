@@ -15,6 +15,8 @@ const loadProjectContent = (slug: string, type: "description" | "role"): string 
 	return "";
 };
 
+export const dynamic = "force-dynamic";
+
 export const generateStaticParams = async () => {
 	return PROJECTS.map((project) => ({ slug: project.slug }));
 };

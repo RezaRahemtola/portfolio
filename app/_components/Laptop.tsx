@@ -454,10 +454,12 @@ const LaptopScene = () => {
 		};
 
 		// Start the animation loop
-		const animationId = requestAnimationFrame(function animateLoop() {
+		let animationId: number;
+		const animateLoop = () => {
 			animate();
-			requestAnimationFrame(animateLoop);
-		});
+			animationId = requestAnimationFrame(animateLoop);
+		};
+		animationId = requestAnimationFrame(animateLoop);
 
 		// Store a reference to the DOM node to use in cleanup
 		const currentRef = mountRef.current;

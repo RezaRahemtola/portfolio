@@ -69,8 +69,16 @@ const AboutMe = () => {
 								width={200}
 								height={200}
 								className="object-cover mx-auto md:hidden"
+								priority
 							/>
-							<Image src="/about/reza_full.jpeg" alt="Reza" width={375} height={200} className="max-md:hidden" />
+							<Image
+								src="/about/reza_full.jpeg"
+								alt="Reza"
+								width={375}
+								height={200}
+								className="max-md:hidden"
+								priority
+							/>
 						</div>
 					</div>
 					<div className="md:col-span-7">

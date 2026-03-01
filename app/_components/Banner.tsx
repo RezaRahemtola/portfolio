@@ -5,8 +5,10 @@ import { GENERAL_INFO } from "@/lib/data";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import dynamic from "next/dynamic";
 import React from "react";
-import Laptop from "./Laptop";
+
+const Laptop = dynamic(() => import("./Laptop"), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 

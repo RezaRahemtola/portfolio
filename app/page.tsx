@@ -10,7 +10,7 @@ export default async function Home() {
 	const chessElo = await getChessStats();
 
 	return (
-		<div className="page-">
+		<div>
 			<Banner />
 			<AboutMe />
 			<Skills />

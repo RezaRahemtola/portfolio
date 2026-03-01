@@ -35,7 +35,7 @@ const ParticleBackground = () => {
 				<div
 					key={i}
 					ref={(el) => {
-						particlesRef.current.push(el!);
+						if (el) particlesRef.current[i] = el;
 					}}
 					className="absolute rounded-full bg-white"
 				/>
