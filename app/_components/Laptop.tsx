@@ -468,12 +468,30 @@ const LaptopScene = () => {
 			renderer.render(scene, camera);
 		};
 
-		// Start the animation loop
-		let animationId: number;
+		// Start the animation loop — pauses when off-screen
+		let animationId = 0;
+		let isVisible = true;
+
 		const animateLoop = () => {
+			if (!isVisible) {
+				animationId = 0;
+				return;
+			}
 			animate();
 			animationId = requestAnimationFrame(animateLoop);
 		};
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible && !animationId) {
+					animationId = requestAnimationFrame(animateLoop);
+				}
+			},
+			{ threshold: 0 },
+		);
+		observer.observe(mountRef.current);
+
 		animationId = requestAnimationFrame(animateLoop);
 
 		// Store a reference to the DOM node to use in cleanup
@@ -481,6 +499,7 @@ const LaptopScene = () => {
 
 		// Cleanup function
 		return () => {
+			observer.disconnect();
 			cancelAnimationFrame(animationId);
 			window.removeEventListener("mousemove", onMouseMove);
 			if (currentRef) {
