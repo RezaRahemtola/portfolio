@@ -98,12 +98,24 @@ const ProjectDetails = ({ project }: Props) => {
 
 							<div className="fade-in-later opacity-0 flex gap-2">
 								{project.sourceCode && (
-									<a href={project.sourceCode} target="_blank" rel="noreferrer noopener" className="hover:text-primary">
+									<a
+										href={project.sourceCode}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="View source code"
+										className="hover:text-primary"
+									>
 										<Github size={30} />
 									</a>
 								)}
 								{project.liveUrl && (
-									<a href={project.liveUrl} target="_blank" rel="noreferrer noopener" className="hover:text-primary">
+									<a
+										href={project.liveUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="View live project"
+										className="hover:text-primary"
+									>
 										<ExternalLink size={30} />
 									</a>
 								)}
@@ -157,6 +169,8 @@ const ProjectDetails = ({ project }: Props) => {
 							<a
 								href={image}
 								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="View full-size image"
 								className="absolute top-4 right-4 z-1 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
 							>
 								<ExternalLink />

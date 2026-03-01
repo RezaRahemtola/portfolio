@@ -7,7 +7,12 @@ export const MarkdownRenderer = ({ content }: { content: string }) => (
 		remarkPlugins={[remarkGfm]}
 		components={{
 			a: ({ ...props }) => (
-				<a {...props} target="_blank" className="underline underline-offset-3 decoration-primary">
+				<a
+					{...props}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="underline underline-offset-3 decoration-primary"
+				>
 					{props.children}
 				</a>
 			),

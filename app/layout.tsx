@@ -28,8 +28,16 @@ const robotoFlex = Roboto_Flex({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://reza.dev"),
 	title: "Portfolio - Reza Rahemtola",
 	description: "Personal portfolio of Reza Rahemtola",
+	openGraph: {
+		title: "Portfolio - Reza Rahemtola",
+		description: "Personal portfolio of Reza Rahemtola",
+		url: "https://reza.dev",
+		type: "website",
+	},
+	twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

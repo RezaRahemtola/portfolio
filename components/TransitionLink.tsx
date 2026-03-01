@@ -14,7 +14,7 @@ const TransitionLink = ({ href, onClick, children, back = false, ...rest }: Prop
 		e.preventDefault();
 
 		if (back) {
-			if (window.history.length > 1) {
+			if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
 				router.back();
 			} else {
 				router.push(href.toString());

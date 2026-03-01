@@ -44,6 +44,8 @@ const Navbar = () => {
 		<>
 			<div className="sticky top-0 z-4">
 				<button
+					aria-label="Toggle navigation menu"
+					aria-expanded={isMenuOpen}
 					className={cn("group size-12 absolute top-5 right-5 md:right-10 z-2")}
 					onClick={() => setIsMenuOpen(!isMenuOpen)}
 				>
