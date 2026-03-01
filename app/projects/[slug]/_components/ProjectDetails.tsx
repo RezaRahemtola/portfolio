@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
 import React, { useRef } from "react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
@@ -64,16 +65,15 @@ const ProjectDetails = ({ project }: Props) => {
 	// parallax effect on images
 	useGSAP(
 		() => {
-			gsap.utils.toArray<HTMLDivElement>("#images > div").forEach((imageDiv, i) => {
-				gsap.to(imageDiv, {
-					backgroundPosition: `center 0%`,
+			gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
+				gsap.to(img, {
+					objectPosition: `center 0%`,
 					ease: "none",
 					scrollTrigger: {
-						trigger: imageDiv,
+						trigger: img.parentElement,
 						start: () => (i ? "top bottom" : "top 50%"),
 						end: "bottom top",
 						scrub: true,
-						// invalidateOnRefresh: true, // to make it responsive
 					},
 				});
 			});
@@ -145,20 +145,19 @@ const ProjectDetails = ({ project }: Props) => {
 
 				<div className="fade-in-later relative flex flex-col gap-2 max-w-[800px] mx-auto" id="images">
 					{project.images.map((image) => (
-						<div
-							key={image}
-							className="group relative w-full aspect-750/400 bg-background-light"
-							style={{
-								backgroundImage: `url(${image})`,
-								backgroundSize: "cover",
-								backgroundPosition: "center 50%",
-								backgroundRepeat: "no-repeat",
-							}}
-						>
+						<div key={image} className="group relative w-full aspect-750/400 bg-background-light overflow-hidden">
+							<Image
+								src={image}
+								alt={project.title}
+								fill
+								sizes="(max-width: 800px) 100vw, 800px"
+								className="object-cover"
+								style={{ objectPosition: "center 50%" }}
+							/>
 							<a
 								href={image}
 								target="_blank"
-								className="absolute top-4 right-4 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
+								className="absolute top-4 right-4 z-1 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
 							>
 								<ExternalLink />
 							</a>

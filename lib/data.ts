@@ -112,7 +112,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 			"/projects/images/doctripper-3.png",
 		],
 		liveUrl: "https://doctripper.com",
-		year: "2023 - 2025",
+		year: "2023 - 2026",
 	},
 	{
 		title: "LibertAI landing",

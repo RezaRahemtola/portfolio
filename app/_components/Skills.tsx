@@ -72,7 +72,7 @@ const Skills = () => {
 								{value.map((item) => (
 									<div className="slide-up flex gap-3.5 items-center leading-none" key={item.name}>
 										<div className="w-10 h-10 relative">
-											<Image src={item.icon} alt={item.name} sizes="40,40" fill className="object-contain" />
+											<Image src={item.icon} alt={item.name} sizes="40px" fill className="object-contain" />
 										</div>
 										<span className="text-2xl">{item.name}</span>
 									</div>
