@@ -41,7 +41,7 @@ const Navbar = () => {
 	const router = useRouter();
 
 	return (
-		<>
+		<nav>
 			<div className="sticky top-0 z-4">
 				<button
 					aria-label="Toggle navigation menu"
@@ -100,7 +100,13 @@ const Navbar = () => {
 							<ul className="space-y-3">
 								{SOCIAL_LINKS.map((link) => (
 									<li key={link.name}>
-										<a href={link.url} target="_blank" rel="noreferrer" className="text-lg capitalize hover:underline">
+										<a
+											href={link.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-lg capitalize hover:underline flex items-center gap-2"
+										>
+											<link.icon className="w-5 h-5" />
 											{link.name}
 										</a>
 									</li>
@@ -141,7 +147,7 @@ const Navbar = () => {
 					<a href={`mailto:${GENERAL_INFO.email}`}>{GENERAL_INFO.email}</a>
 				</div>
 			</div>
-		</>
+		</nav>
 	);
 };
 

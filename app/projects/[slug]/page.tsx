@@ -24,12 +24,26 @@ export const generateStaticParams = async () => {
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
 	const { slug } = await params;
 	const project = PROJECTS.find((project) => project.slug === slug);
-	const description = loadProjectContent(slug, "description");
+	const description = loadProjectContent(slug, "description").substring(0, 160);
+	const title = `${project?.title} - ${project?.techStack.slice(0, 3).join(", ")}`;
 
 	return {
-		title: `${project?.title} - ${project?.techStack.slice(0, 3).join(", ")}`,
-		description: description.substring(0, 160),
-	} as Metadata;
+		title,
+		description,
+		openGraph: {
+			title,
+			description,
+			url: `https://reza.dev/projects/${slug}`,
+			type: "article",
+			images: project?.thumbnail ? [{ url: project.thumbnail, width: 1200, height: 630 }] : [],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: project?.thumbnail ? [project.thumbnail] : [],
+		},
+	};
 };
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -72,7 +86,25 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		role,
 	};
 
-	return <ProjectDetails project={projectWithContent} />;
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "SoftwareSourceCode",
+		name: project.title,
+		description: description.substring(0, 160),
+		url: `https://reza.dev/projects/${slug}`,
+		author: { "@type": "Person", name: "Reza Rahemtola", url: "https://reza.dev" },
+		programmingLanguage: project.techStack,
+		...(project.sourceCode && { codeRepository: project.sourceCode }),
+		...(project.liveUrl && { targetProduct: { "@type": "WebApplication", url: project.liveUrl } }),
+		image: project.thumbnail ? `https://reza.dev${project.thumbnail}` : undefined,
+	};
+
+	return (
+		<>
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+			<ProjectDetails project={projectWithContent} />
+		</>
+	);
 };
 
 export default Page;
