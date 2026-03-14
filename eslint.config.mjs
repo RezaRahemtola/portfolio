@@ -14,6 +14,9 @@ const compat = new FlatCompat({
 
 export default defineConfig([
 	{
+		ignores: [".next/**", "*.mjs"],
+	},
+	{
 		extends: compat.extends("next/core-web-vitals", "next/typescript"),
 
 		languageOptions: {
