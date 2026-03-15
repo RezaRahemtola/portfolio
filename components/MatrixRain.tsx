@@ -1,7 +1,8 @@
 "use client";
+import { useHotkey, useHotkeySequence, type HotkeySequence } from "@tanstack/react-hotkeys";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const KONAMI_CODE = [
+const KONAMI_SEQUENCE: HotkeySequence = [
 	"ArrowUp",
 	"ArrowUp",
 	"ArrowDown",
@@ -10,8 +11,8 @@ const KONAMI_CODE = [
 	"ArrowRight",
 	"ArrowLeft",
 	"ArrowRight",
-	"b",
-	"a",
+	"B",
+	"A",
 ];
 
 const CHARS =
@@ -21,7 +22,6 @@ const MatrixRain = () => {
 	const [active, setActive] = useState(false);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const animationRef = useRef<number>(0);
-	const inputRef = useRef<string[]>([]);
 
 	const stop = useCallback(() => {
 		setActive(false);
@@ -31,28 +31,8 @@ const MatrixRain = () => {
 		}
 	}, []);
 
-	// Konami code listener
-	useEffect(() => {
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (active) {
-				if (e.key === "Escape") stop();
-				return;
-			}
-
-			inputRef.current.push(e.key);
-			if (inputRef.current.length > KONAMI_CODE.length) {
-				inputRef.current.shift();
-			}
-
-			if (inputRef.current.join(",") === KONAMI_CODE.join(",")) {
-				inputRef.current = [];
-				setActive(true);
-			}
-		};
-
-		window.addEventListener("keydown", handleKeyDown);
-		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [active, stop]);
+	useHotkeySequence(KONAMI_SEQUENCE, () => setActive(true), { enabled: !active });
+	useHotkey("Escape", () => stop(), { enabled: active });
 
 	// Canvas animation
 	useEffect(() => {
@@ -82,7 +62,7 @@ const MatrixRain = () => {
 		window.addEventListener("resize", resize);
 
 		let lastTime = 0;
-		const interval = 50; // ms between frames — higher = slower
+		const interval = 50;
 
 		const draw = (time: number) => {
 			animationRef.current = requestAnimationFrame(draw);
