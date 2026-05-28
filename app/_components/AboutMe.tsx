@@ -65,7 +65,7 @@ const AboutMe = () => {
 						<div className="mb-6 slide-up-and-fade">
 							<Image
 								src="/about/reza.jpeg"
-								alt="Reza"
+								alt="Reza Rahemtola, Full Stack Developer"
 								width={200}
 								height={200}
 								className="object-cover mx-auto md:hidden"
@@ -73,7 +73,7 @@ const AboutMe = () => {
 							/>
 							<Image
 								src="/about/reza_full.jpeg"
-								alt="Reza"
+								alt="Reza Rahemtola, Full Stack Developer"
 								width={375}
 								height={200}
 								className="max-md:hidden"

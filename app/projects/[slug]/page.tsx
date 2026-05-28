@@ -22,13 +22,14 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 	const { slug } = await params;
 	const project = PROJECTS.find((project) => project.slug === slug);
 	const description = loadProjectContent(slug, "description").substring(0, 160);
-	const title = `${project?.title} - ${project?.techStack.slice(0, 3).join(", ")}`;
+	const title = project?.title ?? "Project";
+	const brandedTitle = `${title} | Reza Rahemtola`;
 
 	return {
 		title,
 		description,
 		openGraph: {
-			title,
+			title: brandedTitle,
 			description,
 			url: `https://reza.dev/projects/${slug}`,
 			type: "article",
@@ -36,7 +37,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 		},
 		twitter: {
 			card: "summary_large_image",
-			title,
+			title: brandedTitle,
 			description,
 			images: project?.thumbnail ? [project.thumbnail] : [],
 		},

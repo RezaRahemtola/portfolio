@@ -30,7 +30,10 @@ const robotoFlex = Roboto_Flex({
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://reza.dev"),
-	title: "Portfolio - Reza Rahemtola",
+	title: {
+		default: "Portfolio - Reza Rahemtola",
+		template: "%s | Reza Rahemtola",
+	},
 	description: "Personal portfolio of Reza Rahemtola",
 	openGraph: {
 		title: "Portfolio - Reza Rahemtola",
