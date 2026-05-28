@@ -99,7 +99,7 @@ const Project = ({ index, project }: Props) => {
 				<div className="flex gap-2 md:gap-5 flex-1">
 					<div className="font-anton text-muted-foreground">_{(index + 1).toString().padStart(2, "0")}.</div>
 					<div className="flex-1">
-						<h4 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+						<h3 className="text-4xl xs:text-6xl flex gap-4 font-anton transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 							{project.title}
 							<span className="text-foreground opacity-0 group-hover:opacity-100 transition-all">
 								<svg
@@ -119,7 +119,7 @@ const Project = ({ index, project }: Props) => {
 									<path id="arrow-curb" d="M15 3h6v6"></path>
 								</svg>
 							</span>
-						</h4>
+						</h3>
 						<div className="mt-2 flex flex-wrap gap-3 text-muted-foreground text-xs">
 							{project.techStack.slice(0, 3).map((tech, idx, stackArr) => (
 								<div className="gap-3 flex items-center" key={tech}>

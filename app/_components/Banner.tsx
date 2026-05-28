@@ -69,15 +69,15 @@ const Banner = () => {
 
 				<div className="md:absolute bottom-[10%] right-[4%] flex md:flex-col gap-4 md:gap-8 text-center md:text-right">
 					<div className="slide-up-and-fade">
-						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">3+</h5>
+						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">3+</p>
 						<p className="text-muted-foreground">Years of Experience</p>
 					</div>
 					<div className="slide-up-and-fade">
-						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12+</h5>
+						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12+</p>
 						<p className="text-muted-foreground">Completed Projects</p>
 					</div>
 					<div className="slide-up-and-fade">
-						<h5 className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7k+</h5>
+						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7k+</p>
 						<p className="text-muted-foreground">GitHub Commits</p>
 					</div>
 				</div>
