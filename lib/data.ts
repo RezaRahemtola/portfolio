@@ -114,6 +114,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://doctripper.com",
 		year: "2023 - 2026",
 		lastModified: "2026-01-18",
+		metaDescription:
+			"French healthtech platform connecting medical students with rural professionals to fight medical deserts. 2000+ users, featured on TF1 and France 3.",
 	},
 	{
 		title: "LibertAI landing",
@@ -130,6 +132,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://libertai.io",
 		year: "2024",
 		lastModified: "2026-01-18",
+		metaDescription:
+			"Confidential AI platform offering chat, inference APIs and agent deployment, powered by Trusted Execution Environments and decentralized tech.",
 	},
 	{
 		title: "Stocks Hedging",
@@ -141,6 +145,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://polymarket-stocks-hedging.reza.dev",
 		year: "2026",
 		lastModified: "2026-02-04",
+		metaDescription:
+			"Polymarket scanner that ranks stock-price prediction markets by APY and lets you trade and hedge on your holdings.",
 	},
 	{
 		title: "Solva",
@@ -157,6 +163,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://ethglobal.com/showcase/solva-map8t",
 		year: "2025",
 		lastModified: "2026-01-18",
+		metaDescription:
+			"Venmo-like Web3 payment app for instant fee-free transfers without needing any crypto knowledge. Won 3 prizes & was a finalist at ETHGlobal Taipei 2025.",
 	},
 	{
 		title: "CreAItors",
@@ -173,6 +181,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://devfolio.co/projects/creaitors-b521",
 		year: "2025",
 		lastModified: "2026-01-18",
+		metaDescription:
+			"Platform to deploy unstoppable AI agents that pay for their own compute on a decentralized cloud. Won $6k in prizes at ETHDenver 2025.",
 	},
 ];
 

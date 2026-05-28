@@ -21,8 +21,9 @@ export const generateStaticParams = async () => {
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
 	const { slug } = await params;
 	const project = PROJECTS.find((project) => project.slug === slug);
-	const description = loadProjectContent(slug, "description").substring(0, 160);
-	const title = project?.title ?? "Project";
+	if (!project) return {};
+
+	const { title, metaDescription: description, thumbnail } = project;
 	const brandedTitle = `${title} | Reza Rahemtola`;
 
 	return {
@@ -33,13 +34,13 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 			description,
 			url: `https://reza.dev/projects/${slug}`,
 			type: "article",
-			images: project?.thumbnail ? [{ url: project.thumbnail, width: 1200, height: 630 }] : [],
+			images: [{ url: thumbnail, width: 1200, height: 630 }],
 		},
 		twitter: {
 			card: "summary_large_image",
 			title: brandedTitle,
 			description,
-			images: project?.thumbnail ? [project.thumbnail] : [],
+			images: [thumbnail],
 		},
 	};
 };
@@ -66,13 +67,13 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		"@context": "https://schema.org",
 		"@type": "SoftwareSourceCode",
 		name: project.title,
-		description: description.substring(0, 160),
+		description: project.metaDescription,
 		url: `https://reza.dev/projects/${slug}`,
 		author: { "@type": "Person", name: "Reza Rahemtola", url: "https://reza.dev" },
 		programmingLanguage: project.techStack,
 		...(project.sourceCode && { codeRepository: project.sourceCode }),
 		...(project.liveUrl && { targetProduct: { "@type": "WebApplication", url: project.liveUrl } }),
-		image: project.thumbnail ? `https://reza.dev${project.thumbnail}` : undefined,
+		image: `https://reza.dev${project.thumbnail}`,
 	};
 
 	return (
