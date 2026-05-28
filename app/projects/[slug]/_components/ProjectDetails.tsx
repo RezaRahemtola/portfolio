@@ -156,11 +156,11 @@ const ProjectDetails = ({ project }: Props) => {
 				</div>
 
 				<div className="fade-in-later relative flex flex-col gap-2 max-w-[800px] mx-auto" id="images">
-					{project.images.map((image) => (
+					{project.images.map((image, i) => (
 						<div key={image} className="group relative w-full aspect-750/400 bg-background-light overflow-hidden">
 							<Image
 								src={image}
-								alt={project.title}
+								alt={`${project.title} screenshot ${i + 1}`}
 								fill
 								sizes="(max-width: 800px) 100vw, 800px"
 								className="object-cover"
