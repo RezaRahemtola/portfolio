@@ -3,7 +3,7 @@ import SectionTitle from "@/components/SectionTitle";
 import { MY_EXPERIENCE } from "@/lib/data";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);

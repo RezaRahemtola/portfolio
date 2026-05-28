@@ -4,7 +4,7 @@ import TransitionLink from "@/components/TransitionLink";
 import { IProject } from "@/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import React, { useRef } from "react";

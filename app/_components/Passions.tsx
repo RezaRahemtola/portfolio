@@ -2,7 +2,7 @@
 import SectionTitle from "@/components/SectionTitle";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Award, WavesLadder } from "lucide-react";
 import { useMemo, useRef } from "react";
 

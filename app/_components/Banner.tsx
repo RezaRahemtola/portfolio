@@ -5,7 +5,7 @@ import { GENERAL_INFO } from "@/lib/data";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
 import React from "react";
 
