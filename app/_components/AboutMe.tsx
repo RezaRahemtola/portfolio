@@ -75,7 +75,7 @@ const AboutMe = () => {
 								src="/about/reza_full.jpeg"
 								alt="Reza Rahemtola, Full Stack Developer"
 								width={375}
-								height={200}
+								height={196}
 								className="max-md:hidden"
 								priority
 							/>
