@@ -113,6 +113,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		],
 		liveUrl: "https://doctripper.com",
 		year: "2023 - 2026",
+		lastModified: "2026-01-18",
 	},
 	{
 		title: "LibertAI landing",
@@ -128,6 +129,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		sourceCode: "https://github.com/LibertAI/libertai-website",
 		liveUrl: "https://libertai.io",
 		year: "2024",
+		lastModified: "2026-01-18",
 	},
 	{
 		title: "Stocks Hedging",
@@ -138,6 +140,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		sourceCode: "https://github.com/RezaRahemtola/polymarket-stocks-hedging",
 		liveUrl: "https://polymarket-stocks-hedging.reza.dev",
 		year: "2026",
+		lastModified: "2026-02-04",
 	},
 	{
 		title: "Solva",
@@ -153,6 +156,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		sourceCode: "https://github.com/RezaRahemtola/ETHGlobal-Taipei2025",
 		liveUrl: "https://ethglobal.com/showcase/solva-map8t",
 		year: "2025",
+		lastModified: "2026-01-18",
 	},
 	{
 		title: "CreAItors",
@@ -168,6 +172,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		sourceCode: "https://github.com/ethdenver-creaitors/creaitors",
 		liveUrl: "https://devfolio.co/projects/creaitors-b521",
 		year: "2025",
+		lastModified: "2026-01-18",
 	},
 ];
 

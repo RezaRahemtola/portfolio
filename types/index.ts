@@ -13,6 +13,7 @@ export type Variant =
 export interface IProject {
 	title: string;
 	year: string;
+	lastModified: string;
 	description: string;
 	role: string;
 	techStack: string[];
