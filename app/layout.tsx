@@ -1,14 +1,13 @@
 import { ReactLenis } from "lenis/react";
 import type { Metadata } from "next";
 import { Anton, Roboto_Flex } from "next/font/google";
-import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
-import MatrixRain from "@/components/MatrixRain";
 import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
 import "lenis/dist/lenis.css";
 import Preloader from "../components/Preloader";
+import ClientEffects from "./_components/ClientEffects";
 import StickyEmail from "./_components/StickyEmail";
 import "./globals.css";
 import { ReactNode } from "react";
@@ -66,12 +65,11 @@ export default function RootLayout({
 					<main>{children}</main>
 					<Footer />
 
-					<CustomCursor />
 					<Preloader />
 					<ScrollProgressIndicator />
 					<ParticleBackground />
 					<StickyEmail />
-					<MatrixRain />
+					<ClientEffects />
 				</ReactLenis>
 			</body>
 		</html>
