@@ -2,18 +2,20 @@
 import ArrowAnimation from "@/components/ArrowAnimation";
 import Button from "@/components/Button";
 import { GENERAL_INFO } from "@/lib/data";
+import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Laptop = dynamic(() => import("./Laptop"), { ssr: false });
+const Laptop = dynamic(() => import("./Laptop"), { ssr: false, loading: () => null });
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Banner = () => {
 	const containerRef = React.useRef<HTMLDivElement>(null);
+	const isDesktop = useIsDesktop();
 
 	// move the content a little up on scroll
 	useGSAP(
@@ -35,9 +37,11 @@ const Banner = () => {
 	return (
 		<section className="relative overflow-hidden" id="banner">
 			<ArrowAnimation />
-			<div className="absolute right-0 top-0 w-1/2 h-full">
-				<Laptop />
-			</div>
+			{isDesktop && (
+				<div className="absolute right-0 top-0 w-1/2 h-full">
+					<Laptop />
+				</div>
+			)}
 			<div
 				className="container h-[100svh] min-h-[530px] max-md:pb-10 flex justify-between items-center max-md:flex-col"
 				ref={containerRef}
