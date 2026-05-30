@@ -34,7 +34,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 			description,
 			url: `https://reza.dev/projects/${slug}`,
 			type: "article",
-			images: [{ url: thumbnail, width: 1200, height: 630 }],
+			images: [thumbnail],
 		},
 		twitter: {
 			card: "summary_large_image",

@@ -39,8 +39,9 @@ export const metadata: Metadata = {
 		description: "Personal portfolio of Reza Rahemtola",
 		url: "https://reza.dev",
 		type: "website",
+		images: [{ url: "/about/reza_full.jpeg", width: 1170, height: 610, alt: "Reza Rahemtola" }],
 	},
-	twitter: { card: "summary_large_image" },
+	twitter: { card: "summary_large_image", images: ["/about/reza_full.jpeg"] },
 };
 
 export default function RootLayout({
