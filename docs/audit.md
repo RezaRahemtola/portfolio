@@ -49,7 +49,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## 🎨 UX / Content
 
-- [ ] **Preloader blocks content ~2s every full load** (MED) — `components/Preloader.tsx:11-41`. No skip, no reduced-motion bypass. Show once/session (sessionStorage) + click/keypress dismiss + skip under reduced-motion.
+- [x] **Preloader blocks content ~2s every full load** (MED) — `components/Preloader.tsx`. Now plays once per session (sessionStorage `preloaderShown`), dismissable via click or Escape, and skipped under reduced motion. Verified: first visit plays → flag set; second load skips; Escape hides instantly.
 - [ ] **Chess stat shows permanent "..." if chess.com fails** (LOW) — `app/_components/Passions.tsx:48,146`, `lib/getChessStats.ts:31-34`. (Live: API works, Elo 1342 ✓.) Add baseline/last-known fallback.
 - [ ] **404 page: no visible "back home" CTA** (LOW, live) — only hamburger. Snake is arrow-key-only → unplayable on touch.
 - [ ] **Project card tech stack silently truncated to 3** (LOW) — `app/_components/Project.tsx:124-131`. DocTripper has 7. Add `+{n-3} more` chip.
