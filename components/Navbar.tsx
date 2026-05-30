@@ -1,8 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MoveUpRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { GENERAL_INFO, SOCIAL_LINKS } from "@/lib/data";
 
 const COLORS = [
@@ -38,14 +38,55 @@ const MENU_LINKS = [
 
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const router = useRouter();
+	const panelRef = useRef<HTMLDivElement>(null);
+	const toggleRef = useRef<HTMLButtonElement>(null);
+
+	const closeMenu = () => setIsMenuOpen(false);
+
+	// While open: move focus into the panel, trap Tab inside it, close on
+	// Escape, and restore focus to the toggle.
+	useEffect(() => {
+		if (!isMenuOpen) return;
+		const panel = panelRef.current;
+		if (!panel) return;
+
+		const getFocusable = () => Array.from(panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"));
+
+		getFocusable()[0]?.focus();
+
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				setIsMenuOpen(false);
+				toggleRef.current?.focus();
+				return;
+			}
+			if (e.key === "Tab") {
+				const items = getFocusable();
+				if (items.length === 0) return;
+				const first = items[0];
+				const last = items[items.length - 1];
+				if (e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && document.activeElement === last) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
+		};
+
+		document.addEventListener("keydown", onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	}, [isMenuOpen]);
 
 	return (
 		<nav>
 			<div className="sticky top-0 z-4">
 				<button
+					ref={toggleRef}
 					aria-label="Toggle navigation menu"
 					aria-expanded={isMenuOpen}
+					aria-controls="nav-menu"
 					className={cn("group size-12 absolute top-5 right-5 md:right-10 z-2")}
 					onClick={() => setIsMenuOpen(!isMenuOpen)}
 				>
@@ -78,6 +119,12 @@ const Navbar = () => {
 			></div>
 
 			<div
+				ref={panelRef}
+				id="nav-menu"
+				role="dialog"
+				aria-modal="true"
+				aria-label="Site menu"
+				inert={!isMenuOpen}
 				className={cn(
 					"fixed top-0 right-0 h-[100dvh] w-[500px] max-w-[calc(100vw-3rem)] transform translate-x-full transition-transform duration-700 z-3 overflow-hidden gap-y-14",
 					"flex flex-col lg:justify-center py-10",
@@ -118,13 +165,7 @@ const Navbar = () => {
 							<ul className="space-y-3">
 								{MENU_LINKS.map((link, idx) => (
 									<li key={link.name}>
-										<button
-											onClick={() => {
-												router.push(link.url);
-												setIsMenuOpen(false);
-											}}
-											className="group text-xl flex items-center gap-3"
-										>
+										<Link href={link.url} onClick={closeMenu} className="group text-xl flex items-center gap-3">
 											<span
 												className={cn(
 													"size-3.5 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-[200%] transition-all",
@@ -134,7 +175,7 @@ const Navbar = () => {
 												<MoveUpRight size={8} className="scale-0 group-hover:scale-100 transition-all" />
 											</span>
 											{link.name}
-										</button>
+										</Link>
 									</li>
 								))}
 							</ul>
