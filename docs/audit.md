@@ -23,7 +23,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 ## ♿ Accessibility
 
 - [x] **No `prefers-reduced-motion` anywhere** (HIGH) — now handled: global CSS net in `globals.css` (neutralizes CSS animation/transition/smooth-scroll); `SmoothScroll.tsx` disables Lenis under reduce; `ParticleBackground` renders nothing under reduce; `Preloader` hides instantly under reduce; GSAP timelines in Banner/AboutMe/Skills/Experiences/Passions/ProjectList/ProjectDetails/ArrowAnimation wrapped in `gsap.matchMedia('(prefers-reduced-motion: no-preference)')`, with visible fallbacks where markup hides content (ProjectDetails title). Verified live: Lenis off, 0 particles, preloader hidden, all content visible.
-  - *Remaining (lower priority):* three.js `Laptop` auto-rotation, `MatrixRain` (Konami, opt-in), `SnakeGame` (404, user-initiated) not yet motion-gated.
+  - three.js `Laptop` now renders a static frame under reduced motion (no idle float / hover loop).
+  - *Remaining (lower priority):* `MatrixRain` (Konami, opt-in), `SnakeGame` (404, user-initiated) not yet motion-gated.
 - [x] **Button removes focus outline, no replacement** (HIGH) — `components/Button.tsx`: added `focus-visible:ring-2 ring-primary ring-offset-2` + fill sweep now triggers on `group-focus-visible`. Verified: "Hire Me" shows green focus ring on keyboard focus.
 - [ ] **Global `cursor:none` unconditional** (MED) — `app/globals.css:133-135`. Narrow-window/hybrid/keyboard users lose pointer. Scope behind `@media (min-width:768px) and (pointer:fine)`.
 - [x] **Navbar items are `<button>`+`router.push`** (MED) — `components/Navbar.tsx`. Menu items are now `next/link` `<a href>` (real link semantics) that close the menu on click. Verified: 8 anchors, "Projects" navigates to `/#projects-showcase`.
@@ -43,7 +44,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Button crashes when `target=_blank` + href undefined** — `components/Button.tsx`. Now `props.href?.toString() || "#"`.
 - [x] **TransitionLink silently drops `onClick` when href present** — `components/TransitionLink.tsx`. `onClick?.(e)` now called first, unconditionally. Verified nav + back still work.
 - [x] **Footer social links missing `rel="noopener noreferrer"`** — `components/Footer.tsx`. Added.
-- [ ] **Laptop scene crashes in cleanup if 2D context null** — `app/_components/Laptop.tsx:100,166,183,510-514`. `createMarbleMaterial()` returns undefined → cleanup throws. Return fallback material + null-guard. (Very low prob; left for a Laptop-focused pass.)
+- [x] **Laptop scene crashes in cleanup if 2D context null** — `app/_components/Laptop.tsx`. `createMarbleMaterial()` now returns a plain grey fallback material instead of undefined, and cleanup null-guards `material`/`map`/`geometry`.
 
 ---
 
