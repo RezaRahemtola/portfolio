@@ -88,8 +88,9 @@ const Project = ({ index, project }: Props) => {
 						src={project.thumbnail}
 						alt={project.title}
 						width="400"
-						height="300"
-						className="w-full object-cover aspect-3/2 object-top transition-transform duration-700"
+						height="267"
+						quality={90}
+						className="w-full h-auto object-cover aspect-3/2 object-top transition-transform duration-700"
 						key={project.slug}
 						loading="lazy"
 					/>
