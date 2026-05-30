@@ -13,6 +13,8 @@ const TransitionLink = ({ href, onClick, children, back = false, ...rest }: Prop
 	const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 
+		onClick?.(e);
+
 		if (back) {
 			if (document.referrer && new URL(document.referrer).origin === window.location.origin) {
 				router.back();
@@ -21,8 +23,6 @@ const TransitionLink = ({ href, onClick, children, back = false, ...rest }: Prop
 			}
 		} else if (href) {
 			router.push(href.toString());
-		} else if (onClick) {
-			onClick(e);
 		}
 	};
 

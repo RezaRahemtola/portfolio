@@ -10,7 +10,7 @@ const ScrollProgressIndicator = () => {
 				const { scrollHeight, clientHeight } = document.documentElement;
 				const scrollableHeight = scrollHeight - clientHeight;
 				const scrollY = window.scrollY;
-				const scrollProgress = (scrollY / scrollableHeight) * 100;
+				const scrollProgress = scrollableHeight > 0 ? (scrollY / scrollableHeight) * 100 : 0;
 
 				scrollBarRef.current.style.transform = `translateY(-${100 - scrollProgress}%)`;
 			}

@@ -18,6 +18,7 @@ const Footer = async () => {
 							key={social.name}
 							href={social.url}
 							target="_blank"
+							rel="noopener noreferrer"
 							className="transition-transform hover:scale-110"
 							aria-label={social.name}
 						>
