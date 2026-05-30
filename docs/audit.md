@@ -72,8 +72,9 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## 🔍 SEO (low)
 
-- [ ] **No canonical URLs** — `app/layout.tsx`, `app/page.tsx`, `app/projects/[slug]/page.tsx`. Add `alternates.canonical`.
-- [ ] **Homepage title/description generic** — `app/layout.tsx:33-39`. 36-char desc, no keywords. Write 140-160 char keyword-rich desc + title "Reza Rahemtola - Full Stack Developer".
+- [x] **No canonical URLs** — added `alternates.canonical` to homepage (`/` in `app/layout.tsx`) and project pages (`/projects/<slug>` in `app/projects/[slug]/page.tsx`). Verified via prod SSR.
+- [x] **`Person` JSON-LD image** — added `image: https://reza.dev/about/reza.jpeg` to the existing homepage Person schema (`app/page.tsx`). (Person + WebSite JSON-LD were already present.)
+- [~] **Homepage title/description generic** — `app/layout.tsx:33-39`. Intentionally left as-is per preference (not changing the title/description).
 - [ ] **Missing BreadcrumbList structured data on project pages** — `app/projects/[slug]/page.tsx:66-77`. Add 2-level Home → project.
 - [ ] **No app icons beyond favicon.ico** — add `app/icon.png` (512), `app/apple-icon.png` (180).
 
