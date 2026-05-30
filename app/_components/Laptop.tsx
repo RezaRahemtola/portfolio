@@ -97,7 +97,10 @@ const LaptopScene = () => {
 			canvas.height = 128;
 			const ctx = canvas.getContext("2d");
 
-			if (ctx === null) return;
+			// Fall back to a plain grey material if a 2D context isn't available
+			if (ctx === null) {
+				return new MeshStandardMaterial({ color: 0x808080, roughness: 0.3, metalness: 0.1 });
+			}
 
 			// Base color - grey tone based on brightness (0.0 to 1.0)
 			const colorValue = Math.floor(100 + brightness * 100);
@@ -363,8 +366,6 @@ const LaptopScene = () => {
 			}
 		};
 
-		window.addEventListener("mousemove", onMouseMove, { passive: true });
-
 		// Animation function
 		const animate = () => {
 			// Raycast once per frame (not per mousemove event)
@@ -471,6 +472,7 @@ const LaptopScene = () => {
 		// Start the animation loop — pauses when off-screen
 		let animationId = 0;
 		let isVisible = true;
+		let observer: IntersectionObserver | undefined;
 
 		const animateLoop = () => {
 			if (!isVisible) {
@@ -481,25 +483,34 @@ const LaptopScene = () => {
 			animationId = requestAnimationFrame(animateLoop);
 		};
 
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				isVisible = entry.isIntersecting;
-				if (isVisible && !animationId) {
-					animationId = requestAnimationFrame(animateLoop);
-				}
-			},
-			{ threshold: 0 },
-		);
-		observer.observe(mountRef.current);
+		// Respect reduced motion: render one static frame, no loop or hover
+		const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-		animationId = requestAnimationFrame(animateLoop);
+		if (prefersReduced) {
+			renderer.render(scene, camera);
+		} else {
+			window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+			observer = new IntersectionObserver(
+				([entry]) => {
+					isVisible = entry.isIntersecting;
+					if (isVisible && !animationId) {
+						animationId = requestAnimationFrame(animateLoop);
+					}
+				},
+				{ threshold: 0 },
+			);
+			observer.observe(mountRef.current);
+
+			animationId = requestAnimationFrame(animateLoop);
+		}
 
 		// Store a reference to the DOM node to use in cleanup
 		const currentRef = mountRef.current;
 
 		// Cleanup function
 		return () => {
-			observer.disconnect();
+			observer?.disconnect();
 			cancelAnimationFrame(animationId);
 			window.removeEventListener("mousemove", onMouseMove);
 			if (currentRef) {
@@ -508,9 +519,9 @@ const LaptopScene = () => {
 
 			// Dispose resources
 			marbles.forEach((marble) => {
-				marble.geometry.dispose();
-				if (marble.material.map) marble.material.map.dispose();
-				marble.material.dispose();
+				marble.geometry?.dispose?.();
+				if (marble.material?.map) marble.material.map.dispose();
+				marble.material?.dispose?.();
 			});
 
 			scene.clear();
