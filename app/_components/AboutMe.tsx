@@ -66,17 +66,17 @@ const AboutMe = () => {
 							<Image
 								src="/about/reza.jpeg"
 								alt="Reza Rahemtola, Full Stack Developer"
-								width={200}
-								height={200}
-								className="object-cover mx-auto md:hidden"
+								width={500}
+								height={500}
+								className="object-cover mx-auto w-[200px] h-auto md:hidden"
 								priority
 							/>
 							<Image
 								src="/about/reza_full.jpeg"
 								alt="Reza Rahemtola, Full Stack Developer"
-								width={375}
-								height={196}
-								className="max-md:hidden"
+								width={1170}
+								height={610}
+								className="w-[375px] h-auto max-md:hidden"
 								priority
 							/>
 						</div>

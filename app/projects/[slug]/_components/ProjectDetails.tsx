@@ -162,6 +162,7 @@ const ProjectDetails = ({ project }: Props) => {
 								src={image}
 								alt={`${project.title} screenshot ${i + 1}`}
 								fill
+								quality={90}
 								sizes="(max-width: 800px) 100vw, 800px"
 								className="object-cover"
 								style={{ objectPosition: "center 50%" }}
