@@ -59,7 +59,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 
 		if (props.target === "_blank") {
 			return (
-				<a className={buttonClasses} {...props} href={props.href.toString() || "#"}>
+				<a className={buttonClasses} {...props} href={props.href?.toString() || "#"}>
 					{variant !== "link" && (
 						<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 group-focus-visible:top-0 transition-all duration-500 scale-150"></span>
 					)}

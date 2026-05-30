@@ -39,11 +39,11 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## 🐛 Bugs (latent / low)
 
-- [ ] **NaN transform on non-scrollable pages** — `components/ScrollProgressIndicator.tsx:11-15`. `scrollY/0*100=NaN`. Guard `scrollableHeight > 0 ? ... : 0`.
-- [ ] **Button crashes when `target=_blank` + href undefined** — `components/Button.tsx:62,72`. `props.href.toString()` throws before fallback. Use `props.href?.toString() || "#"`.
-- [ ] **TransitionLink silently drops `onClick` when href present** — `components/TransitionLink.tsx:13-27`. Dead `else if` branch. Call `onClick?.(e)` near top.
-- [ ] **Laptop scene crashes in cleanup if 2D context null** — `app/_components/Laptop.tsx:100,166,183,510-514`. `createMarbleMaterial()` returns undefined → cleanup throws. Return fallback material + null-guard. (Very low prob.)
-- [ ] **Footer social links missing `rel="noopener noreferrer"`** — `components/Footer.tsx:17-26`. Consistency/defense-in-depth.
+- [x] **NaN transform on non-scrollable pages** — `components/ScrollProgressIndicator.tsx`. Guarded `scrollableHeight > 0 ? … : 0`. Verified: 404/short page bar now `translateY(-100%)`, no `NaN`.
+- [x] **Button crashes when `target=_blank` + href undefined** — `components/Button.tsx`. Now `props.href?.toString() || "#"`.
+- [x] **TransitionLink silently drops `onClick` when href present** — `components/TransitionLink.tsx`. `onClick?.(e)` now called first, unconditionally. Verified nav + back still work.
+- [x] **Footer social links missing `rel="noopener noreferrer"`** — `components/Footer.tsx`. Added.
+- [ ] **Laptop scene crashes in cleanup if 2D context null** — `app/_components/Laptop.tsx:100,166,183,510-514`. `createMarbleMaterial()` returns undefined → cleanup throws. Return fallback material + null-guard. (Very low prob; left for a Laptop-focused pass.)
 
 ---
 
