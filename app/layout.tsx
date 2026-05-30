@@ -34,6 +34,7 @@ export const metadata: Metadata = {
 		template: "%s | Reza Rahemtola",
 	},
 	description: "Personal portfolio of Reza Rahemtola",
+	alternates: { canonical: "/" },
 	openGraph: {
 		title: "Portfolio - Reza Rahemtola",
 		description: "Personal portfolio of Reza Rahemtola",

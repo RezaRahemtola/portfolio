@@ -16,6 +16,7 @@ export default async function Home() {
 		name: "Reza Rahemtola",
 		url: "https://reza.dev",
 		jobTitle: "Full Stack Developer",
+		image: "https://reza.dev/about/reza.jpeg",
 		email: `mailto:${GENERAL_INFO.email}`,
 		sameAs: SOCIAL_LINKS.map((link) => link.url),
 	};
