@@ -14,8 +14,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Delivery quality** — project `<Image>` now `quality={90}` (was next default 75), the main on-page quality lever. Source q95 + delivery q90 = visually lossless, verified live.
 - [x] **Image aspect-ratio warnings** (project thumbnails) — `app/_components/Project.tsx`: added `h-auto` + matched intrinsic height (400×267 = 3:2). All 4 thumbnail warnings gone.
 - [x] **Aspect-ratio warning: About photos** — `app/_components/AboutMe.tsx`. Declared intrinsic dims (500×500, 1170×610) + `w-[...] h-auto` so the ratio matches the file exactly. Homepage now 0 console warnings.
-- [ ] **OG/Twitter images = raw thumbnails** — `app/projects/[slug]/page.tsx:37,43,76`. Now point to 1200w WebP (lighter), but still declared 1200×630 while actual is ~1.26:1 portrait → previews crop. Ideal: dedicated 1200×630 OG (next/og) per project.
-- [ ] **Homepage has no OG image** — `app/layout.tsx:37-43`. `twitter.card=summary_large_image` but no image → blank card sharing reza.dev. Add `app/opengraph-image.tsx`.
+- [x] **OG/Twitter images** — homepage uses the full-bleed photo `/about/reza_full.jpeg` (1170×610 ≈ 1.91:1) set in `app/layout.tsx`; project pages use their own thumbnail (`app/projects/[slug]/page.tsx`, no fake dimensions this time). Verified via prod SSR: home → reza_full.jpeg, projects → thumbnail webp, both with `summary_large_image`.
+  - *Note:* some thumbnails are portrait/square (e.g. creaitors 1200×1500, solva 776×868) and will be cropped/letterboxed in the 1.91:1 social slot. Acceptable per preference to "use the thumbnail"; revisit if a uniform crop is wanted.
 - [ ] **Consider downscaling detail-image source** — currently full-res (~2970px, up to ~1MB each) so the full-size click-through stays sharp. If that view isn't important, capping at ~2000px would roughly halve repo size again with no on-page impact.
 
 ---
