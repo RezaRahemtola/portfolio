@@ -10,32 +10,41 @@ const Preloader = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				defaults: {
-					ease: "power1.inOut",
-				},
+			const mm = gsap.matchMedia();
+
+			// Reduced motion: skip the intro wipe and reveal content immediately
+			mm.add("(prefers-reduced-motion: reduce)", () => {
+				gsap.set(preloaderRef.current, { autoAlpha: 0 });
 			});
 
-			tl.to(".name-text span", {
-				y: 0,
-				stagger: 0.05,
-				duration: 0.2,
-			});
-
-			tl.to(".preloader-item", {
-				delay: 1,
-				y: "100%",
-				duration: 0.5,
-				stagger: 0.1,
-			})
-				.to(".name-text span", { autoAlpha: 0 }, "<0.5")
-				.to(
-					preloaderRef.current,
-					{
-						autoAlpha: 0,
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					defaults: {
+						ease: "power1.inOut",
 					},
-					"<1",
-				);
+				});
+
+				tl.to(".name-text span", {
+					y: 0,
+					stagger: 0.05,
+					duration: 0.2,
+				});
+
+				tl.to(".preloader-item", {
+					delay: 1,
+					y: "100%",
+					duration: 0.5,
+					stagger: 0.1,
+				})
+					.to(".name-text span", { autoAlpha: 0 }, "<0.5")
+					.to(
+						preloaderRef.current,
+						{
+							autoAlpha: 0,
+						},
+						"<1",
+					);
+			});
 		},
 		{ scope: preloaderRef },
 	);

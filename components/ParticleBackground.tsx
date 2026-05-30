@@ -32,6 +32,8 @@ const ParticleBackground = () => {
 	const [mode, setMode] = useState<ParticleMode>("default");
 
 	useEffect(() => {
+		// Skip the animated particle layer entirely for reduced-motion users
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		setCount(window.innerWidth < 768 ? 30 : 100);
 	}, []);
 

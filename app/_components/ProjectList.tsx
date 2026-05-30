@@ -15,19 +15,22 @@ const ProjectList = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top bottom",
-					end: "top 80%",
-					toggleActions: "restart none none reverse",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "top bottom",
+						end: "top 80%",
+						toggleActions: "restart none none reverse",
+						scrub: 1,
+					},
+				});
 
-			tl.from(containerRef.current, {
-				y: 150,
-				opacity: 0,
+				tl.from(containerRef.current, {
+					y: 150,
+					opacity: 0,
+				});
 			});
 		},
 		{ scope: containerRef },

@@ -23,18 +23,27 @@ const ProjectDetails = ({ project }: Props) => {
 		() => {
 			if (!containerRef.current) return;
 
-			gsap.set(".fade-in-later", {
-				autoAlpha: 0,
-				y: 30,
-			});
-			const tl = gsap.timeline({
-				delay: 0.5,
+			const mm = gsap.matchMedia();
+
+			// Reduced motion: reveal content immediately (markup hides the title with opacity-0)
+			mm.add("(prefers-reduced-motion: reduce)", () => {
+				gsap.set(".fade-in-later", { autoAlpha: 1, y: 0 });
 			});
 
-			tl.to(".fade-in-later", {
-				autoAlpha: 1,
-				y: 0,
-				stagger: 0.1,
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				gsap.set(".fade-in-later", {
+					autoAlpha: 0,
+					y: 30,
+				});
+				const tl = gsap.timeline({
+					delay: 0.5,
+				});
+
+				tl.to(".fade-in-later", {
+					autoAlpha: 1,
+					y: 0,
+					stagger: 0.1,
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -45,18 +54,21 @@ const ProjectDetails = ({ project }: Props) => {
 		() => {
 			if (window.innerWidth < 992) return;
 
-			gsap.to("#info", {
-				filter: "blur(3px)",
-				autoAlpha: 0,
-				scale: 0.9,
-				scrollTrigger: {
-					trigger: "#info",
-					start: "bottom bottom",
-					end: "bottom top",
-					pin: true,
-					pinSpacing: false,
-					scrub: 0.5,
-				},
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				gsap.to("#info", {
+					filter: "blur(3px)",
+					autoAlpha: 0,
+					scale: 0.9,
+					scrollTrigger: {
+						trigger: "#info",
+						start: "bottom bottom",
+						end: "bottom top",
+						pin: true,
+						pinSpacing: false,
+						scrub: 0.5,
+					},
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -65,16 +77,19 @@ const ProjectDetails = ({ project }: Props) => {
 	// parallax effect on images
 	useGSAP(
 		() => {
-			gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
-				gsap.to(img, {
-					objectPosition: `center 0%`,
-					ease: "none",
-					scrollTrigger: {
-						trigger: img.parentElement,
-						start: () => (i ? "top bottom" : "top 50%"),
-						end: "bottom top",
-						scrub: true,
-					},
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
+					gsap.to(img, {
+						objectPosition: `center 0%`,
+						ease: "none",
+						scrollTrigger: {
+							trigger: img.parentElement,
+							start: () => (i ? "top bottom" : "top 50%"),
+							end: "bottom top",
+							scrub: true,
+						},
+					});
 				});
 			});
 		},

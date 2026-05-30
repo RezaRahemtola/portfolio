@@ -1,10 +1,10 @@
-import { ReactLenis } from "lenis/react";
 import type { Metadata } from "next";
 import { Anton, Roboto_Flex } from "next/font/google";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
+import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
 import Preloader from "../components/Preloader";
 import ClientEffects from "./_components/ClientEffects";
@@ -54,13 +54,7 @@ export default function RootLayout({
 				<PlausibleProvider domain="reza.dev" customDomain="https://analytics.reza.dev" trackOutboundLinks />
 			</head>
 			<body className={`${antonFont.variable} ${robotoFlex.variable} antialiased`}>
-				<ReactLenis
-					root
-					options={{
-						lerp: 0.1,
-						duration: 1.4,
-					}}
-				>
+				<SmoothScroll>
 					<Navbar />
 					<main>{children}</main>
 					<Footer />
@@ -70,7 +64,7 @@ export default function RootLayout({
 					<ParticleBackground />
 					<StickyEmail />
 					<ClientEffects />
-				</ReactLenis>
+				</SmoothScroll>
 			</body>
 		</html>
 	);

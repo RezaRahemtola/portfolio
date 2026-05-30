@@ -136,4 +136,18 @@
     body {
         @apply bg-background text-foreground font-roboto-flex;
     }
+
+    /* Respect users who request reduced motion: neutralize CSS animations,
+       transitions and native smooth scrolling. JS-driven motion (GSAP, Lenis,
+       canvas) is gated separately in their components. */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 }

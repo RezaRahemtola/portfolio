@@ -22,8 +22,9 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## ♿ Accessibility
 
-- [ ] **No `prefers-reduced-motion` anywhere** (HIGH) — Lenis smooth-scroll, ParticleBackground, GSAP reveals, Preloader wipe, counters all unconditional. Vestibular hazard. Gate via `gsap.matchMedia('(prefers-reduced-motion: no-preference)')` + disable Lenis under reduce + global CSS fallback.
-- [ ] **Button removes focus outline, no replacement** (HIGH) — `components/Button.tsx:51` (`outline-hidden`, no `:focus-visible`). WCAG 2.4.7. Add `focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`.
+- [x] **No `prefers-reduced-motion` anywhere** (HIGH) — now handled: global CSS net in `globals.css` (neutralizes CSS animation/transition/smooth-scroll); `SmoothScroll.tsx` disables Lenis under reduce; `ParticleBackground` renders nothing under reduce; `Preloader` hides instantly under reduce; GSAP timelines in Banner/AboutMe/Skills/Experiences/Passions/ProjectList/ProjectDetails/ArrowAnimation wrapped in `gsap.matchMedia('(prefers-reduced-motion: no-preference)')`, with visible fallbacks where markup hides content (ProjectDetails title). Verified live: Lenis off, 0 particles, preloader hidden, all content visible.
+  - *Remaining (lower priority):* three.js `Laptop` auto-rotation, `MatrixRain` (Konami, opt-in), `SnakeGame` (404, user-initiated) not yet motion-gated.
+- [x] **Button removes focus outline, no replacement** (HIGH) — `components/Button.tsx`: added `focus-visible:ring-2 ring-primary ring-offset-2` + fill sweep now triggers on `group-focus-visible`. Verified: "Hire Me" shows green focus ring on keyboard focus.
 - [ ] **Global `cursor:none` unconditional** (MED) — `app/globals.css:133-135`. Narrow-window/hybrid/keyboard users lose pointer. Scope behind `@media (min-width:768px) and (pointer:fine)`.
 - [ ] **Navbar items are `<button>`+`router.push`** (MED) — `components/Navbar.tsx:119-139`. Lose href/new-tab/middle-click/copy semantics (WCAG 4.1.2/1.3.1). Use `TransitionLink`/`next/link`.
 - [ ] **Overlay menu: no focus management** (MED) — `components/Navbar.tsx:39-149`. No focus trap, no Escape, no restore; closed panel stays tabbable (translate-only). Add focus trap + Escape + `role="dialog"`/`aria-modal` + `inert` when closed.
