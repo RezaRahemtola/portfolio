@@ -6,12 +6,14 @@ import {
 	CanvasTexture,
 	DirectionalLight,
 	Euler,
+	InstancedMesh,
 	MathUtils,
+	Material,
 	Matrix4,
-	Mesh,
 	MeshPhongMaterial,
 	MeshPhysicalMaterial,
 	MeshStandardMaterial,
+	Object3D,
 	PerspectiveCamera,
 	PointLight,
 	Raycaster,
@@ -49,9 +51,10 @@ const LaptopScene = () => {
 		const hoverPoint = new Vector3();
 		const effectRadius = 2.5; // Radius of effect around mouse
 
-		// Reusable vectors to avoid per-frame allocations
+		// Reusable objects to avoid per-frame allocations
 		const _direction = new Vector3();
 		const _floatingPos = new Vector3();
+		const _dummy = new Object3D();
 		let mouseDirty = false; // true when mouse moved since last frame
 
 		// Gentle floating animation variables
@@ -68,9 +71,34 @@ const LaptopScene = () => {
 			trackpad: { width: 2, height: 0.05, depth: 1.3, position: [-2, 0.26, 1.25] },
 		};
 
-		// Marbles array to hold all marbles
-		const marbles: any[] = [];
 		const marbleRadius = 0.08; // Size of each marble
+
+		// All marbles share one sphere geometry and are rendered as InstancedMeshes
+		// grouped by material — collapsing thousands of draw calls into a handful.
+		const sharedSphere = new SphereGeometry(marbleRadius, 8, 8);
+		const instanceGroups = new Map<Material, { pos: Vector3; rot: Euler; scale: number }[]>();
+		const addMarble = (material: Material, pos: Vector3, rot: Euler, scale = 1) => {
+			let list = instanceGroups.get(material);
+			if (!list) {
+				list = [];
+				instanceGroups.set(material, list);
+			}
+			list.push({ pos, rot, scale });
+		};
+
+		// Per-instance animation state, kept in sync with the instance matrices
+		type MarbleState = {
+			mesh: InstancedMesh;
+			index: number;
+			pos: Vector3;
+			rot: Euler;
+			originalPosition: Vector3;
+			originalRotation: Euler;
+			offset: number;
+			scale: number;
+		};
+		const instanceStates: MarbleState[] = [];
+		const instancedMeshes: InstancedMesh[] = [];
 
 		// Add lighting
 		const ambientLight = new AmbientLight(0x404040, 1);
@@ -164,8 +192,6 @@ const LaptopScene = () => {
 			const spacingY = height / numY;
 			const spacingZ = depth / numZ;
 
-			// Create marbles
-			const sphereGeometry = new SphereGeometry(marbleRadius, 8, 8);
 			const marbleMaterial = createMarbleMaterial(brightness);
 
 			// Get center position for this part
@@ -182,41 +208,25 @@ const LaptopScene = () => {
 						const posY = centerY + y * spacingY - height / 2 + spacingY / 2;
 						const posZ = centerZ + z * spacingZ - depth / 2 + spacingZ / 2;
 
-						// Create marble
-						const marble = new Mesh(sphereGeometry, marbleMaterial);
-						marble.position.set(posX, posY, posZ);
+						const pos = new Vector3(posX, posY, posZ);
 
 						// Apply rotation if specified
 						if (rotation) {
-							// Create a dummy object to help with rotation
 							const center = new Vector3(centerX, centerY, centerZ);
-							const marblePos = new Vector3(posX, posY, posZ);
-
-							// Calculate vector from center to marble
-							const relativePos = new Vector3().subVectors(marblePos, center);
-
-							// Create rotation matrix
+							const relativePos = new Vector3().subVectors(pos, center);
 							const rotMatrix = new Matrix4().makeRotationFromEuler(new Euler(rotation[0], rotation[1], rotation[2]));
-
-							// Apply rotation to the relative position
 							relativePos.applyMatrix4(rotMatrix);
-
-							// Calculate new position
-							const newPos = new Vector3().addVectors(center, relativePos);
-							marble.position.copy(newPos);
+							pos.copy(new Vector3().addVectors(center, relativePos));
 						}
 
-						// Add random rotation
-						marble.rotation.set(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2);
+						// Random initial rotation
+						const rot = new Euler(
+							Math.random() * Math.PI * 2,
+							Math.random() * Math.PI * 2,
+							Math.random() * Math.PI * 2,
+						);
 
-						// Store original position and rotation for animations
-						marble.userData.originalPosition = marble.position.clone();
-						marble.userData.originalRotation = marble.rotation.clone();
-						marble.userData.offset = Math.random(); // Random offset for animation
-
-						// Add to scene and track
-						scene.add(marble);
-						marbles.push(marble);
+						addMarble(marbleMaterial, pos, rot);
 					}
 				}
 			}
@@ -234,9 +244,6 @@ const LaptopScene = () => {
 			// Calculate actual spacing
 			const spacingX = width / numX;
 			const spacingY = height / numY;
-
-			// Create marbles
-			const sphereGeometry = new SphereGeometry(marbleRadius, 8, 8);
 
 			// Create a shiny black material for the display marbles
 			const blackMarbleMaterial = new MeshPhysicalMaterial({
@@ -270,21 +277,10 @@ const LaptopScene = () => {
 					// Use black material for main display, grey for edges
 					const material = isEdge ? edgeMaterial : blackMarbleMaterial;
 
-					// Create marble
-					const marble = new Mesh(sphereGeometry, material);
-					marble.position.set(posX, posY, posZ);
+					const pos = new Vector3(posX, posY, posZ);
+					const rot = new Euler(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2);
 
-					// Add random rotation
-					marble.rotation.set(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2);
-
-					// Store original position and rotation for animations
-					marble.userData.originalPosition = marble.position.clone();
-					marble.userData.originalRotation = marble.rotation.clone();
-					marble.userData.offset = Math.random(); // Random offset for animation
-
-					// Add to scene and track
-					scene.add(marble);
-					marbles.push(marble);
+					addMarble(material, pos, rot);
 				}
 			}
 		}
@@ -295,7 +291,6 @@ const LaptopScene = () => {
 			const keyRows = 5;
 			const keyCols = 14;
 
-			const sphereGeometry = new SphereGeometry(marbleRadius * 0.8, 8, 8);
 			const keyMaterial = new MeshPhongMaterial({ color: 0x555555 });
 
 			// Calculate starting position
@@ -305,20 +300,9 @@ const LaptopScene = () => {
 
 			for (let row = 0; row < keyRows; row++) {
 				for (let col = 0; col < keyCols; col++) {
-					// Place a single marble for each key
-					const marble = new Mesh(sphereGeometry, keyMaterial);
-
-					// Position the key
-					marble.position.set(startX + col * keySpacing, keyHeight, startZ + row * keySpacing);
-
-					// Store original position and rotation for animations
-					marble.userData.originalPosition = marble.position.clone();
-					marble.userData.originalRotation = marble.rotation.clone();
-					marble.userData.offset = Math.random(); // Random offset for animation
-
-					// Add to scene and track
-					scene.add(marble);
-					marbles.push(marble);
+					// One (smaller) marble per key — scaled down via the instance matrix
+					const pos = new Vector3(startX + col * keySpacing, keyHeight, startZ + row * keySpacing);
+					addMarble(keyMaterial, pos, new Euler(0, 0, 0), 0.8);
 				}
 			}
 		}
@@ -338,6 +322,34 @@ const LaptopScene = () => {
 
 		// Initialize the laptop
 		createLaptopFromMarbles();
+
+		// Build one InstancedMesh per material from the collected transforms
+		instanceGroups.forEach((list, material) => {
+			const mesh = new InstancedMesh(sharedSphere, material, list.length);
+			mesh.frustumCulled = false; // marbles move on hover; don't cull the whole batch
+			for (let i = 0; i < list.length; i++) {
+				const t = list[i];
+				_dummy.position.copy(t.pos);
+				_dummy.rotation.copy(t.rot);
+				_dummy.scale.setScalar(t.scale);
+				_dummy.updateMatrix();
+				mesh.setMatrixAt(i, _dummy.matrix);
+
+				instanceStates.push({
+					mesh,
+					index: i,
+					pos: t.pos.clone(),
+					rot: t.rot.clone(),
+					originalPosition: t.pos.clone(),
+					originalRotation: t.rot.clone(),
+					offset: Math.random(),
+					scale: t.scale,
+				});
+			}
+			mesh.instanceMatrix.needsUpdate = true;
+			scene.add(mesh);
+			instancedMeshes.push(mesh);
+		});
 
 		// Position camera
 		camera.position.set(6, 5, 7.5);
@@ -372,7 +384,7 @@ const LaptopScene = () => {
 			if (mouseDirty && mouseInBounds) {
 				mouseDirty = false;
 				raycaster.setFromCamera(mouse, camera);
-				const intersects = raycaster.intersectObjects(marbles);
+				const intersects = raycaster.intersectObjects(instancedMeshes);
 				if (intersects.length > 0) {
 					hovering = true;
 					hoverPoint.copy(intersects[0].point);
@@ -391,10 +403,10 @@ const LaptopScene = () => {
 			const explosionDistSq = (effectRadius * explosionThreshold) ** 2;
 
 			// Update marbles - apply hover effect and gentle floating
-			for (let i = 0, len = marbles.length; i < len; i++) {
-				const marble = marbles[i];
-				const pos = marble.position;
-				const ud = marble.userData;
+			for (let i = 0, len = instanceStates.length; i < len; i++) {
+				const state = instanceStates[i];
+				const pos = state.pos;
+				const ud = state;
 
 				// Apply hover effect if mouse is hovering
 				if (hovering) {
@@ -420,18 +432,18 @@ const LaptopScene = () => {
 							pos.y += _direction.y * explosionForce + 0.08;
 							pos.z += _direction.z * explosionForce + (Math.random() - 0.5) * 0.05;
 
-							marble.rotation.x += Math.random() * 0.2;
-							marble.rotation.y += Math.random() * 0.2;
-							marble.rotation.z += Math.random() * 0.2;
+							state.rot.x += Math.random() * 0.2;
+							state.rot.y += Math.random() * 0.2;
+							state.rot.z += Math.random() * 0.2;
 						} else {
 							const f = 0.08 * force;
 							pos.x += _direction.x * f;
 							pos.y += _direction.y * f + 0.03 * force;
 							pos.z += _direction.z * f;
 
-							marble.rotation.x += 0.05 * force;
-							marble.rotation.y += 0.07 * force;
-							marble.rotation.z += 0.05 * force;
+							state.rot.x += 0.05 * force;
+							state.rot.y += 0.07 * force;
+							state.rot.z += 0.05 * force;
 						}
 					}
 				}
@@ -460,10 +472,21 @@ const LaptopScene = () => {
 					const targetRotX = ud.originalRotation.x + floatRotation;
 					const targetRotZ = ud.originalRotation.z + floatRotation;
 
-					marble.rotation.x = MathUtils.lerp(marble.rotation.x, targetRotX, returnForce);
-					marble.rotation.y = MathUtils.lerp(marble.rotation.y, ud.originalRotation.y, returnForce);
-					marble.rotation.z = MathUtils.lerp(marble.rotation.z, targetRotZ, returnForce);
+					state.rot.x = MathUtils.lerp(state.rot.x, targetRotX, returnForce);
+					state.rot.y = MathUtils.lerp(state.rot.y, ud.originalRotation.y, returnForce);
+					state.rot.z = MathUtils.lerp(state.rot.z, targetRotZ, returnForce);
 				}
+
+				// Write the updated transform into the instanced mesh
+				_dummy.position.copy(pos);
+				_dummy.rotation.copy(state.rot);
+				_dummy.scale.setScalar(state.scale);
+				_dummy.updateMatrix();
+				state.mesh.setMatrixAt(state.index, _dummy.matrix);
+			}
+
+			for (let m = 0; m < instancedMeshes.length; m++) {
+				instancedMeshes[m].instanceMatrix.needsUpdate = true;
 			}
 
 			renderer.render(scene, camera);
@@ -518,12 +541,18 @@ const LaptopScene = () => {
 			}
 
 			// Dispose resources
-			marbles.forEach((marble) => {
-				marble.geometry?.dispose?.();
-				if (marble.material?.map) marble.material.map.dispose();
-				marble.material?.dispose?.();
+			sharedSphere.dispose();
+			instancedMeshes.forEach((mesh) => {
+				const mat = mesh.material;
+				if (!Array.isArray(mat)) {
+					const map = (mat as MeshStandardMaterial).map;
+					if (map) map.dispose();
+					mat.dispose();
+				}
+				mesh.dispose();
 			});
 
+			renderer.dispose();
 			scene.clear();
 		};
 	}, []);

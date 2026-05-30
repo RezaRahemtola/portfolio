@@ -63,11 +63,11 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## ⚡ Performance (med/low)
 
-- [ ] **three.js Laptop builds ~4,600 individual meshes** (MED) — `app/_components/Laptop.tsx:165-321,393-466`. Use `THREE.InstancedMesh` → ~6 draw calls.
+- [x] **three.js Laptop builds ~4,600 individual meshes** (MED) — `app/_components/Laptop.tsx`. Rewritten to one `THREE.InstancedMesh` per material (shared sphere geometry, per-instance matrix incl. scale for keyboard keys); animation now updates instance matrices. Verified via WebGL instrumentation: **7 instanced draws/frame, 0 regular draws** (was ~4,600), identical visuals.
 - [ ] **ParticleBackground = up to 100 animated DOM nodes every route** (MED) — `app/layout.tsx:70`, `components/ParticleBackground.tsx:35,130-140`. Move to canvas / gate `useIsDesktop` / pause on `document.hidden` / limit to home.
 - [ ] **Home section components are `'use client'` only for scroll anims** (LOW) — AboutMe/Skills/Experiences/Passions/ProjectList/Banner. Extract animation into thin client child, keep markup server-side.
 - [ ] **ScrollProgressIndicator scroll listener unthrottled + reads layout each event** (LOW) — `components/ScrollProgressIndicator.tsx:7-23`. Coalesce with rAF, cache dims via ResizeObserver.
-- [ ] **Laptop disposal disposes shared geometries/materials repeatedly** (LOW) — `app/_components/Laptop.tsx:510-514`. Collect uniques in a Set, dispose once.
+- [x] **Laptop disposal disposes shared geometries/materials repeatedly** (LOW) — `app/_components/Laptop.tsx`. Resolved by the instancing rewrite: the shared geometry is disposed once and each material/map once (per InstancedMesh), plus `renderer.dispose()`.
 
 ---
 
