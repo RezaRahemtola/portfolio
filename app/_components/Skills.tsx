@@ -18,20 +18,23 @@ const Skills = () => {
 
 			if (!slideUpEl?.length) return;
 
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 80%",
-					end: "bottom 80%",
-					scrub: 0.5,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "top 80%",
+						end: "bottom 80%",
+						scrub: 0.5,
+					},
+				});
 
-			tl.from(".slide-up", {
-				opacity: 0,
-				y: 40,
-				ease: "none",
-				stagger: 0.4,
+				tl.from(".slide-up", {
+					opacity: 0,
+					y: 40,
+					ease: "none",
+					stagger: 0.4,
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -39,18 +42,21 @@ const Skills = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "bottom 50%",
-					end: "bottom 10%",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "bottom 50%",
+						end: "bottom 10%",
+						scrub: 1,
+					},
+				});
 
-			tl.to(containerRef.current, {
-				y: -150,
-				opacity: 0,
+				tl.to(containerRef.current, {
+					y: -150,
+					opacity: 0,
+				});
 			});
 		},
 		{ scope: containerRef },

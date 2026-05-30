@@ -58,20 +58,23 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	// Animation for section entrance
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 60%",
-					end: "bottom 50%",
-					toggleActions: "restart none none reverse",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "top 60%",
+						end: "bottom 50%",
+						toggleActions: "restart none none reverse",
+						scrub: 1,
+					},
+				});
 
-			tl.from(".passion-item", {
-				y: 50,
-				opacity: 0,
-				stagger: 0.3,
+				tl.from(".passion-item", {
+					y: 50,
+					opacity: 0,
+					stagger: 0.3,
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -80,39 +83,45 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	// Animation for section exit
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "bottom 50%",
-					end: "bottom 20%",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "bottom 50%",
+						end: "bottom 20%",
+						scrub: 1,
+					},
+				});
 
-			tl.to(containerRef.current, {
-				y: -150,
-				opacity: 0,
+				tl.to(containerRef.current, {
+					y: -150,
+					opacity: 0,
+				});
 			});
 		},
 		{ scope: containerRef },
 	);
 
-	// Number counters animation
+	// Number counters animation (skipped under reduced motion — real values render immediately)
 	useGSAP(
 		() => {
-			valueRefs.current.forEach((ref, index) => {
-				const passion = passionsData[index];
-				if (ref && passion && typeof passion.value === "number") {
-					gsap.from(ref, {
-						innerText: 0,
-						duration: 2,
-						snap: { innerText: 1 },
-						scrollTrigger: {
-							trigger: ref,
-							start: "top 80%",
-						},
-					});
-				}
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				valueRefs.current.forEach((ref, index) => {
+					const passion = passionsData[index];
+					if (ref && passion && typeof passion.value === "number") {
+						gsap.from(ref, {
+							innerText: 0,
+							duration: 2,
+							snap: { innerText: 1 },
+							scrollTrigger: {
+								trigger: ref,
+								start: "top 80%",
+							},
+						});
+					}
+				});
 			});
 		},
 		{ scope: containerRef, dependencies: [chessElo] },

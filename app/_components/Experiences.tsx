@@ -13,20 +13,23 @@ const Experiences = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 60%",
-					end: "bottom 50%",
-					toggleActions: "restart none none reverse",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "top 60%",
+						end: "bottom 50%",
+						toggleActions: "restart none none reverse",
+						scrub: 1,
+					},
+				});
 
-			tl.from(".experience-item", {
-				y: 50,
-				opacity: 0,
-				stagger: 0.3,
+				tl.from(".experience-item", {
+					y: 50,
+					opacity: 0,
+					stagger: 0.3,
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -34,18 +37,21 @@ const Experiences = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "bottom 50%",
-					end: "bottom 20%",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "bottom 50%",
+						end: "bottom 20%",
+						scrub: 1,
+					},
+				});
 
-			tl.to(containerRef.current, {
-				y: -150,
-				opacity: 0,
+				tl.to(containerRef.current, {
+					y: -150,
+					opacity: 0,
+				});
 			});
 		},
 		{ scope: containerRef },

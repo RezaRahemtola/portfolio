@@ -20,16 +20,19 @@ const Banner = () => {
 	// move the content a little up on scroll
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "bottom 70%",
-					end: "bottom 10%",
-					scrub: 1,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "bottom 70%",
+						end: "bottom 10%",
+						scrub: 1,
+					},
+				});
 
-			tl.fromTo(".slide-up-and-fade", { y: 0 }, { y: -150, opacity: 0, stagger: 0.02 });
+				tl.fromTo(".slide-up-and-fade", { y: 0 }, { y: -150, opacity: 0, stagger: 0.02 });
+			});
 		},
 		{ scope: containerRef },
 	);

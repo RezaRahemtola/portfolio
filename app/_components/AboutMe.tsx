@@ -12,20 +12,23 @@ const AboutMe = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					id: "about-me-in",
-					trigger: container.current,
-					start: "top 70%",
-					end: "bottom bottom",
-					scrub: 0.5,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						id: "about-me-in",
+						trigger: container.current,
+						start: "top 70%",
+						end: "bottom bottom",
+						scrub: 0.5,
+					},
+				});
 
-			tl.from(".slide-up-and-fade", {
-				y: 150,
-				opacity: 0,
-				stagger: 0.05,
+				tl.from(".slide-up-and-fade", {
+					y: 150,
+					opacity: 0,
+					stagger: 0.05,
+				});
 			});
 		},
 		{ scope: container },
@@ -33,20 +36,23 @@ const AboutMe = () => {
 
 	useGSAP(
 		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					id: "about-me-out",
-					trigger: container.current,
-					start: "bottom 50%",
-					end: "bottom 10%",
-					scrub: 0.5,
-				},
-			});
+			const mm = gsap.matchMedia();
+			mm.add("(prefers-reduced-motion: no-preference)", () => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						id: "about-me-out",
+						trigger: container.current,
+						start: "bottom 50%",
+						end: "bottom 10%",
+						scrub: 0.5,
+					},
+				});
 
-			tl.to(".slide-up-and-fade", {
-				y: -150,
-				opacity: 0,
-				stagger: 0.02,
+				tl.to(".slide-up-and-fade", {
+					y: -150,
+					opacity: 0,
+					stagger: 0.02,
+				});
 			});
 		},
 		{ scope: container },
