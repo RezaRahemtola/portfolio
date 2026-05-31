@@ -1,5 +1,6 @@
 import { IProject } from "@/types";
-import { Github, Linkedin, Trees } from "lucide-react";
+import { Github, Linkedin } from "@/components/icons";
+import { Trees } from "lucide-react";
 
 export const GENERAL_INFO = {
 	email: "contact@reza.dev",
