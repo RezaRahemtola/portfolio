@@ -2,6 +2,7 @@
 import ArrowAnimation from "@/components/ArrowAnimation";
 import TransitionLink from "@/components/TransitionLink";
 import { IProject } from "@/types";
+import { withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,14 +24,7 @@ const ProjectDetails = ({ project }: Props) => {
 		() => {
 			if (!containerRef.current) return;
 
-			const mm = gsap.matchMedia();
-
-			// Reduced motion: reveal content immediately (markup hides the title with opacity-0)
-			mm.add("(prefers-reduced-motion: reduce)", () => {
-				gsap.set(".fade-in-later", { autoAlpha: 1, y: 0 });
-			});
-
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			const mm = withMotion(() => {
 				gsap.set(".fade-in-later", {
 					autoAlpha: 0,
 					y: 30,
@@ -45,6 +39,11 @@ const ProjectDetails = ({ project }: Props) => {
 					stagger: 0.1,
 				});
 			});
+
+			// Reduced motion: reveal content immediately (markup hides the title with opacity-0)
+			mm.add("(prefers-reduced-motion: reduce)", () => {
+				gsap.set(".fade-in-later", { autoAlpha: 1, y: 0 });
+			});
 		},
 		{ scope: containerRef },
 	);
@@ -54,8 +53,7 @@ const ProjectDetails = ({ project }: Props) => {
 		() => {
 			if (window.innerWidth < 992) return;
 
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				gsap.to("#info", {
 					filter: "blur(3px)",
 					autoAlpha: 0,
@@ -77,8 +75,7 @@ const ProjectDetails = ({ project }: Props) => {
 	// parallax effect on images
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
 					gsap.to(img, {
 						objectPosition: `center 0%`,

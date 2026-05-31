@@ -2,6 +2,7 @@
 import ArrowAnimation from "@/components/ArrowAnimation";
 import Button from "@/components/Button";
 import { GENERAL_INFO } from "@/lib/data";
+import { withMotion } from "@/lib/gsap";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -20,8 +21,7 @@ const Banner = () => {
 	// move the content a little up on scroll
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,

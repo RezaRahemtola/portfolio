@@ -1,6 +1,7 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
 import { MY_STACK } from "@/lib/data";
+import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,8 +19,7 @@ const Skills = () => {
 
 			if (!slideUpEl?.length) return;
 
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,
@@ -40,27 +40,7 @@ const Skills = () => {
 		{ scope: containerRef },
 	);
 
-	useGSAP(
-		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "bottom 50%",
-						end: "bottom 10%",
-						scrub: 1,
-					},
-				});
-
-				tl.to(containerRef.current, {
-					y: -150,
-					opacity: 0,
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
+	useScrollExitAnimation(containerRef, { end: "bottom 10%" });
 
 	return (
 		<section id="my-stack" aria-labelledby="my-stack-title" ref={containerRef}>

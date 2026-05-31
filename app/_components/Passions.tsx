@@ -1,5 +1,6 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
+import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -58,8 +59,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	// Animation for section entrance
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,
@@ -81,33 +81,12 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	);
 
 	// Animation for section exit
-	useGSAP(
-		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "bottom 50%",
-						end: "bottom 20%",
-						scrub: 1,
-					},
-				});
-
-				tl.to(containerRef.current, {
-					y: -150,
-					opacity: 0,
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
+	useScrollExitAnimation(containerRef);
 
 	// Number counters animation (skipped under reduced motion — real values render immediately)
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				valueRefs.current.forEach((ref, index) => {
 					const passion = passionsData[index];
 					if (ref && passion && typeof passion.value === "number") {
@@ -151,9 +130,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 									<p className="text-5xl font-anton leading-none transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 										{passion.prefix}
 										{/* @ts-expect-error ref*/}
-										<span ref={(el) => (valueRefs.current[index] = el)}>
-											{passion.value ?? (passion.title === "Chess" ? "..." : passion.value)}
-										</span>
+										<span ref={(el) => (valueRefs.current[index] = el)}>{passion.value ?? "..."}</span>
 										{passion.suffix}
 									</p>
 									<p className="text-xl text-muted-foreground">{passion.unit}</p>

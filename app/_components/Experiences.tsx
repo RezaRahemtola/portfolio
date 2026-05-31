@@ -1,6 +1,7 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
 import { MY_EXPERIENCE } from "@/lib/data";
+import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,8 +14,7 @@ const Experiences = () => {
 
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,
@@ -35,27 +35,7 @@ const Experiences = () => {
 		{ scope: containerRef },
 	);
 
-	useGSAP(
-		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "bottom 50%",
-						end: "bottom 20%",
-						scrub: 1,
-					},
-				});
-
-				tl.to(containerRef.current, {
-					y: -150,
-					opacity: 0,
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
+	useScrollExitAnimation(containerRef);
 
 	return (
 		<section className="py-section" id="experience" aria-labelledby="experience-title">

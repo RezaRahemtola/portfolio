@@ -1,6 +1,7 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
 import { PROJECTS } from "@/lib/data";
+import { withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,8 +16,7 @@ const ProjectList = () => {
 
 	useGSAP(
 		() => {
-			const mm = gsap.matchMedia();
-			mm.add("(prefers-reduced-motion: no-preference)", () => {
+			withMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,
