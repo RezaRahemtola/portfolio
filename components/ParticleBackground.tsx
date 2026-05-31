@@ -1,8 +1,10 @@
 "use client";
+import { useIsDesktop } from "@/lib/useIsDesktop";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -28,14 +30,12 @@ const MODE_COLORS: Record<ParticleMode, string> = {
 
 const ParticleBackground = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [count, setCount] = useState(0);
 	const [mode, setMode] = useState<ParticleMode>("default");
+	const reducedMotion = useReducedMotion();
+	const isDesktop = useIsDesktop();
 
-	useEffect(() => {
-		// Skip the animated particle layer entirely for reduced-motion users
-		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-		setCount(window.innerWidth < 768 ? 30 : 100);
-	}, []);
+	// Skip the animated particle layer entirely for reduced-motion users
+	const count = reducedMotion ? 0 : isDesktop ? 100 : 30;
 
 	useHotkey("Mod+.", (e) => {
 		e.preventDefault();

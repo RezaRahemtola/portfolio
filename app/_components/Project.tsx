@@ -20,6 +20,8 @@ const Project = ({ index, project }: Props) => {
 		revertOnUpdate: true,
 	});
 
+	// contextSafe returns a deferred event handler — the ref is only read on hover, never during render.
+	// eslint-disable-next-line react-hooks/refs
 	const handleMouseEnter = contextSafe?.(() => {
 		const arrowLine = externalLinkSVGRef.current?.querySelector("#arrow-line") as SVGPathElement;
 		const arrowCurb = externalLinkSVGRef.current?.querySelector("#arrow-curb") as SVGPathElement;

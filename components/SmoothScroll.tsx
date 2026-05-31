@@ -1,20 +1,12 @@
 "use client";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ReactLenis } from "lenis/react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 
 // Wraps the app in Lenis smooth-scroll, but disables it for users who request
 // reduced motion (Lenis hijacks native scrolling, which CSS alone can't undo).
 const SmoothScroll = ({ children }: { children: ReactNode }) => {
-	const [reducedMotion, setReducedMotion] = useState(false);
-
-	useEffect(() => {
-		const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setReducedMotion(mql.matches);
-
-		const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-		mql.addEventListener("change", onChange);
-		return () => mql.removeEventListener("change", onChange);
-	}, []);
+	const reducedMotion = useReducedMotion();
 
 	if (reducedMotion) {
 		return <>{children}</>;
