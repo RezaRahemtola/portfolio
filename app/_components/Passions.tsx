@@ -128,9 +128,9 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	);
 
 	return (
-		<section className="py-section" id="passions">
+		<section className="py-section" id="passions" aria-labelledby="passions-title">
 			<div className="container" ref={containerRef}>
-				<SectionTitle title="My Passions" />
+				<SectionTitle id="passions-title" title="My Passions" />
 
 				<div className="grid gap-14">
 					{passionsData.map((passion, index) => {

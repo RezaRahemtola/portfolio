@@ -63,9 +63,9 @@ const Skills = () => {
 	);
 
 	return (
-		<section id="my-stack" ref={containerRef}>
+		<section id="my-stack" aria-labelledby="my-stack-title" ref={containerRef}>
 			<div className="container">
-				<SectionTitle title="My favorite technologies" />
+				<SectionTitle id="my-stack-title" title="My favorite technologies" />
 
 				<div className="space-y-20">
 					{Object.entries(MY_STACK).map(([key, value]) => (

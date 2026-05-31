@@ -58,9 +58,9 @@ const Experiences = () => {
 	);
 
 	return (
-		<section className="py-section" id="experience">
+		<section className="py-section" id="experience" aria-labelledby="experience-title">
 			<div className="container" ref={containerRef}>
-				<SectionTitle title="My Experience" />
+				<SectionTitle id="experience-title" title="My Experience" />
 
 				<div className="grid gap-14">
 					{MY_EXPERIENCE.map((item) => (

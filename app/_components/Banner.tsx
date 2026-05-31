@@ -38,7 +38,7 @@ const Banner = () => {
 	);
 
 	return (
-		<section className="relative overflow-hidden" id="banner">
+		<section className="relative overflow-hidden" id="banner" aria-labelledby="banner-title">
 			<ArrowAnimation />
 			{isDesktop && (
 				<div className="absolute right-0 top-0 w-1/2 h-full">
@@ -50,7 +50,10 @@ const Banner = () => {
 				ref={containerRef}
 			>
 				<div className="max-md:grow max-md:flex flex-col justify-center items-start max-w-[544px]">
-					<h1 className="banner-title slide-up-and-fade leading-[.95] text-6xl sm:text-[80px] font-anton">
+					<h1
+						id="banner-title"
+						className="banner-title slide-up-and-fade leading-[.95] text-6xl sm:text-[80px] font-anton"
+					>
 						<span className="text-primary">FULL STACK</span>
 						<br /> <span className="ml-4">DEVELOPER</span>
 					</h1>

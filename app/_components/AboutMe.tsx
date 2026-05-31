@@ -59,8 +59,11 @@ const AboutMe = () => {
 	);
 
 	return (
-		<section className="pb-section" id="about-me">
+		<section className="pb-section" id="about-me" aria-labelledby="about-me-title">
 			<div className="container" ref={container}>
+				<h2 id="about-me-title" className="sr-only">
+					About Me
+				</h2>
 				<p className="pb-3 border-b text-muted-foreground slide-up-and-fade">This is me.</p>
 
 				<div className="grid md:grid-cols-12 mt-9">

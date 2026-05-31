@@ -37,9 +37,9 @@ const ProjectList = () => {
 	);
 
 	return (
-		<section className="pb-section" id="projects-showcase">
+		<section className="pb-section" id="projects-showcase" aria-labelledby="projects-showcase-title">
 			<div className="container">
-				<SectionTitle title="PROJECTS SHOWCASE" />
+				<SectionTitle id="projects-showcase-title" title="PROJECTS SHOWCASE" />
 
 				<div className="group/projects" ref={containerRef}>
 					<div className="flex flex-col max-md:gap-10" ref={projectListRef}>
