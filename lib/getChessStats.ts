@@ -13,6 +13,7 @@ export async function getChessStats(): Promise<number | null> {
 	try {
 		const response = await fetch("https://api.chess.com/pub/player/rezarahemtola/stats", {
 			next: { revalidate: 3600 }, // Cache for 1 hour
+			signal: AbortSignal.timeout(5000), // Don't let a hung upstream block the homepage render
 		});
 
 		if (!response.ok) {
