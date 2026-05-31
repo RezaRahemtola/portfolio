@@ -27,22 +27,25 @@ const robotoFlex = Roboto_Flex({
 	variable: "--font-roboto-flex",
 });
 
+const DESCRIPTION =
+	"Reza Rahemtola — full stack developer with 3+ years building web platforms, scalable backends, blockchain apps, and AI-powered products.";
+
 export const metadata: Metadata = {
 	metadataBase: new URL("https://reza.dev"),
 	title: {
 		default: "Portfolio - Reza Rahemtola",
 		template: "%s | Reza Rahemtola",
 	},
-	description: "Personal portfolio of Reza Rahemtola",
+	description: DESCRIPTION,
 	alternates: { canonical: "/" },
 	openGraph: {
 		title: "Portfolio - Reza Rahemtola",
-		description: "Personal portfolio of Reza Rahemtola",
+		description: DESCRIPTION,
 		url: "https://reza.dev",
 		type: "website",
 		images: [{ url: "/about/reza_full.jpeg", width: 1170, height: 610, alt: "Reza Rahemtola" }],
 	},
-	twitter: { card: "summary_large_image", images: ["/about/reza_full.jpeg"] },
+	twitter: { card: "summary_large_image", description: DESCRIPTION, images: ["/about/reza_full.jpeg"] },
 };
 
 export default function RootLayout({
