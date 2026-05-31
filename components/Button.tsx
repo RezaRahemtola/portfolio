@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 import { Variant } from "@/types";
 import { cn } from "@/lib/utils";
 
-const Child = ({ icon }: any) => (
+const Child = ({ icon }: { icon?: boolean }) => (
 	<span className="flex items-center justify-center gap-3">
 		<svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 			<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -54,26 +54,29 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 		className,
 	);
 
+	const inner = (
+		<>
+			{variant !== "link" && (
+				<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 group-focus-visible:top-0 transition-all duration-500 scale-150"></span>
+			)}
+			<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
+		</>
+	);
+
 	if (as === "link") {
 		const props = rest as ComponentProps<typeof Link>;
 
 		if (props.target === "_blank") {
 			return (
 				<a className={buttonClasses} {...props} href={props.href?.toString() || "#"}>
-					{variant !== "link" && (
-						<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 group-focus-visible:top-0 transition-all duration-500 scale-150"></span>
-					)}
-					<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
+					{inner}
 				</a>
 			);
 		}
 
 		return (
 			<Link className={buttonClasses} {...props} href={props.href || "#"}>
-				{variant !== "link" && (
-					<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 group-focus-visible:top-0 transition-all duration-500 scale-150"></span>
-				)}
-				<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
+				{inner}
 			</Link>
 		);
 	} else if (as === "button") {
@@ -81,10 +84,7 @@ const Button = ({ loading, variant, className, children, as = "link", icon = fal
 
 		return (
 			<button className={buttonClasses} {...props}>
-				{variant !== "link" && (
-					<span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 group-focus-visible:top-0 transition-all duration-500 scale-150"></span>
-				)}
-				<span className="z-1">{loading ? <Child icon={icon} /> : children}</span>
+				{inner}
 			</button>
 		);
 	}

@@ -15,7 +15,7 @@ interface PassionsProps {
 
 const Passions = ({ chessElo }: PassionsProps) => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const valueRefs = useRef<HTMLSpanElement[]>([]);
+	const valueRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
 	const passionsData = useMemo(
 		() => [
@@ -129,8 +129,13 @@ const Passions = ({ chessElo }: PassionsProps) => {
 								<div className="flex flex-wrap items-baseline gap-x-4 mt-3.5 mb-2.5 group">
 									<p className="text-5xl font-anton leading-none transition-all duration-700 bg-linear-to-r from-primary to-foreground from-50% to-50% bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
 										{passion.prefix}
-										{/* @ts-expect-error ref*/}
-										<span ref={(el) => (valueRefs.current[index] = el)}>{passion.value ?? "..."}</span>
+										<span
+											ref={(el) => {
+												valueRefs.current[index] = el;
+											}}
+										>
+											{passion.value ?? "..."}
+										</span>
 										{passion.suffix}
 									</p>
 									<p className="text-xl text-muted-foreground">{passion.unit}</p>
