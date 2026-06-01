@@ -16,7 +16,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Banner = () => {
 	const containerRef = React.useRef<HTMLDivElement>(null);
-	const isDesktop = useIsDesktop();
+	// Match the canvas' `lg:block` visibility so WebGL never inits on the 768-1023px range where it stays hidden
+	const isDesktop = useIsDesktop("(min-width: 1024px)");
 
 	// move the content a little up on scroll
 	useGSAP(
