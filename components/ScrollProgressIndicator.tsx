@@ -5,20 +5,28 @@ const ScrollProgressIndicator = () => {
 	const scrollBarRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			if (scrollBarRef.current) {
-				const { scrollHeight, clientHeight } = document.documentElement;
-				const scrollableHeight = scrollHeight - clientHeight;
-				const scrollY = window.scrollY;
-				const scrollProgress = scrollableHeight > 0 ? (scrollY / scrollableHeight) * 100 : 0;
+		let ticking = false;
 
-				scrollBarRef.current.style.transform = `translateY(-${100 - scrollProgress}%)`;
-			}
+		const update = () => {
+			ticking = false;
+			if (!scrollBarRef.current) return;
+			const { scrollHeight, clientHeight } = document.documentElement;
+			const scrollableHeight = scrollHeight - clientHeight;
+			const scrollProgress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+
+			scrollBarRef.current.style.transform = `translateY(-${100 - scrollProgress}%)`;
 		};
 
-		handleScroll();
+		// Coalesce rapid scroll events into one read/write per frame.
+		const handleScroll = () => {
+			if (ticking) return;
+			ticking = true;
+			requestAnimationFrame(update);
+		};
 
-		window.addEventListener("scroll", handleScroll);
+		update();
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
