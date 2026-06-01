@@ -49,12 +49,11 @@ const ProjectDetails = ({ project }: Props) => {
 		{ scope: containerRef },
 	);
 
-	// blur info div and make it smaller on scroll
+	// blur info div and make it smaller on scroll (desktop only, motion allowed).
+	// matchMedia keeps this reactive to resize and aligned with the `lg` breakpoint.
 	useGSAP(
 		() => {
-			if (window.innerWidth < 992) return;
-
-			withMotion(() => {
+			gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-width: 1024px)", () => {
 				gsap.to("#info", {
 					filter: "blur(3px)",
 					autoAlpha: 0,
