@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const wantsMarkdown = (accept: string | null): boolean => accept?.toLowerCase().includes("text/markdown") ?? false;
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
 	if (!wantsMarkdown(request.headers.get("accept"))) return NextResponse.next();
 
 	const url = request.nextUrl.clone();
