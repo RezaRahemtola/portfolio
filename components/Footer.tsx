@@ -1,6 +1,6 @@
 import { GENERAL_INFO, SOCIAL_LINKS } from "@/lib/data";
 
-const Footer = async () => {
+const Footer = () => {
 	return (
 		<footer className="text-center pb-5" id="contact">
 			<div className="container">
@@ -26,16 +26,6 @@ const Footer = async () => {
 						</a>
 					))}
 				</div>
-
-				{/*<div>*/}
-				{/*	<a*/}
-				{/*		href="https://www.me.toinfinite.dev/"*/}
-				{/*		target="_blank"*/}
-				{/*		className="leading-none text-muted-foreground hover:underline hover:text-white"*/}
-				{/*	>*/}
-				{/*		Original design by Tajmirul Islam*/}
-				{/*	</a>*/}
-				{/*</div>*/}
 			</div>
 		</footer>
 	);
