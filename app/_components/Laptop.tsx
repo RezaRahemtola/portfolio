@@ -557,7 +557,7 @@ const LaptopScene = () => {
 		};
 	}, []);
 
-	return <div ref={mountRef} className="absolute w-full h-full hidden lg:block" />;
+	return <div ref={mountRef} aria-hidden="true" className="absolute w-full h-full hidden lg:block" />;
 };
 
 export default LaptopScene;

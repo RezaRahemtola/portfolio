@@ -56,6 +56,7 @@ const ArrowAnimation = () => {
 	return (
 		<svg
 			id="banner-arrow-svg"
+			aria-hidden="true"
 			width="376"
 			height="111"
 			viewBox="0 0 376 111"

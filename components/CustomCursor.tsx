@@ -2,35 +2,42 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 gsap.registerPlugin(useGSAP);
 
 const CustomCursor = () => {
 	const svgRef = useRef<SVGSVGElement>(null);
+	const prefersReducedMotion = useReducedMotion();
 
-	useGSAP((_ctx, contextSafe) => {
-		if (window.innerWidth < 768) return;
+	useGSAP(
+		(_ctx, contextSafe) => {
+			if (prefersReducedMotion || window.innerWidth < 768) return;
 
-		const handleMouseMove = contextSafe?.((e: MouseEvent) => {
-			if (!svgRef.current) return;
+			const handleMouseMove = contextSafe?.((e: MouseEvent) => {
+				if (!svgRef.current) return;
 
-			const { clientX, clientY } = e;
+				const { clientX, clientY } = e;
 
-			gsap.to(svgRef.current, {
-				x: clientX,
-				y: clientY,
-				ease: "power2.out",
-				duration: 0.25,
-				opacity: 1,
-			});
-		}) as any;
+				gsap.to(svgRef.current, {
+					x: clientX,
+					y: clientY,
+					ease: "power2.out",
+					duration: 0.25,
+					opacity: 1,
+				});
+			}) as any;
 
-		window.addEventListener("mousemove", handleMouseMove);
+			window.addEventListener("mousemove", handleMouseMove);
 
-		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
-		};
-	});
+			return () => {
+				window.removeEventListener("mousemove", handleMouseMove);
+			};
+		},
+		{ dependencies: [prefersReducedMotion] },
+	);
+
+	if (prefersReducedMotion) return null;
 
 	return (
 		<svg
@@ -40,6 +47,7 @@ const CustomCursor = () => {
 			className="hidden md:block fixed top-0 left-0 opacity-0 z-50 pointer-events-none" // -translate-x-1/2 -translate-y-1/2
 			fill="none"
 			id="cursor"
+			aria-hidden="true"
 			strokeWidth="2"
 			opacity="0"
 			xmlns="http://www.w3.org/2000/svg"
