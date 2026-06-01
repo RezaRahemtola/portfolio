@@ -1,7 +1,7 @@
 "use client";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -10,6 +10,9 @@ const SESSION_KEY = "preloaderShown";
 const Preloader = () => {
 	const preloaderRef = useRef<HTMLDivElement>(null);
 	const timelineRef = useRef<gsap.core.Timeline | null>(null);
+	// True only while the intro is actually playing, so the Escape-to-skip
+	// listener is scoped to that window instead of the whole session.
+	const [playing, setPlaying] = useState(true);
 
 	// Skip the intro and reveal content immediately
 	const dismiss = useCallback(() => {
@@ -18,6 +21,7 @@ const Preloader = () => {
 		timelineRef.current?.kill();
 		gsap.to(el, { autoAlpha: 0, duration: 0.3 });
 		sessionStorage.setItem(SESSION_KEY, "true");
+		setPlaying(false);
 	}, []);
 
 	useGSAP(
@@ -31,6 +35,7 @@ const Preloader = () => {
 
 			if (alreadyShown || prefersReduced) {
 				gsap.set(el, { autoAlpha: 0 });
+				setPlaying(false);
 				return;
 			}
 
@@ -38,7 +43,10 @@ const Preloader = () => {
 				defaults: {
 					ease: "power1.inOut",
 				},
-				onComplete: () => sessionStorage.setItem(SESSION_KEY, "true"),
+				onComplete: () => {
+					sessionStorage.setItem(SESSION_KEY, "true");
+					setPlaying(false);
+				},
 			});
 			timelineRef.current = tl;
 
@@ -66,14 +74,15 @@ const Preloader = () => {
 		{ scope: preloaderRef },
 	);
 
-	// Let users skip the intro with the Escape key
+	// Let users skip the intro with the Escape key — only while it's playing
 	useEffect(() => {
+		if (!playing) return;
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (e.key === "Escape") dismiss();
 		};
 		window.addEventListener("keydown", onKeyDown);
 		return () => window.removeEventListener("keydown", onKeyDown);
-	}, [dismiss]);
+	}, [playing, dismiss]);
 
 	return (
 		<div className="fixed inset-0 z-6 flex" ref={preloaderRef} aria-hidden="true" onClick={dismiss}>
