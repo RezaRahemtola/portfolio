@@ -77,7 +77,6 @@ const AboutMe = () => {
 								width={500}
 								height={500}
 								className="object-cover mx-auto w-[200px] h-auto md:hidden"
-								priority
 							/>
 							<Image
 								src="/about/reza_full.jpeg"
@@ -85,7 +84,6 @@ const AboutMe = () => {
 								width={1170}
 								height={610}
 								className="w-[375px] h-auto max-md:hidden"
-								priority
 							/>
 						</div>
 					</div>
