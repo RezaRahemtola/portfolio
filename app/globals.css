@@ -131,15 +131,35 @@
         display: none;
     }
     * {
-        @apply border-border cursor-none;
+        @apply border-border;
     }
     body {
         @apply bg-background text-foreground font-roboto-flex;
     }
 
+    /* Hide the native cursor only on devices with a precise pointer (mouse/
+       trackpad), where the custom cursor takes over. Touch/coarse-pointer
+       devices keep their native behaviour. */
+    @media (hover: hover) and (pointer: fine) {
+        * {
+            @apply cursor-none;
+        }
+    }
+
+    /* Visible keyboard-focus indicator for all interactive elements (links,
+       icon buttons, etc.). Suppressed for mouse/touch focus to avoid noise. */
+    :focus-visible {
+        outline: 2px solid hsl(var(--primary));
+        outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
+
     /* Respect users who request reduced motion: neutralize CSS animations,
        transitions and native smooth scrolling. JS-driven motion (GSAP, Lenis,
-       canvas) is gated separately in their components. */
+       canvas) is gated separately in their components. The custom cursor is
+       disabled too, so restore the native one. */
     @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -148,6 +168,7 @@
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
             scroll-behavior: auto !important;
+            cursor: auto !important;
         }
     }
 }
