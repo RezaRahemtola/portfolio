@@ -1,14 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
 import { GENERAL_INFO, MY_EXPERIENCE, MY_STACK, PROJECTS, SOCIAL_LINKS } from "@/lib/data";
-
-const loadProjectContent = (slug: string, type: "description" | "role"): string => {
-	const filePath = path.join(process.cwd(), "content", "projects", `${slug}-${type}.md`);
-	if (fs.existsSync(filePath)) {
-		return fs.readFileSync(filePath, "utf-8").trim();
-	}
-	return "";
-};
+import { loadProjectContent } from "@/lib/projectContent";
 
 export const buildHomeMarkdown = (): string => {
 	const lines: string[] = [];

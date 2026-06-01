@@ -2,17 +2,8 @@ import { notFound } from "next/navigation";
 import ProjectDetails from "./_components/ProjectDetails";
 import { PROJECTS } from "@/lib/data";
 import { Metadata } from "next";
-import fs from "node:fs";
-import path from "node:path";
 import { IProject } from "@/types";
-
-const loadProjectContent = (slug: string, type: "description" | "role"): string => {
-	const filePath = path.join(process.cwd(), "content", "projects", `${slug}-${type}.md`);
-	if (fs.existsSync(filePath)) {
-		return fs.readFileSync(filePath, "utf-8");
-	}
-	return "";
-};
+import { loadProjectContent } from "@/lib/projectContent";
 
 export const generateStaticParams = async () => {
 	return PROJECTS.map((project) => ({ slug: project.slug }));
