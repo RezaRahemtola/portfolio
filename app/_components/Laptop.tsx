@@ -24,6 +24,15 @@ import {
 	WebGLRenderer,
 } from "three";
 
+// Geometry definition for a laptop part, expressed as a box of marbles.
+type LaptopPart = {
+	width: number;
+	height: number;
+	depth: number;
+	position: number[];
+	rotation?: number[];
+};
+
 const LaptopScene = () => {
 	const mountRef = useRef<HTMLDivElement | null>(null);
 
@@ -178,7 +187,7 @@ const LaptopScene = () => {
 		}
 
 		// Create laptop parts from marbles
-		function createMarblePart(partDef: any, brightness: number) {
+		function createMarblePart(partDef: LaptopPart, brightness: number) {
 			const { width, height, depth, position, rotation } = partDef;
 
 			// Calculate how many marbles we need along each axis
@@ -233,7 +242,7 @@ const LaptopScene = () => {
 		}
 
 		// Create screen display using black marbles with grey edges
-		function createMarbleDisplay(structure: any) {
+		function createMarbleDisplay(structure: LaptopPart) {
 			const { width, height, position } = structure;
 
 			// Calculate how many marbles we need along each axis

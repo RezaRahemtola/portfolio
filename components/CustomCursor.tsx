@@ -26,7 +26,9 @@ const CustomCursor = () => {
 					duration: 0.25,
 					opacity: 1,
 				});
-			}) as any;
+			});
+
+			if (!handleMouseMove) return;
 
 			window.addEventListener("mousemove", handleMouseMove);
 
