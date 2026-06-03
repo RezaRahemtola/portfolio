@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 import ScrollProgressIndicator from "@/components/ScrollProgressIndicator";
+import ScrollRestorer from "@/components/ScrollRestorer";
 import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
 import Preloader from "../components/Preloader";
@@ -60,6 +61,7 @@ export default function RootLayout({
 			</head>
 			<body className={`${antonFont.variable} ${robotoFlex.variable} antialiased`}>
 				<SmoothScroll>
+					<ScrollRestorer />
 					<Navbar />
 					<main>{children}</main>
 					<Footer />

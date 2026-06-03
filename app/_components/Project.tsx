@@ -1,4 +1,4 @@
-import TransitionLink from "@/components/TransitionLink";
+import Link from "next/link";
 import { IProject } from "@/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -77,7 +77,7 @@ const Project = ({ index, project }: Props) => {
 	});
 
 	return (
-		<TransitionLink
+		<Link
 			href={`/projects/${project.slug}`}
 			className="project-item group leading-none py-5 md:py-8 md:border-b first:pt-0! last:pb-0 last:border-none transition-all"
 			onMouseEnter={handleMouseEnter}
@@ -136,7 +136,7 @@ const Project = ({ index, project }: Props) => {
 					</div>
 				</div>
 			</div>
-		</TransitionLink>
+		</Link>
 	);
 };
 

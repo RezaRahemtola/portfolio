@@ -1,6 +1,7 @@
 "use client";
 import ArrowAnimation from "@/components/ArrowAnimation";
-import TransitionLink from "@/components/TransitionLink";
+import { hasAppHistory } from "@/components/ScrollRestorer";
+import { useRouter } from "next/navigation";
 import { IProject } from "@/types";
 import { withDesktopMotion, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -20,6 +21,17 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const ProjectDetails = ({ project }: Props) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const router = useRouter();
+
+	// Pop history when we got here from within the app (restores the home scroll
+	// position); otherwise fall back to navigating home (e.g. on a direct visit).
+	const handleBack = () => {
+		if (hasAppHistory()) {
+			router.back();
+		} else {
+			router.push("/");
+		}
+	};
 
 	useGSAP(
 		() => {
@@ -96,10 +108,14 @@ const ProjectDetails = ({ project }: Props) => {
 	return (
 		<section className="pt-5 pb-14">
 			<div className="container" ref={containerRef}>
-				<TransitionLink back href="/" className="mb-16 inline-flex gap-2 items-center group h-12">
+				<button
+					type="button"
+					onClick={handleBack}
+					className="mb-16 inline-flex gap-2 items-center group h-12 cursor-pointer"
+				>
 					<ArrowLeft className="group-hover:-translate-x-1 group-hover:text-primary transition-all duration-300" />
 					Back
-				</TransitionLink>
+				</button>
 
 				<div className="top-0 flex min-h-[calc(100svh-100px)]" id="info">
 					<div className="relative w-full">
