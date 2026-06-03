@@ -70,7 +70,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 							scrollTrigger: {
 								// Start shortly after the number scrolls into view so the static "0" isn't shown for long
 								trigger: ref,
-								start: "top 90%",
+								start: "top 95%",
 							},
 						});
 					}
