@@ -37,7 +37,7 @@ const ProjectList = () => {
 	);
 
 	return (
-		<section className="pb-section" id="projects-showcase" aria-labelledby="projects-showcase-title">
+		<section className="pb-40 md:pb-section" id="projects-showcase" aria-labelledby="projects-showcase-title">
 			<div className="container">
 				<SectionTitle id="projects-showcase-title" title="PROJECTS SHOWCASE" />
 

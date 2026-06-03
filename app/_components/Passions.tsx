@@ -107,7 +107,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	);
 
 	return (
-		<section className="py-section" id="passions" aria-labelledby="passions-title">
+		<section className="pb-40 md:pb-section" id="passions" aria-labelledby="passions-title">
 			<div className="container" ref={containerRef}>
 				<SectionTitle id="passions-title" title="My Passions" />
 

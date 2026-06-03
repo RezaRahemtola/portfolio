@@ -58,7 +58,7 @@ const AboutMe = () => {
 	);
 
 	return (
-		<section className="pb-section" id="about-me" aria-labelledby="about-me-title">
+		<section className="pb-40 md:pb-section" id="about-me" aria-labelledby="about-me-title">
 			<div className="container" ref={container}>
 				<h2 id="about-me-title" className="sr-only">
 					About Me

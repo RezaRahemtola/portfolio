@@ -38,7 +38,7 @@ const Experiences = () => {
 	useScrollExitAnimation(containerRef);
 
 	return (
-		<section className="py-section" id="experience" aria-labelledby="experience-title">
+		<section className="pb-40 md:pb-section" id="experience" aria-labelledby="experience-title">
 			<div className="container" ref={containerRef}>
 				<SectionTitle id="experience-title" title="My Experience" />
 

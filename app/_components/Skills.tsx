@@ -43,7 +43,7 @@ const Skills = () => {
 	useScrollExitAnimation(containerRef, { end: "bottom 10%" });
 
 	return (
-		<section id="my-stack" aria-labelledby="my-stack-title" ref={containerRef}>
+		<section className="pb-40 md:pb-section" id="my-stack" aria-labelledby="my-stack-title" ref={containerRef}>
 			<div className="container">
 				<SectionTitle id="my-stack-title" title="My favorite technologies" />
 
