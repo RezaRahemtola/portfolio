@@ -68,9 +68,9 @@ const Passions = ({ chessElo }: PassionsProps) => {
 							duration: 2,
 							snap: { innerText: 1 },
 							scrollTrigger: {
-								// Start as soon as the number scrolls into view so the static "0" isn't shown for long
+								// Start shortly after the number scrolls into view so the static "0" isn't shown for long
 								trigger: ref,
-								start: "top bottom",
+								start: "top 90%",
 							},
 						});
 					}

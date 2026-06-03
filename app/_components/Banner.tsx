@@ -13,7 +13,7 @@ const Banner = () => {
 	return (
 		<section className="relative overflow-hidden" id="banner" aria-labelledby="banner-title">
 			{isDesktop && (
-				<div className="absolute right-0 top-0 w-1/2 h-full z-10">
+				<div className="absolute right-0 top-0 w-1/2 h-full z-1">
 					<Laptop />
 				</div>
 			)}
