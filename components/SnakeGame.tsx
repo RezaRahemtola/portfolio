@@ -38,6 +38,8 @@ const SnakeGame = () => {
 	const spawnFood = useCallback(() => {
 		const { cols, rows } = gridRef.current;
 		const snake = snakeRef.current;
+		// Nothing to place on an empty or full board — bail to avoid an infinite search.
+		if (cols < 1 || rows < 1 || snake.length >= cols * rows) return;
 		let pos: Point;
 		do {
 			pos = {
