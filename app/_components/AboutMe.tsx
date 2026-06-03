@@ -1,5 +1,5 @@
 "use client";
-import { withMotion } from "@/lib/gsap";
+import { withDesktopMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +13,7 @@ const AboutMe = () => {
 
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						id: "about-me-in",
@@ -36,7 +36,7 @@ const AboutMe = () => {
 
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						id: "about-me-out",

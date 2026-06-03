@@ -1,6 +1,6 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
-import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
+import { useScrollExitAnimation, withDesktopMotion, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -59,7 +59,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 	// Animation for section entrance
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,

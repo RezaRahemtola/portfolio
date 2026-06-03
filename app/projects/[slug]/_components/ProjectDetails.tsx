@@ -2,7 +2,7 @@
 import ArrowAnimation from "@/components/ArrowAnimation";
 import TransitionLink from "@/components/TransitionLink";
 import { IProject } from "@/types";
-import { withMotion } from "@/lib/gsap";
+import { withDesktopMotion, withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -72,10 +72,10 @@ const ProjectDetails = ({ project }: Props) => {
 		{ scope: containerRef },
 	);
 
-	// parallax effect on images
+	// parallax effect on images (desktop only — scrub effects feel janky on mobile scroll)
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
 					gsap.to(img, {
 						objectPosition: `center 0%`,

@@ -1,7 +1,7 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
 import { MY_EXPERIENCE } from "@/lib/data";
-import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
+import { useScrollExitAnimation, withDesktopMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,7 +14,7 @@ const Experiences = () => {
 
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,

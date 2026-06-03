@@ -18,7 +18,8 @@ const ArrowAnimation = () => {
 			gsap.set("#banner-arrow-svg", { autoAlpha: 0 });
 		});
 
-		mm.add("(prefers-reduced-motion: no-preference)", () => {
+		// Desktop only: the looping "scroll down" hint is hidden on mobile (max-md:hidden).
+		mm.add("(prefers-reduced-motion: no-preference) and (min-width: 768px)", () => {
 			gsap.set("#banner-arrow-svg", { fill: "transparent", autoAlpha: 0 });
 			gsap.set(".svg-arrow-1", {
 				strokeDasharray: arrow1Ref.current?.getTotalLength(),
@@ -62,7 +63,7 @@ const ArrowAnimation = () => {
 			viewBox="0 0 376 111"
 			fill="transparent"
 			xmlns="http://www.w3.org/2000/svg"
-			className="absolute bottom-20 left-1/2 -translate-x-1/2 z-0"
+			className="hidden md:block absolute bottom-20 left-1/2 -translate-x-1/2 z-0"
 			ref={svgRef}
 		>
 			<path className="svg-arrow svg-arrow-1" d="M1 1V39.9286L188 110V70.6822L1 1Z" stroke="#2C2C2C" ref={arrow1Ref} />

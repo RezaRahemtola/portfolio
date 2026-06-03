@@ -1,7 +1,7 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
 import { MY_STACK } from "@/lib/data";
-import { useScrollExitAnimation, withMotion } from "@/lib/gsap";
+import { useScrollExitAnimation, withDesktopMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,7 +19,7 @@ const Skills = () => {
 
 			if (!slideUpEl?.length) return;
 
-			withMotion(() => {
+			withDesktopMotion(() => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
 						trigger: containerRef.current,

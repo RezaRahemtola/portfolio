@@ -14,6 +14,15 @@ export function withMotion(callback: gsap.ContextFunc): gsap.MatchMedia {
 	return mm;
 }
 
+// Like withMotion, but desktop-only (>= md). Used for scroll-scrubbed reveal/exit
+// effects: on mobile they tie animation progress to scroll position, which makes
+// the page feel laggy and unusable. Content stays visible by default on mobile.
+export function withDesktopMotion(callback: gsap.ContextFunc): gsap.MatchMedia {
+	const mm = gsap.matchMedia();
+	mm.add("(prefers-reduced-motion: no-preference) and (min-width: 768px)", callback);
+	return mm;
+}
+
 // The shared "slide the whole section up and fade out as it scrolls off" exit effect.
 export function useScrollExitAnimation(
 	scope: RefObject<HTMLElement | null>,
@@ -21,7 +30,7 @@ export function useScrollExitAnimation(
 ) {
 	useGSAP(
 		() => {
-			withMotion(() => {
+			withDesktopMotion(() => {
 				gsap
 					.timeline({
 						scrollTrigger: {
