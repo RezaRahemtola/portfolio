@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { IProject } from "@/types";
 import { Github } from "@/components/icons";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import Image from "next/image";
+import ProjectGallery from "@/components/ProjectGallery";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 interface Props {
@@ -96,30 +96,7 @@ const ProjectDetails = ({ project }: Props) => {
 					)}
 				</div>
 
-				<div className="relative flex flex-col gap-2 max-w-[800px] mx-auto" id="images">
-					{project.images.map((image, i) => (
-						<div key={image} className="group relative w-full aspect-750/400 bg-background-light overflow-hidden">
-							<Image
-								src={image}
-								alt={`${project.title} screenshot ${i + 1}`}
-								fill
-								quality={90}
-								sizes="(max-width: 800px) 100vw, 800px"
-								className="object-cover"
-								style={{ objectPosition: "center 50%" }}
-							/>
-							<a
-								href={image}
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label="View full-size image"
-								className="absolute top-4 right-4 z-1 bg-background/70 text-foreground size-12 inline-flex justify-center items-center transition-all opacity-0 hover:bg-primary hover:text-primary-foreground group-hover:opacity-100"
-							>
-								<ExternalLink />
-							</a>
-						</div>
-					))}
-				</div>
+				<ProjectGallery images={project.images} title={project.title} />
 			</div>
 		</section>
 	);
