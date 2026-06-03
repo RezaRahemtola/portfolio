@@ -13,7 +13,15 @@ const ProjectGallery = ({ images, title }: Props) => {
 	// whole image without cropping and without hardcoding dimensions.
 	const [ratios, setRatios] = useState<Record<number, number>>({});
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
+	// Once the page is idle, warm the cache with the full-size variants the lightbox
+	// uses, so opening fullscreen / paging is instant instead of fetching on click.
+	const [preloadFull, setPreloadFull] = useState(false);
 	const isOpen = openIndex !== null;
+
+	useEffect(() => {
+		const id = window.setTimeout(() => setPreloadFull(true), 1000);
+		return () => window.clearTimeout(id);
+	}, []);
 
 	const close = useCallback(() => setOpenIndex(null), []);
 	const step = useCallback(
@@ -103,7 +111,7 @@ const ProjectGallery = ({ images, title }: Props) => {
 							src={images[openIndex]}
 							alt={`${title} screenshot ${openIndex + 1}`}
 							fill
-							quality={95}
+							quality={90}
 							sizes="100vw"
 							className="object-contain"
 						/>
@@ -128,6 +136,16 @@ const ProjectGallery = ({ images, title }: Props) => {
 							{openIndex + 1} / {images.length}
 						</div>
 					)}
+				</div>
+			)}
+
+			{/* Off-screen warm-up of the full-size variant the lightbox uses (same
+			    sizes/quality), so fullscreen + carousel paging is instant. */}
+			{preloadFull && (
+				<div aria-hidden className="pointer-events-none fixed inset-0 -z-50 overflow-hidden opacity-0">
+					{images.map((image) => (
+						<Image key={image} src={image} alt="" fill quality={90} sizes="100vw" loading="eager" />
+					))}
 				</div>
 			)}
 		</>
