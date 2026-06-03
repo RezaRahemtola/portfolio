@@ -1,6 +1,6 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle";
-import { useScrollExitAnimation, withDesktopMotion, withMotion } from "@/lib/gsap";
+import { withMotion } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -56,33 +56,6 @@ const Passions = ({ chessElo }: PassionsProps) => {
 		],
 		[chessElo],
 	);
-	// Animation for section entrance
-	useGSAP(
-		() => {
-			withDesktopMotion(() => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "top 60%",
-						end: "bottom 50%",
-						toggleActions: "restart none none reverse",
-						scrub: 1,
-					},
-				});
-
-				tl.from(".passion-item", {
-					y: 50,
-					opacity: 0,
-					stagger: 0.3,
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
-
-	// Animation for section exit
-	useScrollExitAnimation(containerRef);
-
 	// Number counters animation (skipped under reduced motion — real values render immediately)
 	useGSAP(
 		() => {
@@ -116,7 +89,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 						const IconComponent = passion.icon;
 
 						return (
-							<div key={passion.title} className="passion-item">
+							<div key={passion.title}>
 								<div className="flex items-center gap-2 mb-1">
 									{passion.svg && (
 										<div className="h-6 w-6 text-primary [&>svg]:h-full [&>svg]:w-full [&>svg]:fill-current">

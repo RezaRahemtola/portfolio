@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { IProject } from "@/types";
 import { useGSAP } from "@gsap/react";

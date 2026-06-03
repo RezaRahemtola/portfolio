@@ -1,26 +1,17 @@
 "use client";
-import ArrowAnimation from "@/components/ArrowAnimation";
 import { hasAppHistory } from "@/components/ScrollRestorer";
 import { useRouter } from "next/navigation";
 import { IProject } from "@/types";
-import { withDesktopMotion, withMotion } from "@/lib/gsap";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Github } from "@/components/icons";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Image from "next/image";
-import React, { useRef } from "react";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 interface Props {
 	project: IProject;
 }
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 const ProjectDetails = ({ project }: Props) => {
-	const containerRef = useRef<HTMLDivElement>(null);
 	const router = useRouter();
 
 	// Pop history when we got here from within the app (restores the home scroll
@@ -33,81 +24,9 @@ const ProjectDetails = ({ project }: Props) => {
 		}
 	};
 
-	useGSAP(
-		() => {
-			if (!containerRef.current) return;
-
-			const mm = withMotion(() => {
-				gsap.set(".fade-in-later", {
-					autoAlpha: 0,
-					y: 30,
-				});
-				const tl = gsap.timeline({
-					delay: 0.5,
-				});
-
-				tl.to(".fade-in-later", {
-					autoAlpha: 1,
-					y: 0,
-					stagger: 0.1,
-				});
-			});
-
-			// Reduced motion: reveal content immediately (markup hides the title with opacity-0)
-			mm.add("(prefers-reduced-motion: reduce)", () => {
-				gsap.set(".fade-in-later", { autoAlpha: 1, y: 0 });
-			});
-		},
-		{ scope: containerRef },
-	);
-
-	// blur info div and make it smaller on scroll (desktop only, motion allowed).
-	// matchMedia keeps this reactive to resize and aligned with the `lg` breakpoint.
-	useGSAP(
-		() => {
-			gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-width: 1024px)", () => {
-				gsap.to("#info", {
-					filter: "blur(3px)",
-					autoAlpha: 0,
-					scale: 0.9,
-					scrollTrigger: {
-						trigger: "#info",
-						start: "bottom bottom",
-						end: "bottom top",
-						pin: true,
-						pinSpacing: false,
-						scrub: 0.5,
-					},
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
-
-	// parallax effect on images (desktop only — scrub effects feel janky on mobile scroll)
-	useGSAP(
-		() => {
-			withDesktopMotion(() => {
-				gsap.utils.toArray<HTMLElement>("#images > div > img").forEach((img, i) => {
-					gsap.to(img, {
-						objectPosition: `center 0%`,
-						ease: "none",
-						scrollTrigger: {
-							trigger: img.parentElement,
-							start: () => (i ? "top bottom" : "top 50%"),
-							end: "bottom top",
-							scrub: true,
-						},
-					});
-				});
-			});
-		},
-		{ scope: containerRef },
-	);
-
 	return (
 		<section className="pt-5 pb-14">
-			<div className="container" ref={containerRef}>
+			<div className="container">
 				<button
 					type="button"
 					onClick={handleBack}
@@ -117,73 +36,67 @@ const ProjectDetails = ({ project }: Props) => {
 					Back
 				</button>
 
-				<div className="top-0 flex min-h-[calc(100svh-100px)]" id="info">
-					<div className="relative w-full">
-						<div className="flex items-start gap-6 mx-auto mb-10 max-w-[635px]">
-							<h1 className="fade-in-later opacity-0 text-4xl md:text-[60px] leading-none font-anton overflow-hidden">
-								<span className="inline-block">{project.title}</span>
-							</h1>
+				<div className="flex items-start gap-6 mx-auto mb-10 max-w-[635px]">
+					<h1 className="text-4xl md:text-[60px] leading-none font-anton overflow-hidden">
+						<span className="inline-block">{project.title}</span>
+					</h1>
 
-							<div className="fade-in-later opacity-0 flex gap-2">
-								{project.sourceCode && (
-									<a
-										href={project.sourceCode}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label="View source code"
-										className="hover:text-primary"
-									>
-										<Github size={30} />
-									</a>
-								)}
-								{project.liveUrl && (
-									<a
-										href={project.liveUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										aria-label="View live project"
-										className="hover:text-primary"
-									>
-										<ExternalLink size={30} />
-									</a>
-								)}
-							</div>
-						</div>
-
-						<div className="max-w-[635px] space-y-7 pb-20 mx-auto">
-							<div className="fade-in-later">
-								<p className="text-muted-foreground font-anton mb-3">Year</p>
-
-								<div className="text-lg">{project.year}</div>
-							</div>
-							<div className="fade-in-later">
-								<p className="text-muted-foreground font-anton mb-3">Technologies</p>
-
-								<div className="text-lg">{project.techStack.join(", ")}</div>
-							</div>
-							<div className="fade-in-later">
-								<p className="text-muted-foreground font-anton mb-3">Description</p>
-
-								<div className="text-lg markdown-text">
-									<MarkdownRenderer content={project.description} />
-								</div>
-							</div>
-							{project.role && (
-								<div className="fade-in-later">
-									<p className="text-muted-foreground font-anton mb-3">My Role</p>
-
-									<div className="text-lg markdown-text">
-										<MarkdownRenderer content={project.role} />
-									</div>
-								</div>
-							)}
-						</div>
-
-						<ArrowAnimation />
+					<div className="flex gap-2">
+						{project.sourceCode && (
+							<a
+								href={project.sourceCode}
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="View source code"
+								className="hover:text-primary"
+							>
+								<Github size={30} />
+							</a>
+						)}
+						{project.liveUrl && (
+							<a
+								href={project.liveUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="View live project"
+								className="hover:text-primary"
+							>
+								<ExternalLink size={30} />
+							</a>
+						)}
 					</div>
 				</div>
 
-				<div className="fade-in-later relative flex flex-col gap-2 max-w-[800px] mx-auto" id="images">
+				<div className="max-w-[635px] space-y-7 pb-20 mx-auto">
+					<div>
+						<p className="text-muted-foreground font-anton mb-3">Year</p>
+
+						<div className="text-lg">{project.year}</div>
+					</div>
+					<div>
+						<p className="text-muted-foreground font-anton mb-3">Technologies</p>
+
+						<div className="text-lg">{project.techStack.join(", ")}</div>
+					</div>
+					<div>
+						<p className="text-muted-foreground font-anton mb-3">Description</p>
+
+						<div className="text-lg markdown-text">
+							<MarkdownRenderer content={project.description} />
+						</div>
+					</div>
+					{project.role && (
+						<div>
+							<p className="text-muted-foreground font-anton mb-3">My Role</p>
+
+							<div className="text-lg markdown-text">
+								<MarkdownRenderer content={project.role} />
+							</div>
+						</div>
+					)}
+				</div>
+
+				<div className="relative flex flex-col gap-2 max-w-[800px] mx-auto" id="images">
 					{project.images.map((image, i) => (
 						<div key={image} className="group relative w-full aspect-750/400 bg-background-light overflow-hidden">
 							<Image

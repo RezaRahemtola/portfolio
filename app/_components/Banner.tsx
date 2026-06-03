@@ -1,64 +1,29 @@
 "use client";
-import ArrowAnimation from "@/components/ArrowAnimation";
 import Button from "@/components/Button";
 import { GENERAL_INFO } from "@/lib/data";
-import { withDesktopMotion } from "@/lib/gsap";
 import { useIsDesktop } from "@/lib/useIsDesktop";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const Laptop = dynamic(() => import("./Laptop"), { ssr: false, loading: () => null });
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
 const Banner = () => {
-	const containerRef = React.useRef<HTMLDivElement>(null);
 	// Match the canvas' `lg:block` visibility so WebGL never inits on the 768-1023px range where it stays hidden
 	const isDesktop = useIsDesktop("(min-width: 1024px)");
 
-	// move the content a little up on scroll
-	useGSAP(
-		() => {
-			withDesktopMotion(() => {
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "bottom 70%",
-						end: "bottom 10%",
-						scrub: 1,
-					},
-				});
-
-				tl.fromTo(".slide-up-and-fade", { y: 0 }, { y: -150, opacity: 0, stagger: 0.02 });
-			});
-		},
-		{ scope: containerRef },
-	);
-
 	return (
 		<section className="relative overflow-hidden" id="banner" aria-labelledby="banner-title">
-			<ArrowAnimation />
 			{isDesktop && (
 				<div className="absolute right-0 top-0 w-1/2 h-full">
 					<Laptop />
 				</div>
 			)}
-			<div
-				className="container h-[100svh] min-h-[530px] max-md:pb-10 flex justify-between items-center max-md:flex-col"
-				ref={containerRef}
-			>
+			<div className="container h-[100svh] min-h-[530px] max-md:pb-10 flex justify-between items-center max-md:flex-col">
 				<div className="max-md:grow max-md:flex flex-col justify-center items-start max-w-[544px]">
-					<h1
-						id="banner-title"
-						className="banner-title slide-up-and-fade leading-[.95] text-6xl sm:text-[80px] font-anton"
-					>
+					<h1 id="banner-title" className="leading-[.95] text-6xl sm:text-[80px] font-anton">
 						<span className="text-primary">FULL STACK</span>
 						<br /> <span className="ml-4">DEVELOPER</span>
 					</h1>
-					<p className="banner-description slide-up-and-fade mt-6 text-lg text-muted-foreground">
+					<p className="mt-6 text-lg text-muted-foreground">
 						Hi! I&apos;m <span className="font-medium text-foreground">Reza</span>, a passionate Full Stack Developer
 						with 3+ years of experience turning ideas to realities - from sleek frontends to robust backends.
 					</p>
@@ -68,22 +33,22 @@ const Banner = () => {
 						rel="noopener noreferrer"
 						href={`mailto:${GENERAL_INFO.email}`}
 						variant="primary"
-						className="mt-9 banner-button slide-up-and-fade"
+						className="mt-9"
 					>
 						Hire Me
 					</Button>
 				</div>
 
 				<div className="md:absolute bottom-[10%] right-[4%] flex md:flex-col gap-4 md:gap-8 text-center md:text-right">
-					<div className="slide-up-and-fade">
+					<div>
 						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">3+</p>
 						<p className="text-muted-foreground">Years of Experience</p>
 					</div>
-					<div className="slide-up-and-fade">
+					<div>
 						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12+</p>
 						<p className="text-muted-foreground">Completed Projects</p>
 					</div>
-					<div className="slide-up-and-fade">
+					<div>
 						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7k+</p>
 						<p className="text-muted-foreground">GitHub Commits</p>
 					</div>
