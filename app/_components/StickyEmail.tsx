@@ -6,6 +6,7 @@ const StickyEmail = () => {
 		<div className="max-xl:hidden fixed bottom-32 left-0 block">
 			<a
 				href={`mailto:${GENERAL_INFO.email}`}
+				aria-label={`Email ${GENERAL_INFO.email}`}
 				className="px-3 text-muted-foreground tracking-[1px] transition-all bg-bottom! hover:text-foreground hover:bg-center!"
 				style={{
 					textOrientation: "mixed",
