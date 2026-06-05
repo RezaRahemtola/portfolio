@@ -38,6 +38,8 @@ const ParticleBackground = () => {
 	const count = reducedMotion ? 0 : isDesktop ? 100 : 30;
 
 	useHotkey("Mod+.", (e) => {
+		// Don't let reduced-motion users trigger the animated particle modes
+		if (reducedMotion) return;
 		e.preventDefault();
 		setMode((prev) => MODES[(MODES.indexOf(prev) + 1) % MODES.length]);
 	});
