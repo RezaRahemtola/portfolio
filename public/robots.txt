@@ -1,5 +1,6 @@
 User-Agent: *
 Content-Signal: search=yes, ai-train=no, ai-input=yes
 Allow: /
+Disallow: /api/
 
 Sitemap: https://reza.dev/sitemap.xml
