@@ -1,7 +1,7 @@
 "use client";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
 	images: string[];
@@ -17,6 +17,9 @@ const ProjectGallery = ({ images, title }: Props) => {
 	// uses, so opening fullscreen / paging is instant instead of fetching on click.
 	const [preloadFull, setPreloadFull] = useState(false);
 	const isOpen = openIndex !== null;
+	const dialogRef = useRef<HTMLDivElement>(null);
+	// The thumbnail that opened the lightbox, so focus can return to it on close.
+	const triggerRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
 		const id = window.setTimeout(() => setPreloadFull(true), 1000);
@@ -44,6 +47,39 @@ const ProjectGallery = ({ images, title }: Props) => {
 		};
 	}, [isOpen, close, step]);
 
+	// While open: move focus into the dialog, trap Tab inside it, and restore
+	// focus to the triggering thumbnail once it closes.
+	useEffect(() => {
+		if (!isOpen) return;
+		const dialog = dialogRef.current;
+		if (!dialog) return;
+
+		const getFocusable = () => Array.from(dialog.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"));
+
+		getFocusable()[0]?.focus();
+
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key !== "Tab") return;
+			const items = getFocusable();
+			if (items.length === 0) return;
+			const first = items[0];
+			const last = items[items.length - 1];
+			if (e.shiftKey && document.activeElement === first) {
+				e.preventDefault();
+				last.focus();
+			} else if (!e.shiftKey && document.activeElement === last) {
+				e.preventDefault();
+				first.focus();
+			}
+		};
+
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+			triggerRef.current?.focus();
+		};
+	}, [isOpen]);
+
 	const navButton =
 		"absolute z-10 size-12 inline-flex items-center justify-center bg-background/70 text-foreground hover:bg-primary hover:text-primary-foreground transition-colors";
 
@@ -54,7 +90,10 @@ const ProjectGallery = ({ images, title }: Props) => {
 					<button
 						key={image}
 						type="button"
-						onClick={() => setOpenIndex(i)}
+						onClick={(e) => {
+							triggerRef.current = e.currentTarget;
+							setOpenIndex(i);
+						}}
 						aria-label={`View ${title} screenshot ${i + 1} fullscreen`}
 						className="group relative w-full bg-background-light overflow-hidden"
 						style={{ aspectRatio: ratios[i] ?? 16 / 10 }}
@@ -82,6 +121,7 @@ const ProjectGallery = ({ images, title }: Props) => {
 
 			{isOpen && (
 				<div
+					ref={dialogRef}
 					className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-sm"
 					role="dialog"
 					aria-modal="true"
