@@ -69,17 +69,17 @@ const ProjectDetails = ({ project }: Props) => {
 
 				<div className="max-w-[635px] space-y-7 pb-20 mx-auto">
 					<div>
-						<p className="text-muted-foreground font-anton mb-3">Year</p>
+						<h2 className="text-muted-foreground font-anton mb-3">Year</h2>
 
 						<div className="text-lg">{project.year}</div>
 					</div>
 					<div>
-						<p className="text-muted-foreground font-anton mb-3">Technologies</p>
+						<h2 className="text-muted-foreground font-anton mb-3">Technologies</h2>
 
 						<div className="text-lg">{project.techStack.join(", ")}</div>
 					</div>
 					<div>
-						<p className="text-muted-foreground font-anton mb-3">Description</p>
+						<h2 className="text-muted-foreground font-anton mb-3">Description</h2>
 
 						<div className="text-lg markdown-text">
 							<MarkdownRenderer content={project.description} />
@@ -87,7 +87,7 @@ const ProjectDetails = ({ project }: Props) => {
 					</div>
 					{project.role && (
 						<div>
-							<p className="text-muted-foreground font-anton mb-3">My Role</p>
+							<h2 className="text-muted-foreground font-anton mb-3">My Role</h2>
 
 							<div className="text-lg markdown-text">
 								<MarkdownRenderer content={project.role} />
