@@ -5,7 +5,14 @@ const ScrollProgressIndicator = () => {
 	const scrollBarRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
+		// Indicator is `hidden md:block`, so on mobile it's invisible. Skip the scroll
+		// listener there entirely — otherwise it forces a reflow every scroll frame
+		// (reading scrollHeight/clientHeight/scrollY) for an element nobody can see,
+		// which shows up as scroll jank on mobile.
+		const mql = window.matchMedia("(min-width: 768px)");
+
 		let ticking = false;
+		let attached = false;
 
 		const update = () => {
 			ticking = false;
@@ -24,10 +31,23 @@ const ScrollProgressIndicator = () => {
 			requestAnimationFrame(update);
 		};
 
-		update();
+		const sync = () => {
+			if (mql.matches && !attached) {
+				window.addEventListener("scroll", handleScroll, { passive: true });
+				attached = true;
+				update();
+			} else if (!mql.matches && attached) {
+				window.removeEventListener("scroll", handleScroll);
+				attached = false;
+			}
+		};
 
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => window.removeEventListener("scroll", handleScroll);
+		sync();
+		mql.addEventListener("change", sync);
+		return () => {
+			mql.removeEventListener("change", sync);
+			window.removeEventListener("scroll", handleScroll);
+		};
 	}, []);
 
 	return (
