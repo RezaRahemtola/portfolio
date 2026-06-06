@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AboutMe = () => {
 	return (
-		<section className="pb-40 md:pb-section" id="about-me" aria-labelledby="about-me-title">
+		<section className="max-md:pt-28 pb-40 md:pb-section" id="about-me" aria-labelledby="about-me-title">
 			<div className="container">
 				<h2 id="about-me-title" className="sr-only">
 					About Me

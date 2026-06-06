@@ -3,12 +3,33 @@ import Button from "@/components/Button";
 import { GENERAL_INFO } from "@/lib/data";
 import { useIsDesktop } from "@/lib/useIsDesktop";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 const Laptop = dynamic(() => import("./Laptop"), { ssr: false, loading: () => null });
 
 const Banner = () => {
 	// Match the canvas' `lg:block` visibility so WebGL never inits on the 768-1023px range where it stays hidden
 	const isDesktop = useIsDesktop("(min-width: 1024px)");
+
+	// Pin the hero to a fixed pixel height measured ONCE on mount (and only on width /
+	// orientation changes), exposed as --hero-h. On mobile the address bar shrinks/grows
+	// the viewport — and with it every vh/svh/dvh unit — as you scroll, so a CSS viewport
+	// height makes the hero (and the gap and sections after it) keep resizing. Measuring
+	// once in px and never updating on those height-only changes keeps the hero, the gap
+	// after it, and everything below perfectly still. Falls back to 100svh before JS runs.
+	useEffect(() => {
+		let lastWidth = window.innerWidth;
+		const set = () => document.documentElement.style.setProperty("--hero-h", `${window.innerHeight}px`);
+		const onResize = () => {
+			// Ignore height-only resizes (the address bar); only re-measure on a real width change.
+			if (window.innerWidth === lastWidth) return;
+			lastWidth = window.innerWidth;
+			set();
+		};
+		set();
+		window.addEventListener("resize", onResize);
+		return () => window.removeEventListener("resize", onResize);
+	}, []);
 
 	return (
 		<section className="relative overflow-hidden" id="banner" aria-labelledby="banner-title">
@@ -17,7 +38,14 @@ const Banner = () => {
 					<Laptop />
 				</div>
 			)}
-			<div className="container h-[100svh] min-h-[530px] max-md:pb-10 max-md:pt-28 flex items-center max-md:flex-col md:justify-between max-md:justify-start">
+			{/* min-height (not height): the section is overflow-hidden, so if --hero-h ever
+			    locks shorter than the content (e.g. a pull-to-refresh where innerHeight is
+			    briefly under-reported) a fixed height would clip the metrics. min-height keeps
+			    the hero at least the locked height but grows to fit content, so it never clips. */}
+			<div
+				className="container max-md:pb-10 max-md:pt-28 flex items-center max-md:flex-col md:justify-between max-md:justify-start"
+				style={{ minHeight: "var(--hero-h, 100svh)" }}
+			>
 				<div className="flex flex-col items-start max-w-[544px]">
 					<h1 id="banner-title" className="leading-[.95] text-6xl sm:text-[80px] font-anton">
 						<span className="text-primary">FULL STACK</span>
