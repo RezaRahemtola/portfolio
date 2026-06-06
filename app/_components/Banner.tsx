@@ -17,8 +17,8 @@ const Banner = () => {
 					<Laptop />
 				</div>
 			)}
-			<div className="container h-[100svh] min-h-[530px] max-md:pb-10 flex justify-between items-center max-md:flex-col">
-				<div className="max-md:grow max-md:flex flex-col justify-center items-start max-w-[544px]">
+			<div className="container h-[100svh] min-h-[530px] max-md:pb-10 max-md:pt-28 flex items-center max-md:flex-col md:justify-between max-md:justify-start">
+				<div className="flex flex-col items-start max-w-[544px]">
 					<h1 id="banner-title" className="leading-[.95] text-6xl sm:text-[80px] font-anton">
 						<span className="text-primary">FULL STACK</span>
 						<br /> <span className="ml-4">DEVELOPER</span>
@@ -39,7 +39,7 @@ const Banner = () => {
 					</Button>
 				</div>
 
-				<div className="md:absolute bottom-[10%] right-[4%] flex md:flex-col gap-4 md:gap-8 text-center md:text-right">
+				<div className="md:absolute bottom-[10%] right-[4%] max-md:mt-12 flex md:flex-col gap-4 md:gap-8 text-center md:text-right">
 					<div>
 						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">3+</p>
 						<p className="text-muted-foreground">Years of Experience</p>
