@@ -28,7 +28,7 @@ export const MY_STACK = {
 		},
 		{
 			name: "Vue",
-			icon: "/logo/vue.png",
+			icon: "/logo/vue.webp",
 		},
 		{
 			name: "Tailwind CSS",
@@ -60,7 +60,7 @@ export const MY_STACK = {
 		},
 		{
 			name: "Redis",
-			icon: "/logo/redis.png",
+			icon: "/logo/redis.webp",
 		},
 		{
 			name: "Prisma",
@@ -78,21 +78,21 @@ export const MY_STACK = {
 		},
 		{
 			name: "Dokploy",
-			icon: "/logo/dokploy.png",
+			icon: "/logo/dokploy.webp",
 		},
 		{
 			name: "GitHub Actions",
-			icon: "/logo/github.png",
+			icon: "/logo/github.webp",
 		},
 		{
 			name: "Google Cloud",
-			icon: "/logo/gcloud.png",
+			icon: "/logo/gcloud.webp",
 		},
 	],
 	others: [
 		{
 			name: "Python",
-			icon: "/logo/python.png",
+			icon: "/logo/python.webp",
 		},
 		{
 			name: "Solidity",
