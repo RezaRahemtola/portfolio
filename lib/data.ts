@@ -98,6 +98,10 @@ export const MY_STACK = {
 			name: "Solidity",
 			icon: "/logo/solidity.webp",
 		},
+		{
+			name: "Claude Code",
+			icon: "/logo/claude.svg",
+		},
 	],
 };
 
