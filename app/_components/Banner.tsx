@@ -73,11 +73,11 @@ const Banner = () => {
 						<p className="text-muted-foreground">Years of Experience</p>
 					</div>
 					<div>
-						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12+</p>
+						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">10+</p>
 						<p className="text-muted-foreground">Completed Projects</p>
 					</div>
 					<div>
-						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">7k+</p>
+						<p className="text-3xl sm:text-4xl font-anton text-primary mb-1.5">12k+</p>
 						<p className="text-muted-foreground">GitHub Commits</p>
 					</div>
 				</div>
