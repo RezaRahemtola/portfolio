@@ -1,5 +1,5 @@
-import { IProject } from "@/types";
 import { Github, Linkedin } from "@/components/icons";
+import { IProject } from "@/types";
 import { Trees } from "lucide-react";
 
 export const GENERAL_INFO = {
@@ -154,6 +154,23 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 			"Polymarket scanner that ranks stock-price prediction markets by APY and lets you trade and hedge on your holdings.",
 	},
 	{
+		title: "userstyles",
+		slug: "userstyles",
+		techStack: ["AI Agents", "CSS", "Playwright"],
+		thumbnail: "/projects/thumbnail/userstyles.webp",
+		images: [
+			"/projects/images/userstyles-1.webp",
+			"/projects/images/userstyles-2.webp",
+			"/projects/images/userstyles-3.webp",
+		],
+		sourceCode: "https://github.com/RezaRahemtola/userstyles",
+		liveUrl: "https://userstyles.world/user/RezaRahemtola?page=1&sort=mostinstalls",
+		year: "2020, 2026",
+		lastModified: "2026-06-27",
+		metaDescription:
+			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 3500+ installs.",
+	},
+	{
 		title: "Solva",
 		slug: "solva",
 		techStack: ["React", "Solidity", "FastAPI", "PostgreSQL", "Tailwind CSS"],
@@ -174,7 +191,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 	{
 		title: "CreAItors",
 		slug: "creaitors",
-		techStack: ["AI Agents", "Python", "Blockchain", "Next.js", "Shadcn"],
+		techStack: ["Python", "Blockchain", "AI Agents", "Next.js", "Shadcn"],
 		thumbnail: "/projects/thumbnail/creaitors.webp",
 		images: [
 			"/projects/images/creaitors-1.webp",
@@ -203,13 +220,13 @@ export const MY_EXPERIENCE = [
 		duration: "Jul 2023 - Present",
 	},
 	{
-		title: "Back End Engineer (Internship)",
+		title: "Back End Engineer",
 		company: "Cryptio",
 		duration: "Feb 2024 - June 2024",
 	},
 	{
-		title: "Full Stack Engineer (Internship)",
+		title: "Full Stack Engineer",
 		company: "Qobra",
-		duration: "Jul 2022 - Dec 2022",
+		duration: "Jul 2022 - Jan 2024",
 	},
 ];

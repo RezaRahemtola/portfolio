@@ -103,6 +103,7 @@ const ProjectGallery = ({ images, title }: Props) => {
 							alt={`${title} screenshot ${i + 1}`}
 							fill
 							quality={90}
+							priority={i === 0}
 							sizes="(max-width: 800px) 100vw, 800px"
 							className="object-cover"
 							onLoad={(e) => {
