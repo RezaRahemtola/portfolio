@@ -8,7 +8,7 @@ import { useRef } from "react";
 
 interface Props {
 	index: number;
-	project: Omit<IProject, "description" | "role">;
+	project: Omit<IProject, "longDescription" | "role">;
 }
 
 gsap.registerPlugin(useGSAP);
@@ -124,7 +124,8 @@ const Project = ({ index, project }: Props) => {
 								</svg>
 							</span>
 						</h3>
-						<div className="mt-2 flex flex-wrap gap-3 text-muted-foreground text-xs">
+						<p className="mt-3 text-sm md:text-base text-muted-foreground max-w-[55ch]">{project.description}</p>
+						<div className="mt-3 flex flex-wrap gap-3 text-muted-foreground text-xs">
 							{project.techStack.slice(0, 3).map((tech, idx, stackArr) => (
 								<div className="gap-3 flex items-center" key={tech}>
 									<span className="">{tech}</span>

@@ -14,7 +14,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 	const project = PROJECTS.find((project) => project.slug === slug);
 	if (!project) return {};
 
-	const { title, metaDescription: description, thumbnail } = project;
+	const { title, description, thumbnail } = project;
 	const brandedTitle = `${title} | Reza Rahemtola`;
 
 	return {
@@ -46,12 +46,12 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		return notFound();
 	}
 
-	const description = loadProjectContent(slug, "description");
+	const longDescription = loadProjectContent(slug, "description");
 	const role = loadProjectContent(slug, "role");
 
 	const projectWithContent: IProject = {
 		...project,
-		description,
+		longDescription,
 		role,
 	};
 
@@ -59,7 +59,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 		"@context": "https://schema.org",
 		"@type": "SoftwareSourceCode",
 		name: project.title,
-		description: project.metaDescription,
+		description: project.description,
 		url: `https://reza.dev/projects/${slug}`,
 		author: { "@type": "Person", name: "Reza Rahemtola", url: "https://reza.dev" },
 		programmingLanguage: project.techStack,

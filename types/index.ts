@@ -14,8 +14,8 @@ export interface IProject {
 	title: string;
 	year: string;
 	lastModified: string;
-	metaDescription: string;
 	description: string;
+	longDescription: string;
 	role: string;
 	techStack: string[];
 	thumbnail: string;

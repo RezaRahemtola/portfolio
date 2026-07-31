@@ -105,7 +105,7 @@ export const MY_STACK = {
 	],
 };
 
-export const PROJECTS: Omit<IProject, "description" | "role">[] = [
+export const PROJECTS: Omit<IProject, "longDescription" | "role">[] = [
 	{
 		title: "DocTripper",
 		slug: "doctripper",
@@ -119,8 +119,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://doctripper.com",
 		year: "2023 - 2026",
 		lastModified: "2026-01-18",
-		metaDescription:
-			"French healthtech platform connecting medical students with rural professionals to fight medical deserts. 2000+ users, featured on TF1 and France 3.",
+		description:
+			"French healthtech platform connecting medical students with rural professionals to reduce medical deserts. 2500+ users, featured on national TV.",
 	},
 	{
 		title: "LibertAI landing",
@@ -137,8 +137,8 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://libertai.io",
 		year: "2024",
 		lastModified: "2026-01-18",
-		metaDescription:
-			"Confidential AI platform offering chat, inference APIs and agent deployment, powered by Trusted Execution Environments and decentralized tech.",
+		description:
+			"Confidential AI platform from chat UI to inference APIs and AI agents deployment, powered by Trusted Execution Environments and decentralized tech.",
 	},
 	{
 		title: "Stocks Hedging",
@@ -150,7 +150,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://polymarket-stocks-hedging.reza.dev",
 		year: "2026",
 		lastModified: "2026-02-04",
-		metaDescription:
+		description:
 			"Polymarket scanner that ranks stock-price prediction markets by APY and lets you trade and hedge on your holdings.",
 	},
 	{
@@ -167,7 +167,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://userstyles.world/user/RezaRahemtola?page=1&sort=mostinstalls",
 		year: "2020, 2026",
 		lastModified: "2026-07-31",
-		metaDescription:
+		description:
 			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 4000+ installs.",
 	},
 	{
@@ -185,7 +185,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://ethglobal.com/showcase/solva-map8t",
 		year: "2025",
 		lastModified: "2026-01-18",
-		metaDescription:
+		description:
 			"Venmo-like Web3 payment app for instant fee-free transfers without needing any crypto knowledge. Won 3 prizes & was a finalist at ETHGlobal Taipei 2025.",
 	},
 	{
@@ -203,7 +203,7 @@ export const PROJECTS: Omit<IProject, "description" | "role">[] = [
 		liveUrl: "https://devfolio.co/projects/creaitors-b521",
 		year: "2025",
 		lastModified: "2026-01-18",
-		metaDescription:
+		description:
 			"Platform to deploy unstoppable AI agents that pay for their own compute on a decentralized cloud. Won $6k in prizes at ETHDenver 2025.",
 	},
 ];

@@ -82,7 +82,7 @@ const ProjectDetails = ({ project }: Props) => {
 						<h2 className="text-muted-foreground font-anton mb-3">Description</h2>
 
 						<div className="text-lg markdown-text">
-							<MarkdownRenderer content={project.description} />
+							<MarkdownRenderer content={project.longDescription} />
 						</div>
 					</div>
 					{project.role && (
