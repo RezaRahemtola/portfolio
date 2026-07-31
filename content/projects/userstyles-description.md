@@ -16,4 +16,4 @@ The agents work in distinct stages:
 - **Packaging**: Record a walkthrough video, capture promotional screenshots, and write the targeting rationale with all the metadata needed for publishing.
 
 I keep the final step manual: I review the walkthrough and screenshots, then publish to [userstyles.world](https://userstyles.world/user/RezaRahemtola?page=1&sort=mostinstalls) and [userstyles.org](https://userstyles.org/user-profile/1068424).\
-What makes it interesting is less the themes than the agent setup behind them: a real, end-to-end task handled autonomously, producing something people actually use: 50+ themes, 3500+ installs.
+What makes it interesting is less the themes than the agent setup behind them: a real, end-to-end task handled autonomously, producing something people actually use: 50+ themes, 4000+ installs.
