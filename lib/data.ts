@@ -168,7 +168,7 @@ export const PROJECTS: Omit<IProject, "longDescription" | "role">[] = [
 		year: "2020, 2026",
 		lastModified: "2026-07-31",
 		description:
-			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 4000+ installs.",
+			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 5000+ installs.",
 	},
 	{
 		title: "Solva",
