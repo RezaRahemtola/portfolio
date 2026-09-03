@@ -89,6 +89,16 @@ export const MY_STACK = {
 			icon: "/logo/gcloud.webp",
 		},
 	],
+	AI: [
+		{
+			name: "Claude Code",
+			icon: "/logo/claude.svg",
+		},
+		{
+			name: "Orca",
+			icon: "/logo/orca.svg",
+		},
+	],
 	others: [
 		{
 			name: "Python",
@@ -97,10 +107,6 @@ export const MY_STACK = {
 		{
 			name: "Solidity",
 			icon: "/logo/solidity.webp",
-		},
-		{
-			name: "Claude Code",
-			icon: "/logo/claude.svg",
 		},
 	],
 };
