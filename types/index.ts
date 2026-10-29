@@ -1,14 +1,5 @@
 export type Variant =
-	| "primary"
-	| "secondary"
-	| "success"
-	| "warning"
-	| "danger"
-	| "info"
-	| "light"
-	| "dark"
-	| "link"
-	| "no-color";
+	"primary" | "secondary" | "success" | "warning" | "danger" | "info" | "light" | "dark" | "link" | "no-color";
 
 export interface IProject {
 	title: string;
