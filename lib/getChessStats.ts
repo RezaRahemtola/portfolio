@@ -7,6 +7,10 @@ interface ChessStats {
 		last: { rating: number };
 		best?: { rating: number };
 	};
+	chess_bullet?: {
+		last: { rating: number };
+		best?: { rating: number };
+	};
 }
 
 export async function getChessStats(): Promise<number | null> {
@@ -24,8 +28,9 @@ export async function getChessStats(): Promise<number | null> {
 
 		const rapidRating = data.chess_rapid?.best?.rating || data.chess_rapid?.last?.rating;
 		const blitzRating = data.chess_blitz?.best?.rating || data.chess_blitz?.last?.rating;
+		const bulletRating = data.chess_bullet?.best?.rating || data.chess_bullet?.last?.rating;
 
-		const ratings = [rapidRating, blitzRating].filter((rating): rating is number => rating !== undefined);
+		const ratings = [rapidRating, blitzRating, bulletRating].filter((rating): rating is number => rating !== undefined);
 		const highest = ratings.length > 0 ? Math.max(...ratings) : null;
 
 		return highest;

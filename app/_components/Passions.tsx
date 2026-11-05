@@ -51,7 +51,7 @@ const Passions = ({ chessElo }: PassionsProps) => {
 				suffix: "",
 				unit: "elo on chess.com",
 				description:
-					"I started playing chess recently (May 2025) and have been enjoying it casually to slowly grind. I mainly play rapid and blitz games on chess.com, and spend time doing puzzles to improve my tactical skills. It's a great mental exercise that complements my other activities.",
+					"I started playing chess recently (May 2025) and have been enjoying it casually to slowly grind. I mainly play rapid, blitz and bullet games on chess.com, and spend time doing puzzles to improve my tactical skills. It's a great mental exercise that complements my other activities.",
 			},
 		],
 		[chessElo],
