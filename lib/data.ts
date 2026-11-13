@@ -172,9 +172,9 @@ export const PROJECTS: Omit<IProject, "longDescription" | "role">[] = [
 		sourceCode: "https://github.com/RezaRahemtola/userstyles",
 		liveUrl: "https://userstyles.world/user/RezaRahemtola?page=1&sort=mostinstalls",
 		year: "2020, 2026",
-		lastModified: "2026-07-31",
+		lastModified: "2026-11-13",
 		description:
-			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 5000+ installs.",
+			"Dark themes for popular sites, each found, built and packaged by AI agents for me to review and publish. 10k+ installs.",
 	},
 	{
 		title: "Solva",
